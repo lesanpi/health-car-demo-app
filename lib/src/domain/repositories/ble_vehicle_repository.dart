@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:health_car_demo_app/src/data/data_sources/ble_car_api.dart';
 import 'package:health_car_demo_app/src/data/models/iot_device_info.dart';
 import 'package:health_car_demo_app/src/domain/entities/vehicle_measure.dart';
@@ -11,11 +13,13 @@ class IBleVehiculeRepository {
       if (iotDevice == null) continue;
       vehicleMeasuresList.add(iotDevice);
     }
-    return vehicleMeasuresList
+    final results = vehicleMeasuresList
         .map(
           (e) =>
               VehicleMeasure(kilometers: e.kilometers, vehicleId: e.vehicleId),
         )
         .toList();
+    log('✅ Results $results', name: 'IBleVehicleRepository.scanIoTDevices');
+    return results;
   }
 }

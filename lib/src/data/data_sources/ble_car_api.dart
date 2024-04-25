@@ -23,7 +23,7 @@ class BleCarApi {
 
     /// Start new scan
     await FlutterBluePlus.startScan(
-      withServices: [Guid.fromString('4fafc201-1fb5-459e-8fcc-c5c9c331914b')],
+      withServices: [Guid.fromString(vehicleServiceUUID)],
       timeout: const Duration(
         seconds: 10,
       ),
@@ -125,7 +125,7 @@ class BleCarApi {
           .first;
       log(
         '✅🔥 ${device.remoteId}: "${device.advName}" connected!',
-        name: 'BLE.connection',
+        name: '$_name.researchDevice',
       );
 
       final services = await device.discoverServices();

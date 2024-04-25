@@ -6,9 +6,29 @@ import 'package:permission_handler/permission_handler.dart';
 
 class BackgroundRepository extends IBackgroundRepository {
   @override
-  Future<void> initService() {
-    // TODO: implement initService
-    throw UnimplementedError();
+  Future<void> initService() async {
+    FlutterForegroundTask.init(
+      androidNotificationOptions: AndroidNotificationOptions(
+        id: 500,
+        channelId: 'foreground_service',
+        channelName: 'Foreground Service Notification',
+        channelDescription:
+            'This notification appears when the foreground service is running.',
+        channelImportance: NotificationChannelImportance.LOW,
+        priority: NotificationPriority.LOW,
+        iconData: const NotificationIconData(
+          resType: ResourceType.mipmap,
+          resPrefix: ResourcePrefix.ic,
+          name: 'launcher',
+        ),
+      ),
+      iosNotificationOptions: const IOSNotificationOptions(),
+      foregroundTaskOptions: const ForegroundTaskOptions(
+        interval: 30000,
+        autoRunOnBoot: true,
+        allowWifiLock: true,
+      ),
+    );
   }
 
   @override
