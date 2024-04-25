@@ -14,7 +14,7 @@ class BleCarApi {
   static const String vehiculeIdCharacteristicUUID =
       'beb5483e-36e1-4688-b7f5-ea07361b26a9';
 
-  static Future<List<ScanResult>> scanDevices() async {
+  static Future<List<BluetoothDevice>> scanDevices() async {
     /// Stop scanning before start another
     await FlutterBluePlus.stopScan();
 
@@ -36,7 +36,7 @@ class BleCarApi {
       name: 'ForegroundTask.results',
     );
 
-    return FlutterBluePlus.lastScanResults;
+    return FlutterBluePlus.lastScanResults.map((e) => e.device).toList();
   }
 
   static Future<String> extractVehicleIdValue(
