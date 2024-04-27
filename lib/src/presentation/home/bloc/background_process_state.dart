@@ -1,26 +1,32 @@
-part of 'home_bloc.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+part of 'background_process_bloc.dart';
 
 /// {@template home_state}
 /// HomeState description
 /// {@endtemplate}
-class HomeState extends Equatable {
+class BackgroundProcessState extends Equatable {
   /// {@macro home_state}
-  const HomeState({
+  const BackgroundProcessState({
     this.customProperty = 'Default Value',
+    this.initializedService = false,
   });
 
   /// A description for customProperty
   final String customProperty;
 
+  final bool initializedService;
+
   @override
-  List<Object> get props => [customProperty];
+  List<Object> get props => [customProperty, initializedService];
 
   /// Creates a copy of the current HomeState with property changes
-  HomeState copyWith({
+  BackgroundProcessState copyWith({
     String? customProperty,
+    bool? initializedService,
   }) {
-    return HomeState(
+    return BackgroundProcessState(
       customProperty: customProperty ?? this.customProperty,
+      initializedService: initializedService ?? this.initializedService,
     );
   }
 }
@@ -28,7 +34,7 @@ class HomeState extends Equatable {
 /// {@template home_initial}
 /// The initial state of HomeState
 /// {@endtemplate}
-class HomeInitial extends HomeState {
+class HomeInitial extends BackgroundProcessState {
   /// {@macro home_initial}
   const HomeInitial() : super();
 }

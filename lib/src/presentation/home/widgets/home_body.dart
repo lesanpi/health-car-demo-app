@@ -65,6 +65,32 @@ class WelcomeView extends StatelessWidget {
             'Con esta app podrás monitorear en tiempo real el estado de salud de tu vehículo, previniendo averías y optimizando su rendimiento.',
             style: TextStyle(fontSize: 18),
           ),
+          const Gap(Consts.margin * 2),
+          Text(
+            '⚠️',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontSize: 20,
+                ),
+          ),
+          const Text(
+            'Importante:',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          const Text(
+            '''
+* Esta app se encuentra en fase de prueba y solo está disponible para monitorear un vehículo de prueba específico.''',
+            style: TextStyle(fontSize: 16),
+          ),
+          const Text(
+            '''
+* La información que visualizas en esta app proviene directamente de un vehículo de prueba y se actualiza constantemente. Sin embargo, es importante tener en cuenta que los datos se encuentran en fase de prueba y podrían presentar un margen de error.''',
+            style: TextStyle(fontSize: 16),
+          ),
+          const Text(
+            '''
+* La app no está destinada a ser utilizada como un reemplazo para el diagnóstico o reparación profesional de vehículos.''',
+            style: TextStyle(fontSize: 16),
+          ),
         ],
       ),
     );
@@ -124,9 +150,12 @@ class PermissionRequestView extends StatelessWidget {
           ),
           const Gap(Consts.margin),
           ElevatedButton(
+            // Implementar la lógica para abrir la configuración de permisos
+            // y solicitar la opción "Permitir actividad en segundo plano"
             onPressed: () async {
-              // Implementar la lógica para abrir la configuración de permisos
-              // y solicitar la opción "Permitir actividad en segundo plano"
+              context
+                  .read<BackgroundProcessBloc>()
+                  .add(const RequestPermissionPressed());
             },
             child: const Center(child: Text('Activar permisos')),
           ),

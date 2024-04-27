@@ -7,9 +7,9 @@ void main() {
   group('HomeState', () {
     test('supports value equality', () {
       expect(
-        HomeState(),
+        BackgroundProcessState(),
         equals(
-          const HomeState(),
+          const BackgroundProcessState(),
         ),
       );
     });
@@ -17,7 +17,7 @@ void main() {
     group('constructor', () {
       test('can be instantiated', () {
         expect(
-          const HomeState(),
+          const BackgroundProcessState(),
           isNotNull,
         );
       });
@@ -28,7 +28,7 @@ void main() {
         'copies correctly '
         'when no argument specified',
         () {
-          const homeState = HomeState(
+          const homeState = BackgroundProcessState(
             customProperty: 'My property',
           );
           expect(
@@ -42,10 +42,10 @@ void main() {
         'copies correctly '
         'when all arguments specified',
         () {
-          const homeState = HomeState(
+          const homeState = BackgroundProcessState(
             customProperty: 'My property',
           );
-          final otherHomeState = HomeState(
+          final otherHomeState = BackgroundProcessState(
             customProperty: 'My property 2',
           );
           expect(homeState, isNot(equals(otherHomeState)));

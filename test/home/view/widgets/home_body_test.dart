@@ -6,10 +6,10 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('HomeBody', () {
-    testWidgets('renders Text', (tester) async { 
+    testWidgets('renders Text', (tester) async {
       await tester.pumpWidget(
         BlocProvider(
-          create: (context) => HomeBloc(),
+          create: (context) => BackgroundProcessBloc(),
           child: MaterialApp(home: HomeBody()),
         ),
       );

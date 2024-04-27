@@ -9,22 +9,22 @@ void main() {
     group('constructor', () {
       test('can be instantiated', () {
         expect(
-          HomeBloc(),
+          BackgroundProcessBloc(),
           isNotNull,
         );
       });
     });
 
     test('initial state has default value for customProperty', () {
-      final homeBloc = HomeBloc();
+      final homeBloc = BackgroundProcessBloc();
       expect(homeBloc.state.customProperty, equals('Default Value'));
     });
 
-    blocTest<HomeBloc, HomeState>(
+    blocTest<BackgroundProcessBloc, BackgroundProcessState>(
       'CustomHomeEvent emits nothing',
-      build: HomeBloc.new,
+      build: BackgroundProcessBloc.new,
       act: (bloc) => bloc.add(const CustomHomeEvent()),
-      expect: () => <HomeState>[],
+      expect: () => <BackgroundProcessState>[],
     );
   });
 }

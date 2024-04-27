@@ -1,10 +1,28 @@
 import 'dart:io';
+import 'dart:isolate';
 
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:health_car_demo_app/src/domain/repositories/repositories.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+// The callback function should always be a top-level function.
+
 class BackgroundRepository extends IBackgroundRepository {
+  BackgroundRepository({required super.startCallback});
+
+  @override
+  Future<bool> start() async {
+    if (await FlutterForegroundTask.isRunningService) {
+      return FlutterForegroundTask.restartService();
+    } else {
+      return FlutterForegroundTask.startService(
+        notificationTitle: 'Foreground Service is running',
+        notificationText: 'Tap to return to the app',
+        callback: super.startCallback,
+      );
+    }
+  }
+
   @override
   Future<void> initService() async {
     FlutterForegroundTask.init(

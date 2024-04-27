@@ -9,8 +9,19 @@ class BackgroundUseCase {
 
   final IBackgroundRepository backgroundRepository;
   Future<bool> isEnabled() => backgroundRepository.isEnabled();
-  Future<void> requestPermissions() {
-    return backgroundRepository.requestPermissions();
+  Future<void> requestPermissions() async {
+    final enabled = await backgroundRepository.isEnabled();
+    if (!enabled) {
+      return backgroundRepository.requestPermissions();
+    }
+  }
+
+  Future<void> initService() {
+    return backgroundRepository.initService();
+  }
+
+  Future<void> start() {
+    return backgroundRepository.start();
   }
 
   static Future<void> executeBackgroundProcess() async {

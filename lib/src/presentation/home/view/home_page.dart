@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_car_demo_app/src/domain/use_cases/background_use_case.dart';
 import 'package:health_car_demo_app/src/presentation/home/bloc/bloc.dart';
 import 'package:health_car_demo_app/src/presentation/home/widgets/home_body.dart';
 
@@ -16,13 +17,15 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeBloc(),
-      child: const Scaffold(
-        body: HomeView(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Health Car'),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
       ),
+      body: const HomeView(),
     );
-  }    
+  }
 }
 
 /// {@template home_view}

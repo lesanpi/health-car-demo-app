@@ -1,5 +1,9 @@
 abstract class IBackgroundRepository {
-  const IBackgroundRepository();
+  const IBackgroundRepository({required this.startCallback});
+
+  final Function? startCallback;
+
+  Future<void> start();
 
   Future<bool> isEnabled();
 
