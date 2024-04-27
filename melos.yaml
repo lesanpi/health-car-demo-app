@@ -1,0 +1,33 @@
+name: lesanpi_melos
+
+sdkPath: .fvm/flutter_sdk
+
+packages:
+  # - backend
+  # - models
+  # - repository
+  # - exceptions
+  - app
+  # - typedefs
+  # - failures
+  # - exceptions
+
+scripts:
+  analyze:
+    run: dart analyze 
+
+  generate:build:
+    run: melos run build_runner:build --no-select
+    description: Generate all files for all packages in this project.
+    exec:
+      concurrency: 5
+      fail-fast: true
+
+  build_runner:build:
+    run: dart pub run build_runner build --delete-conflicting-outputs
+    description: Build all generated files for Dart packages in this project.
+    exec:
+      concurrency: 1
+      fail-fast: true
+    packageFilters:
+      dependsOn: build_runner
