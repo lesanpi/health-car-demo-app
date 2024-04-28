@@ -9,7 +9,8 @@ packages:
   # - exceptions
   - app
   # - typedefs
-  # - failures
+  - data_sources
+  - failures
   # - exceptions
 
 scripts:
