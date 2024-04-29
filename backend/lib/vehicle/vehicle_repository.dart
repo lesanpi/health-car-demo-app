@@ -52,14 +52,6 @@ class VehicleRepositoryImpl extends VehicleRepository {
   }
 
   @override
-  Future<Either<Failure, ReportMileage>> getLastReportMileageOfVehicle(
-    String vehicleId,
-  ) {
-    // TODO: implement getLastReportMileageOfVehicle
-    throw UnimplementedError();
-  }
-
-  @override
   Future<Either<Failure, Vehicle>> getVehicleById(String id) async {
     try {
       final vehicle = await dataSource.getVehicleById(id);

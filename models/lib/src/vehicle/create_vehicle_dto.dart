@@ -21,6 +21,7 @@ class CreateVehicleDto with _$CreateVehicleDto {
   factory CreateVehicleDto.fromJson(Map<String, dynamic> data) =>
       _$CreateVehicleDtoFromJson(data);
 
+  /// Validate json [Map]
   static Either<ValidationFailure, CreateVehicleDto> validated(
     Map<String, dynamic> json,
   ) {

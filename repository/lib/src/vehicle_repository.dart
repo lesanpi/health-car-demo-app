@@ -12,11 +12,6 @@ abstract class VehicleRepository {
   /// Get all vehicles
   Future<Either<Failure, List<Vehicle>>> getAllVehicles();
 
-  /// Get last mileage report of [vehicleId] id
-  Future<Either<Failure, ReportMileage>> getLastReportMileageOfVehicle(
-    String vehicleId,
-  );
-
   /// Delete a vehicle document using [id]
   Future<Either<Failure, OperationResultDto>> deleteVehicle(String id);
 
