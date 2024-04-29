@@ -14,5 +14,10 @@ dev_dependencies:
   test: ^1.19.2
   very_good_analysis: ^5.0.0
 dependencies:
+  either_dart: ^1.0.0
+  exceptions:
+    path: ../exceptions
+  failures:
+    path: ../failures
   freezed_annotation: ^2.4.1
   json_annotation: ^4.9.0

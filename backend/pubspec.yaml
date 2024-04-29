@@ -8,13 +8,15 @@ environment:
 
 dependencies:
   dart_frog: ^1.0.0
+  data_sources:
+    path: ../data_sources
   dotenv: ^4.2.0
   either_dart: ^1.0.0
+  exceptions: 
+    path: ../exceptions
   failures: 
     path: ../failures
   mongo_dart: ^0.10.2
-  exceptions: 
-    path: ../exceptions
 
 dev_dependencies:
   mocktail: ^0.3.0
