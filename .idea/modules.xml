@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/backend/melos_backend.iml" filepath="$PROJECT_DIR$/backend/melos_backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/data_sources/melos_data_sources.iml" filepath="$PROJECT_DIR$/data_sources/melos_data_sources.iml" />
+      <module fileurl="file://$PROJECT_DIR$/exceptions/melos_exceptions.iml" filepath="$PROJECT_DIR$/exceptions/melos_exceptions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/failures/melos_failures.iml" filepath="$PROJECT_DIR$/failures/melos_failures.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/melos_health_car_demo_app.iml" filepath="$PROJECT_DIR$/app/melos_health_car_demo_app.iml" />
       <module fileurl="file://$PROJECT_DIR$/models/melos_models.iml" filepath="$PROJECT_DIR$/models/melos_models.iml" />
       <module fileurl="file://$PROJECT_DIR$/melos_lesanpi_melos.iml" filepath="$PROJECT_DIR$/melos_lesanpi_melos.iml" />

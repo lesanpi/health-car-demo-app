@@ -12,7 +12,7 @@ part of 'server_failure.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ServerFailure {
@@ -63,22 +63,22 @@ class _$ServerFailureCopyWithImpl<$Res, $Val extends ServerFailure>
 }
 
 /// @nodoc
-abstract class _$$_ServerFailureCopyWith<$Res>
+abstract class _$$ServerFailureImplCopyWith<$Res>
     implements $ServerFailureCopyWith<$Res> {
-  factory _$$_ServerFailureCopyWith(
-          _$_ServerFailure value, $Res Function(_$_ServerFailure) then) =
-      __$$_ServerFailureCopyWithImpl<$Res>;
+  factory _$$ServerFailureImplCopyWith(
+          _$ServerFailureImpl value, $Res Function(_$ServerFailureImpl) then) =
+      __$$ServerFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message, int statusCode});
 }
 
 /// @nodoc
-class __$$_ServerFailureCopyWithImpl<$Res>
-    extends _$ServerFailureCopyWithImpl<$Res, _$_ServerFailure>
-    implements _$$_ServerFailureCopyWith<$Res> {
-  __$$_ServerFailureCopyWithImpl(
-      _$_ServerFailure _value, $Res Function(_$_ServerFailure) _then)
+class __$$ServerFailureImplCopyWithImpl<$Res>
+    extends _$ServerFailureCopyWithImpl<$Res, _$ServerFailureImpl>
+    implements _$$ServerFailureImplCopyWith<$Res> {
+  __$$ServerFailureImplCopyWithImpl(
+      _$ServerFailureImpl _value, $Res Function(_$ServerFailureImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_ServerFailureCopyWithImpl<$Res>
     Object? message = null,
     Object? statusCode = null,
   }) {
-    return _then(_$_ServerFailure(
+    return _then(_$ServerFailureImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_ServerFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ServerFailure implements _ServerFailure {
-  const _$_ServerFailure(
+class _$ServerFailureImpl implements _ServerFailure {
+  const _$ServerFailureImpl(
       {required this.message,
       this.statusCode = HttpStatus.internalServerError});
 
@@ -119,10 +119,10 @@ class _$_ServerFailure implements _ServerFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ServerFailure &&
+            other is _$ServerFailureImpl &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.statusCode, statusCode) ||
                 other.statusCode == statusCode));
@@ -134,13 +134,14 @@ class _$_ServerFailure implements _ServerFailure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ServerFailureCopyWith<_$_ServerFailure> get copyWith =>
-      __$$_ServerFailureCopyWithImpl<_$_ServerFailure>(this, _$identity);
+  _$$ServerFailureImplCopyWith<_$ServerFailureImpl> get copyWith =>
+      __$$ServerFailureImplCopyWithImpl<_$ServerFailureImpl>(this, _$identity);
 }
 
 abstract class _ServerFailure implements ServerFailure {
   const factory _ServerFailure(
-      {required final String message, final int statusCode}) = _$_ServerFailure;
+      {required final String message,
+      final int statusCode}) = _$ServerFailureImpl;
 
   @override
   String get message;
@@ -148,6 +149,6 @@ abstract class _ServerFailure implements ServerFailure {
   int get statusCode;
   @override
   @JsonKey(ignore: true)
-  _$$_ServerFailureCopyWith<_$_ServerFailure> get copyWith =>
+  _$$ServerFailureImplCopyWith<_$ServerFailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

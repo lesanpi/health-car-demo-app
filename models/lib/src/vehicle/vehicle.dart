@@ -10,7 +10,7 @@ part 'vehicle.g.dart';
 class Vehicle with _$Vehicle {
   /// {@macro vehicle}
   const factory Vehicle({
-    required String id,
+    @JsonKey(name: '_id') required String id,
     required String name,
     required String photo,
   }) = _Vehicle;

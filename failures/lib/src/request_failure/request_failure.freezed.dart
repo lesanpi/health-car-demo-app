@@ -12,7 +12,7 @@ part of 'request_failure.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 RequestFailure _$RequestFailureFromJson(Map<String, dynamic> json) {
   return _RequestFailure.fromJson(json);
@@ -68,22 +68,22 @@ class _$RequestFailureCopyWithImpl<$Res, $Val extends RequestFailure>
 }
 
 /// @nodoc
-abstract class _$$_RequestFailureCopyWith<$Res>
+abstract class _$$RequestFailureImplCopyWith<$Res>
     implements $RequestFailureCopyWith<$Res> {
-  factory _$$_RequestFailureCopyWith(
-          _$_RequestFailure value, $Res Function(_$_RequestFailure) then) =
-      __$$_RequestFailureCopyWithImpl<$Res>;
+  factory _$$RequestFailureImplCopyWith(_$RequestFailureImpl value,
+          $Res Function(_$RequestFailureImpl) then) =
+      __$$RequestFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message, int statusCode});
 }
 
 /// @nodoc
-class __$$_RequestFailureCopyWithImpl<$Res>
-    extends _$RequestFailureCopyWithImpl<$Res, _$_RequestFailure>
-    implements _$$_RequestFailureCopyWith<$Res> {
-  __$$_RequestFailureCopyWithImpl(
-      _$_RequestFailure _value, $Res Function(_$_RequestFailure) _then)
+class __$$RequestFailureImplCopyWithImpl<$Res>
+    extends _$RequestFailureCopyWithImpl<$Res, _$RequestFailureImpl>
+    implements _$$RequestFailureImplCopyWith<$Res> {
+  __$$RequestFailureImplCopyWithImpl(
+      _$RequestFailureImpl _value, $Res Function(_$RequestFailureImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_RequestFailureCopyWithImpl<$Res>
     Object? message = null,
     Object? statusCode = null,
   }) {
-    return _then(_$_RequestFailure(
+    return _then(_$RequestFailureImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -107,12 +107,12 @@ class __$$_RequestFailureCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_RequestFailure implements _RequestFailure {
-  const _$_RequestFailure(
+class _$RequestFailureImpl implements _RequestFailure {
+  const _$RequestFailureImpl(
       {required this.message, this.statusCode = HttpStatus.badRequest});
 
-  factory _$_RequestFailure.fromJson(Map<String, dynamic> json) =>
-      _$$_RequestFailureFromJson(json);
+  factory _$RequestFailureImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RequestFailureImplFromJson(json);
 
   @override
   final String message;
@@ -126,10 +126,10 @@ class _$_RequestFailure implements _RequestFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_RequestFailure &&
+            other is _$RequestFailureImpl &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.statusCode, statusCode) ||
                 other.statusCode == statusCode));
@@ -142,12 +142,13 @@ class _$_RequestFailure implements _RequestFailure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RequestFailureCopyWith<_$_RequestFailure> get copyWith =>
-      __$$_RequestFailureCopyWithImpl<_$_RequestFailure>(this, _$identity);
+  _$$RequestFailureImplCopyWith<_$RequestFailureImpl> get copyWith =>
+      __$$RequestFailureImplCopyWithImpl<_$RequestFailureImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_RequestFailureToJson(
+    return _$$RequestFailureImplToJson(
       this,
     );
   }
@@ -156,10 +157,10 @@ class _$_RequestFailure implements _RequestFailure {
 abstract class _RequestFailure implements RequestFailure {
   const factory _RequestFailure(
       {required final String message,
-      final int statusCode}) = _$_RequestFailure;
+      final int statusCode}) = _$RequestFailureImpl;
 
   factory _RequestFailure.fromJson(Map<String, dynamic> json) =
-      _$_RequestFailure.fromJson;
+      _$RequestFailureImpl.fromJson;
 
   @override
   String get message;
@@ -167,6 +168,6 @@ abstract class _RequestFailure implements RequestFailure {
   int get statusCode;
   @override
   @JsonKey(ignore: true)
-  _$$_RequestFailureCopyWith<_$_RequestFailure> get copyWith =>
+  _$$RequestFailureImplCopyWith<_$RequestFailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

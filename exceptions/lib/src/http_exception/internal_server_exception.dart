@@ -5,8 +5,8 @@ import 'package:exceptions/exceptions.dart';
 /// {@template server_exception}
 /// Exception that occurs on server side
 /// {@endtemplate}
-class ServerException extends HttpException {
+class InternalServerException extends HttpException {
   /// {@macro server_exception}
-  ServerException(String message)
+  InternalServerException(String message)
       : super(message, HttpStatus.internalServerError);
 }

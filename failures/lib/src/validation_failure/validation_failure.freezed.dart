@@ -12,7 +12,7 @@ part of 'validation_failure.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ValidationFailure {
@@ -69,22 +69,22 @@ class _$ValidationFailureCopyWithImpl<$Res, $Val extends ValidationFailure>
 }
 
 /// @nodoc
-abstract class _$$_ValidationFailureCopyWith<$Res>
+abstract class _$$ValidationFailureImplCopyWith<$Res>
     implements $ValidationFailureCopyWith<$Res> {
-  factory _$$_ValidationFailureCopyWith(_$_ValidationFailure value,
-          $Res Function(_$_ValidationFailure) then) =
-      __$$_ValidationFailureCopyWithImpl<$Res>;
+  factory _$$ValidationFailureImplCopyWith(_$ValidationFailureImpl value,
+          $Res Function(_$ValidationFailureImpl) then) =
+      __$$ValidationFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message, int statusCode, Map<String, List<String>> errors});
 }
 
 /// @nodoc
-class __$$_ValidationFailureCopyWithImpl<$Res>
-    extends _$ValidationFailureCopyWithImpl<$Res, _$_ValidationFailure>
-    implements _$$_ValidationFailureCopyWith<$Res> {
-  __$$_ValidationFailureCopyWithImpl(
-      _$_ValidationFailure _value, $Res Function(_$_ValidationFailure) _then)
+class __$$ValidationFailureImplCopyWithImpl<$Res>
+    extends _$ValidationFailureCopyWithImpl<$Res, _$ValidationFailureImpl>
+    implements _$$ValidationFailureImplCopyWith<$Res> {
+  __$$ValidationFailureImplCopyWithImpl(_$ValidationFailureImpl _value,
+      $Res Function(_$ValidationFailureImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$_ValidationFailureCopyWithImpl<$Res>
     Object? statusCode = null,
     Object? errors = null,
   }) {
-    return _then(_$_ValidationFailure(
+    return _then(_$ValidationFailureImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ class __$$_ValidationFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ValidationFailure implements _ValidationFailure {
-  const _$_ValidationFailure(
+class _$ValidationFailureImpl implements _ValidationFailure {
+  const _$ValidationFailureImpl(
       {required this.message,
       this.statusCode = HttpStatus.badRequest,
       final Map<String, List<String>> errors = const {}})
@@ -140,10 +140,10 @@ class _$_ValidationFailure implements _ValidationFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ValidationFailure &&
+            other is _$ValidationFailureImpl &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.statusCode, statusCode) ||
                 other.statusCode == statusCode) &&
@@ -157,8 +157,8 @@ class _$_ValidationFailure implements _ValidationFailure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ValidationFailureCopyWith<_$_ValidationFailure> get copyWith =>
-      __$$_ValidationFailureCopyWithImpl<_$_ValidationFailure>(
+  _$$ValidationFailureImplCopyWith<_$ValidationFailureImpl> get copyWith =>
+      __$$ValidationFailureImplCopyWithImpl<_$ValidationFailureImpl>(
           this, _$identity);
 }
 
@@ -166,7 +166,7 @@ abstract class _ValidationFailure implements ValidationFailure {
   const factory _ValidationFailure(
       {required final String message,
       final int statusCode,
-      final Map<String, List<String>> errors}) = _$_ValidationFailure;
+      final Map<String, List<String>> errors}) = _$ValidationFailureImpl;
 
   @override
   String get message;
@@ -176,6 +176,6 @@ abstract class _ValidationFailure implements ValidationFailure {
   Map<String, List<String>> get errors;
   @override
   @JsonKey(ignore: true)
-  _$$_ValidationFailureCopyWith<_$_ValidationFailure> get copyWith =>
+  _$$ValidationFailureImplCopyWith<_$ValidationFailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

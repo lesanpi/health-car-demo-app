@@ -20,6 +20,7 @@ ReportMileage _$ReportMileageFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ReportMileage {
+  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   String get vehicle => throw _privateConstructorUsedError;
   @DateTimeConverter()
@@ -42,7 +43,7 @@ abstract class $ReportMileageCopyWith<$Res> {
       _$ReportMileageCopyWithImpl<$Res, ReportMileage>;
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       String vehicle,
       @DateTimeConverter() DateTime createdAt,
       Geolocation? geolocation,
@@ -128,7 +129,7 @@ abstract class _$$ReportMileageImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       String vehicle,
       @DateTimeConverter() DateTime createdAt,
       Geolocation? geolocation,
@@ -196,7 +197,7 @@ class __$$ReportMileageImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ReportMileageImpl implements _ReportMileage {
   const _$ReportMileageImpl(
-      {required this.id,
+      {@JsonKey(name: '_id') required this.id,
       required this.vehicle,
       @DateTimeConverter() required this.createdAt,
       this.geolocation,
@@ -208,6 +209,7 @@ class _$ReportMileageImpl implements _ReportMileage {
       _$$ReportMileageImplFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final String id;
   @override
   final String vehicle;
@@ -268,7 +270,7 @@ class _$ReportMileageImpl implements _ReportMileage {
 
 abstract class _ReportMileage implements ReportMileage {
   const factory _ReportMileage(
-      {required final String id,
+      {@JsonKey(name: '_id') required final String id,
       required final String vehicle,
       @DateTimeConverter() required final DateTime createdAt,
       final Geolocation? geolocation,
@@ -280,6 +282,7 @@ abstract class _ReportMileage implements ReportMileage {
       _$ReportMileageImpl.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   String get id;
   @override
   String get vehicle;

@@ -4,6 +4,7 @@ import 'package:data_sources/data_sources.dart';
 import 'package:exceptions/exceptions.dart';
 import 'package:models/models.dart';
 import 'package:mongo_dart/mongo_dart.dart';
+import 'package:exceptions/exceptions.dart';
 
 /// {@template vehicle_data_source_impl}
 /// Vehicle data source implementation for backend
@@ -27,12 +28,12 @@ class VehicleDataSourceImpl extends VehicleDataSource {
       final vehicleDocument = result.document ?? {};
       final id = mapObjectId<String>(vehicleDocument['_id']);
       if (id.isLeft) {
-        throw ServerException('Unexpected error: ${id.left.message}');
+        throw InternalServerException('Unexpected error: ${id.left.message}');
       }
       vehicleDocument['_id'] = id.right;
       return Vehicle.fromJson(vehicleDocument);
     } catch (e) {
-      throw ServerException('Unexpected error: $e');
+      throw InternalServerException('Unexpected error: $e');
     } finally {
       // await _databaseConnection.close();
     }
@@ -50,7 +51,7 @@ class VehicleDataSourceImpl extends VehicleDataSource {
         message: result.errmsg,
       );
     } catch (e) {
-      throw ServerException('Unexpected error: $e');
+      throw InternalServerException('Unexpected error: $e');
     } finally {
       // await _databaseConnection.close();
     }
@@ -63,17 +64,18 @@ class VehicleDataSourceImpl extends VehicleDataSource {
       final collection = _databaseConnection.db.collection('vehicles');
       final result = await collection.find().toList();
 
-      final tags = result.map((tagDocument) {
+      final vehicles = result.map((tagDocument) {
+        print(tagDocument);
         final id = mapObjectId<String>(tagDocument['_id']);
         if (id.isLeft) {
-          throw ServerException('Unexpected error: ${id.left.message}');
+          throw InternalServerException('Unexpected error: ${id.left.message}');
         }
         tagDocument['_id'] = id.right;
         return Vehicle.fromJson(tagDocument);
       }).toList();
-      return tags;
+      return vehicles;
     } catch (e) {
-      throw ServerException('Unexpected error: $e');
+      throw InternalServerException('Unexpected error: $e');
     } finally {
       // await _databaseConnection.close();
     }
@@ -90,14 +92,16 @@ class VehicleDataSourceImpl extends VehicleDataSource {
 
       final vehicleId = mapObjectId<String>(document['_id']);
       if (vehicleId.isLeft) {
-        throw ServerException('Unexpected error: ${vehicleId.left.message}');
+        throw InternalServerException(
+          'Unexpected error: ${vehicleId.left.message}',
+        );
       }
       document['_id'] = vehicleId.right;
 
       final user = Vehicle.fromJson(document);
       return user;
     } catch (e) {
-      throw ServerException('Unexpected error: $e');
+      throw InternalServerException('Unexpected error: $e');
     } finally {
       // await _databaseConnection.close();
     }
@@ -123,14 +127,16 @@ class VehicleDataSourceImpl extends VehicleDataSource {
 
       final reportId = mapObjectId<String>(document['_id']);
       if (reportId.isLeft) {
-        throw ServerException('Unexpected error: ${reportId.left.message}');
+        throw InternalServerException(
+          'Unexpected error: ${reportId.left.message}',
+        );
       }
       document['_id'] = reportId.right;
 
       final report = ReportMileage.fromJson(document);
       return report;
     } catch (e) {
-      throw ServerException('Unexpected error: $e');
+      throw InternalServerException('Unexpected error: $e');
 
       // await _databaseConnection.close();
     }

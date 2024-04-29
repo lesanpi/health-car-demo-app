@@ -12,7 +12,7 @@ part of 'network_failure.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 NetworkFailure _$NetworkFailureFromJson(Map<String, dynamic> json) {
   return _NetworkFailure.fromJson(json);
@@ -74,22 +74,22 @@ class _$NetworkFailureCopyWithImpl<$Res, $Val extends NetworkFailure>
 }
 
 /// @nodoc
-abstract class _$$_NetworkFailureCopyWith<$Res>
+abstract class _$$NetworkFailureImplCopyWith<$Res>
     implements $NetworkFailureCopyWith<$Res> {
-  factory _$$_NetworkFailureCopyWith(
-          _$_NetworkFailure value, $Res Function(_$_NetworkFailure) then) =
-      __$$_NetworkFailureCopyWithImpl<$Res>;
+  factory _$$NetworkFailureImplCopyWith(_$NetworkFailureImpl value,
+          $Res Function(_$NetworkFailureImpl) then) =
+      __$$NetworkFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message, int statusCode, List<String> errors});
 }
 
 /// @nodoc
-class __$$_NetworkFailureCopyWithImpl<$Res>
-    extends _$NetworkFailureCopyWithImpl<$Res, _$_NetworkFailure>
-    implements _$$_NetworkFailureCopyWith<$Res> {
-  __$$_NetworkFailureCopyWithImpl(
-      _$_NetworkFailure _value, $Res Function(_$_NetworkFailure) _then)
+class __$$NetworkFailureImplCopyWithImpl<$Res>
+    extends _$NetworkFailureCopyWithImpl<$Res, _$NetworkFailureImpl>
+    implements _$$NetworkFailureImplCopyWith<$Res> {
+  __$$NetworkFailureImplCopyWithImpl(
+      _$NetworkFailureImpl _value, $Res Function(_$NetworkFailureImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_NetworkFailureCopyWithImpl<$Res>
     Object? statusCode = null,
     Object? errors = null,
   }) {
-    return _then(_$_NetworkFailure(
+    return _then(_$NetworkFailureImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -118,15 +118,15 @@ class __$$_NetworkFailureCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_NetworkFailure implements _NetworkFailure {
-  const _$_NetworkFailure(
+class _$NetworkFailureImpl implements _NetworkFailure {
+  const _$NetworkFailureImpl(
       {required this.message,
       required this.statusCode,
       final List<String> errors = const []})
       : _errors = errors;
 
-  factory _$_NetworkFailure.fromJson(Map<String, dynamic> json) =>
-      _$$_NetworkFailureFromJson(json);
+  factory _$NetworkFailureImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NetworkFailureImplFromJson(json);
 
   @override
   final String message;
@@ -147,10 +147,10 @@ class _$_NetworkFailure implements _NetworkFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NetworkFailure &&
+            other is _$NetworkFailureImpl &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.statusCode, statusCode) ||
                 other.statusCode == statusCode) &&
@@ -165,12 +165,13 @@ class _$_NetworkFailure implements _NetworkFailure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NetworkFailureCopyWith<_$_NetworkFailure> get copyWith =>
-      __$$_NetworkFailureCopyWithImpl<_$_NetworkFailure>(this, _$identity);
+  _$$NetworkFailureImplCopyWith<_$NetworkFailureImpl> get copyWith =>
+      __$$NetworkFailureImplCopyWithImpl<_$NetworkFailureImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_NetworkFailureToJson(
+    return _$$NetworkFailureImplToJson(
       this,
     );
   }
@@ -180,10 +181,10 @@ abstract class _NetworkFailure implements NetworkFailure {
   const factory _NetworkFailure(
       {required final String message,
       required final int statusCode,
-      final List<String> errors}) = _$_NetworkFailure;
+      final List<String> errors}) = _$NetworkFailureImpl;
 
   factory _NetworkFailure.fromJson(Map<String, dynamic> json) =
-      _$_NetworkFailure.fromJson;
+      _$NetworkFailureImpl.fromJson;
 
   @override
   String get message;
@@ -193,6 +194,6 @@ abstract class _NetworkFailure implements NetworkFailure {
   List<String> get errors;
   @override
   @JsonKey(ignore: true)
-  _$$_NetworkFailureCopyWith<_$_NetworkFailure> get copyWith =>
+  _$$NetworkFailureImplCopyWith<_$NetworkFailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,0 +1,8 @@
+# melos_managed_dependency_overrides: exceptions,failures,models
+dependency_overrides:
+  exceptions:
+    path: ../exceptions
+  failures:
+    path: ../failures
+  models:
+    path: ../models

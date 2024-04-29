@@ -12,7 +12,7 @@ part 'report_mileage.g.dart';
 class ReportMileage with _$ReportMileage {
   /// {@macro report_mileage}
   const factory ReportMileage({
-    required String id,
+    @JsonKey(name: '_id') required String id,
     required String vehicle,
     @DateTimeConverter() required DateTime createdAt,
     Geolocation? geolocation,

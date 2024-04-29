@@ -20,6 +20,7 @@ Vehicle _$VehicleFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Vehicle {
+  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get photo => throw _privateConstructorUsedError;
@@ -34,7 +35,7 @@ abstract class $VehicleCopyWith<$Res> {
   factory $VehicleCopyWith(Vehicle value, $Res Function(Vehicle) then) =
       _$VehicleCopyWithImpl<$Res, Vehicle>;
   @useResult
-  $Res call({String id, String name, String photo});
+  $Res call({@JsonKey(name: '_id') String id, String name, String photo});
 }
 
 /// @nodoc
@@ -78,7 +79,7 @@ abstract class _$$VehicleImplCopyWith<$Res> implements $VehicleCopyWith<$Res> {
       __$$VehicleImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String photo});
+  $Res call({@JsonKey(name: '_id') String id, String name, String photo});
 }
 
 /// @nodoc
@@ -117,12 +118,15 @@ class __$$VehicleImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$VehicleImpl implements _Vehicle {
   const _$VehicleImpl(
-      {required this.id, required this.name, required this.photo});
+      {@JsonKey(name: '_id') required this.id,
+      required this.name,
+      required this.photo});
 
   factory _$VehicleImpl.fromJson(Map<String, dynamic> json) =>
       _$$VehicleImplFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final String id;
   @override
   final String name;
@@ -164,13 +168,14 @@ class _$VehicleImpl implements _Vehicle {
 
 abstract class _Vehicle implements Vehicle {
   const factory _Vehicle(
-      {required final String id,
+      {@JsonKey(name: '_id') required final String id,
       required final String name,
       required final String photo}) = _$VehicleImpl;
 
   factory _Vehicle.fromJson(Map<String, dynamic> json) = _$VehicleImpl.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   String get id;
   @override
   String get name;

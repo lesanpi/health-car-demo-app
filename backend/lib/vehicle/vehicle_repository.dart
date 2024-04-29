@@ -20,7 +20,7 @@ class VehicleRepositoryImpl extends VehicleRepository {
     try {
       final vehicle = await dataSource.create(data);
       return Right(vehicle);
-    } on ServerException catch (e) {
+    } on InternalServerException catch (e) {
       return Left(
         ServerFailure(message: e.message),
       );
@@ -32,7 +32,7 @@ class VehicleRepositoryImpl extends VehicleRepository {
     try {
       final result = await dataSource.deleteVehicle(id);
       return Right(result);
-    } on ServerException catch (e) {
+    } on InternalServerException catch (e) {
       return Left(
         ServerFailure(message: e.message),
       );
@@ -44,7 +44,7 @@ class VehicleRepositoryImpl extends VehicleRepository {
     try {
       final vehicles = await dataSource.getAllVehicles();
       return Right(vehicles);
-    } on ServerException catch (e) {
+    } on InternalServerException catch (e) {
       return Left(
         ServerFailure(message: e.message),
       );
@@ -64,7 +64,7 @@ class VehicleRepositoryImpl extends VehicleRepository {
     try {
       final vehicle = await dataSource.getVehicleById(id);
       return Right(vehicle);
-    } on ServerException catch (e) {
+    } on InternalServerException catch (e) {
       return Left(
         ServerFailure(message: e.message),
       );

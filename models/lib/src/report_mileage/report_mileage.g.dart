@@ -8,7 +8,7 @@ part of 'report_mileage.dart';
 
 _$ReportMileageImpl _$$ReportMileageImplFromJson(Map<String, dynamic> json) =>
     _$ReportMileageImpl(
-      id: json['id'] as String,
+      id: json['_id'] as String,
       vehicle: json['vehicle'] as String,
       createdAt: const DateTimeConverter().fromJson(json['createdAt']),
       geolocation: json['geolocation'] == null
@@ -21,7 +21,7 @@ _$ReportMileageImpl _$$ReportMileageImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$ReportMileageImplToJson(_$ReportMileageImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'vehicle': instance.vehicle,
       'createdAt': const DateTimeConverter().toJson(instance.createdAt),
       'geolocation': instance.geolocation,
