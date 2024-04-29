@@ -4,7 +4,7 @@ import 'package:backend/db/database_connection.dart';
 import 'package:dart_frog/dart_frog.dart';
 import 'package:dotenv/dotenv.dart';
 
-final env = DotEnv()..load(['variables.env']);
+final env = DotEnv(includePlatformEnvironment: true)..load(['variables.env']);
 final _db = DatabaseConnection(dbUrl: env['DB_URL'] ?? '');
 
 Future<HttpServer> run(Handler handler, InternetAddress ip, int port) async {
