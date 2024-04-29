@@ -48,13 +48,6 @@ class CreateReportDto with _$CreateReportDto {
       if (mileage == null) {
         errors['mileage'] = ['Mileage is required'];
       }
-      // if (channel.isEmpty) {
-      //   errors['channel'] = ['Channel is required'];
-      // }
-
-      // if (device.isEmpty) {
-      //   errors['device'] = ['Device is required'];
-      // }
 
       if (geolocationData.isNotEmpty) {
         final geolocationValidated = Geolocation.validated(geolocationData);
