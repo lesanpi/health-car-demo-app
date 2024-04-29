@@ -90,6 +90,12 @@ class VehicleDataSourceImpl extends VehicleDataSource {
           await collection.findOne(where.id(ObjectId.fromHexString(id)));
       final document = result ?? {};
 
+      if (document.isEmpty) {
+        throw NotFoundException(
+          'Not found vehicle $id',
+        );
+      }
+
       final vehicleId = mapObjectId<String>(document['_id']);
       if (vehicleId.isLeft) {
         throw InternalServerException(
@@ -100,6 +106,8 @@ class VehicleDataSourceImpl extends VehicleDataSource {
 
       final user = Vehicle.fromJson(document);
       return user;
+    } on HttpException {
+      rethrow;
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
     } finally {
@@ -125,6 +133,12 @@ class VehicleDataSourceImpl extends VehicleDataSource {
           .findOne(where.eq('vehicle', vehicleId).sortBy('createdAt'));
       final document = result ?? {};
 
+      if (document.isEmpty) {
+        throw NotFoundException(
+          'Not found report for $vehicleId',
+        );
+      }
+
       final reportId = mapObjectId<String>(document['_id']);
       if (reportId.isLeft) {
         throw InternalServerException(
@@ -135,6 +149,8 @@ class VehicleDataSourceImpl extends VehicleDataSource {
 
       final report = ReportMileage.fromJson(document);
       return report;
+    } on HttpException {
+      rethrow;
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
 

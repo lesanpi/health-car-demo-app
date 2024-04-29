@@ -64,9 +64,9 @@ class VehicleRepositoryImpl extends VehicleRepository {
     try {
       final vehicle = await dataSource.getVehicleById(id);
       return Right(vehicle);
-    } on InternalServerException catch (e) {
+    } on HttpException catch (e) {
       return Left(
-        ServerFailure(message: e.message),
+        ServerFailure(message: e.message, statusCode: e.statusCode),
       );
     }
   }
