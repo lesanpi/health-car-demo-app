@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
-import 'dart:html';
+import 'dart:io';
 
 import 'package:backend/controller/http_controller.dart';
 import 'package:dart_frog/dart_frog.dart';
@@ -8,16 +8,21 @@ import 'package:either_dart/either.dart';
 import 'package:models/models.dart';
 import 'package:repository/repository.dart';
 
-class VehicleController extends HttpController {
-  VehicleController({
+class ReportMileageController extends HttpController {
+  ReportMileageController({
     required ReportMileageRepository repository,
   }) : _repository = repository;
   final ReportMileageRepository _repository;
 
   @override
   FutureOr<Response> index(Request request) {
-    final tags = _repository.getAllReports();
-    return tags.fold(
+    final uri = request.uri;
+    final vehicle = uri.queryParameters['vehicle'];
+
+    final reports = vehicle == null || vehicle.isEmpty
+        ? _repository.getAllReports()
+        : _repository.getAllReportsOfVehicle(vehicle);
+    return reports.fold(
       (left) => Response.json(
         body: {
           'message': left.message,

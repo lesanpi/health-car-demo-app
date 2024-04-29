@@ -18,8 +18,13 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   @override
   Future<ReportMileage> createReport(CreateReportDto data) async {
     try {
+      await _databaseConnection.connect();
+
       final collection = _databaseConnection.db.collection('reportMileage');
-      final result = await collection.insertOne(data.toJson());
+      final result = await collection.insertOne({
+        ...data.toJson(),
+        'createdAt': DateTime.now().toUtc().toIso8601String(),
+      });
       final document = result.document ?? {};
 
       final reportId = mapObjectId<String>(document['_id']);
@@ -43,6 +48,8 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   @override
   Future<OperationResultDto> deleteReport(String id) async {
     try {
+      await _databaseConnection.connect();
+
       final collection = _databaseConnection.db.collection('reportMileage');
       final result =
           await collection.deleteOne(where.id(ObjectId.fromHexString(id)));
@@ -61,17 +68,27 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   @override
   Future<List<ReportMileage>> getAllReports() async {
     try {
+      await _databaseConnection.connect();
+
       final collection = _databaseConnection.db.collection('reportMileage');
       final result = await collection.find().toList();
 
       final reports = result.map((tagDocument) {
         final id = mapObjectId<String>(tagDocument['_id']);
+
         if (id.isLeft) {
           throw InternalServerException('Unexpected error: ${id.left.message}');
         }
+
         tagDocument['_id'] = id.right;
-        return ReportMileage.fromJson(tagDocument);
+        try {
+          return ReportMileage.fromJson(tagDocument);
+        } catch (e, s) {
+          print(s);
+          rethrow;
+        }
       }).toList();
+
       return reports;
     } on HttpException {
       rethrow;
@@ -83,6 +100,8 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   @override
   Future<List<ReportMileage>> getAllReportsByVehicle(String vehicleId) async {
     try {
+      await _databaseConnection.connect();
+
       final collection = _databaseConnection.db.collection('reportMileage');
       final result = await collection
           .find(where.eq('vehicle', vehicleId).sortBy('createdAt'))
@@ -107,6 +126,8 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   @override
   Future<ReportMileage> getLastReportOfVehicle(String vehicleId) async {
     try {
+      await _databaseConnection.connect();
+
       final collection = _databaseConnection.db.collection('reportMileage');
 
       final result = await collection
@@ -141,6 +162,8 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   @override
   Future<ReportMileage> getReportById(String id) async {
     try {
+      await _databaseConnection.connect();
+
       await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('reportMileage');
       final result =

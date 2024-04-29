@@ -12,13 +12,18 @@ import 'package:repository/repository.dart';
 class ReportMileageRepositoryImpl extends ReportMileageRepository {
   ReportMileageRepositoryImpl({
     required ReportMileageDataSource dataSource,
-  }) : _dataSource = dataSource;
+    required VehicleDataSource vehicleDataSource,
+  })  : _dataSource = dataSource,
+        _vehicleDataSource = vehicleDataSource;
   final ReportMileageDataSource _dataSource;
+  final VehicleDataSource _vehicleDataSource;
 
   @override
   Future<Either<Failure, ReportMileage>> createReport(
-      CreateReportDto data) async {
+    CreateReportDto data,
+  ) async {
     try {
+      final _ = await _vehicleDataSource.getVehicleById(data.vehicle);
       final report = await _dataSource.createReport(data);
       return Right(report);
     } on HttpException catch (e) {
