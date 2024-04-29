@@ -1,1 +1,8 @@
 include: package:very_good_analysis/analysis_options.5.0.0.yaml
+
+targets:
+  $default:
+    builders:
+      json_serializable:
+        options:
+          explicit_to_json: true
