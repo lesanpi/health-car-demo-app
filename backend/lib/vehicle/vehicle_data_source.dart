@@ -2,9 +2,7 @@ import 'package:backend/controller/mapObjectId.dart';
 import 'package:backend/db/database_connection.dart';
 import 'package:data_sources/data_sources.dart';
 import 'package:exceptions/exceptions.dart';
-import 'package:models/src/operation_result/operation_result_dto.dart';
-import 'package:models/src/vehicle/create_vehicle_dto.dart';
-import 'package:models/src/vehicle/vehicle.dart';
+import 'package:models/models.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 /// {@template vehicle_data_source_impl}
@@ -36,7 +34,7 @@ class VehicleDataSourceImpl extends VehicleDataSource {
     } catch (e) {
       throw ServerException('Unexpected error: $e');
     } finally {
-      await _databaseConnection.close();
+      // await _databaseConnection.close();
     }
   }
 
@@ -54,7 +52,7 @@ class VehicleDataSourceImpl extends VehicleDataSource {
     } catch (e) {
       throw ServerException('Unexpected error: $e');
     } finally {
-      await _databaseConnection.close();
+      // await _databaseConnection.close();
     }
   }
 
@@ -77,7 +75,7 @@ class VehicleDataSourceImpl extends VehicleDataSource {
     } catch (e) {
       throw ServerException('Unexpected error: $e');
     } finally {
-      await _databaseConnection.close();
+      // await _databaseConnection.close();
     }
   }
 
@@ -101,7 +99,7 @@ class VehicleDataSourceImpl extends VehicleDataSource {
     } catch (e) {
       throw ServerException('Unexpected error: $e');
     } finally {
-      await _databaseConnection.close();
+      // await _databaseConnection.close();
     }
   }
 
@@ -112,5 +110,29 @@ class VehicleDataSourceImpl extends VehicleDataSource {
   }) {
     // TODO: implement updateVehicle
     throw UnimplementedError();
+  }
+
+  @override
+  Future<ReportMileage> getLastReportOfVehicle(String vehicleId) async {
+    try {
+      final collection = _databaseConnection.db.collection('reportMileage');
+
+      final result = await collection
+          .findOne(where.eq('vehicle', vehicleId).sortBy('createdAt'));
+      final document = result ?? {};
+
+      final reportId = mapObjectId<String>(document['_id']);
+      if (reportId.isLeft) {
+        throw ServerException('Unexpected error: ${reportId.left.message}');
+      }
+      document['_id'] = reportId.right;
+
+      final report = ReportMileage.fromJson(document);
+      return report;
+    } catch (e) {
+      throw ServerException('Unexpected error: $e');
+
+      // await _databaseConnection.close();
+    }
   }
 }
