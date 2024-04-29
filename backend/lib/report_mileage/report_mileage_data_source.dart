@@ -18,8 +18,6 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   @override
   Future<ReportMileage> createReport(CreateReportDto data) async {
     try {
-      await _databaseConnection.connect();
-
       final collection = _databaseConnection.db.collection('reportMileage');
       final result = await collection.insertOne({
         ...data.toJson(),
@@ -48,8 +46,6 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   @override
   Future<OperationResultDto> deleteReport(String id) async {
     try {
-      await _databaseConnection.connect();
-
       final collection = _databaseConnection.db.collection('reportMileage');
       final result =
           await collection.deleteOne(where.id(ObjectId.fromHexString(id)));
@@ -68,8 +64,6 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   @override
   Future<List<ReportMileage>> getAllReports() async {
     try {
-      await _databaseConnection.connect();
-
       final collection = _databaseConnection.db.collection('reportMileage');
       final result = await collection.find().toList();
 
@@ -100,8 +94,6 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   @override
   Future<List<ReportMileage>> getAllReportsByVehicle(String vehicleId) async {
     try {
-      await _databaseConnection.connect();
-
       final collection = _databaseConnection.db.collection('reportMileage');
       final result = await collection
           .find(where.eq('vehicle', vehicleId).sortBy('createdAt'))
@@ -126,8 +118,6 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   @override
   Future<ReportMileage> getLastReportOfVehicle(String vehicleId) async {
     try {
-      await _databaseConnection.connect();
-
       final collection = _databaseConnection.db.collection('reportMileage');
 
       final result = await collection
@@ -162,9 +152,6 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   @override
   Future<ReportMileage> getReportById(String id) async {
     try {
-      await _databaseConnection.connect();
-
-      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('reportMileage');
       final result =
           await collection.findOne(where.id(ObjectId.fromHexString(id)));
