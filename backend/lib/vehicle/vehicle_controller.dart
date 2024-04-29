@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
-import 'dart:io';
+import 'dart:html';
 
 import 'package:backend/controller/http_controller.dart';
 import 'package:dart_frog/dart_frog.dart';
@@ -49,21 +49,6 @@ class VehicleController extends HttpController {
   @override
   FutureOr<Response> destroy(Request request, String id) {
     final tags = _repository.deleteVehicle(id);
-    return tags.fold(
-      (left) => Response.json(
-        body: {
-          'message': left.message,
-        },
-        statusCode: left.statusCode,
-      ),
-      (right) => Response.json(
-        body: right.toJson(),
-      ),
-    );
-  }
-
-  FutureOr<Response> lastReport(Request request, String id) {
-    final tags = _repository.getLastReportMileageOfVehicle(id);
     return tags.fold(
       (left) => Response.json(
         body: {

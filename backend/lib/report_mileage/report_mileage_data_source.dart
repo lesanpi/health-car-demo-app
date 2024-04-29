@@ -16,6 +16,31 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   final DatabaseConnection _databaseConnection;
 
   @override
+  Future<ReportMileage> createReport(CreateReportDto data) async {
+    try {
+      final collection = _databaseConnection.db.collection('reportMileage');
+      final result = await collection.insertOne(data.toJson());
+      final document = result.document ?? {};
+
+      final reportId = mapObjectId<String>(document['_id']);
+
+      if (reportId.isLeft) {
+        throw InternalServerException(
+          'Unexpected error: ${reportId.left.message}',
+        );
+      }
+      document['_id'] = reportId.right;
+
+      final report = ReportMileage.fromJson(document);
+      return report;
+    } on HttpException {
+      rethrow;
+    } catch (e) {
+      throw InternalServerException('Unexpected error: $e');
+    }
+  }
+
+  @override
   Future<OperationResultDto> deleteReport(String id) async {
     try {
       final collection = _databaseConnection.db.collection('reportMileage');

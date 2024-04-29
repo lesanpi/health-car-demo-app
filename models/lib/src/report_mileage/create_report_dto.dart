@@ -38,7 +38,7 @@ class CreateReportDto with _$CreateReportDto {
       final device = json['device'] as String? ?? '';
       final geolocationData =
           json['geolocation'] as Map<String, dynamic>? ?? {};
-      final Geolocation? geolocation;
+
       if (vehicle.isEmpty) {
         errors['vehicle'] = ['Vehicle is required'];
       }
@@ -56,9 +56,6 @@ class CreateReportDto with _$CreateReportDto {
         if (geolocationValidated.isLeft) {
           errors['geolocation'] = ['Geolocation data is invalid'];
         }
-        geolocation = geolocationValidated.right;
-      } else {
-        geolocation = null;
       }
 
       if (errors.isEmpty) return Right(CreateReportDto.fromJson(json));

@@ -26,7 +26,7 @@ abstract class ReportMileageRepository {
   Future<Either<Failure, OperationResultDto>> deleteReport(String id);
 
   /// Create a new [ReportMileage] using [data]
-  Future<Either<Failure, Vehicle>> createReport(
+  Future<Either<Failure, ReportMileage>> createReport(
     CreateReportDto data,
   );
 }
