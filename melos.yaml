@@ -6,7 +6,7 @@ packages:
   - backend
   - models
   # - repository
-  # - exceptions
+  - exceptions
   - app
   # - typedefs
   - data_sources
