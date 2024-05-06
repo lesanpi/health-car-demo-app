@@ -15,3 +15,11 @@ abstract class HttpException implements Exception {
   @override
   String toString() => '$runtimeType: $message';
 }
+
+/// {@template http_failure_exception}
+/// General http failure exception
+/// {@endtemplate}
+class HttpFailureException extends HttpException {
+  /// {@macro http_failure_exception}
+  const HttpFailureException(super.message, super.statusCode);
+}

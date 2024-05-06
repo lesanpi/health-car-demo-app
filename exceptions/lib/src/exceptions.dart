@@ -3,3 +3,4 @@ export 'http_exception/http_exception.dart';
 export 'http_exception/internal_server_exception.dart';
 export 'http_exception/not_found_exception.dart';
 export 'http_exception/unathorized_exception.dart';
+export 'json_exception/json_exception.dart';
