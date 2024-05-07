@@ -122,7 +122,7 @@ class ReportMileageApi extends ReportMileageDataSource {
   Future<ReportMileage> getLastReportOfVehicle(String vehicleId) async {
     final uri = Uri.https(
       _apiHost,
-      ReportMileageEndpoints.vehicleStatusEndpoints,
+      '${ReportMileageEndpoints.vehicleStatusEndpoints}/$vehicleId',
     );
     http.Response response;
     try {
