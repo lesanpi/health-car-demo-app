@@ -30,7 +30,7 @@ class BackgroundUseCase {
 
   static Future<void> executeBackgroundProcess() async {
     final vehicleMeasures = await IBleVehiculeRepository.scanIoTDevices();
-    const apiHost = 'https://healt-car-api-w59q1bv-lesanpi.globeapp.dev';
+    const apiHost = 'healt-car-api-w59q1bv-lesanpi.globeapp.dev';
     final repository = VehicleRepository(
       apiReports: ReportMileageApi(apiHost: apiHost),
       apiVehicle: VehicleApi(apiHost: apiHost),

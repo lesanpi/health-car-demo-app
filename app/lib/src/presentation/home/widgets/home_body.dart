@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:health_car_demo_app/app/constant.dart';
 import 'package:health_car_demo_app/src/presentation/home/bloc/bloc.dart';
+import 'package:health_car_demo_app/src/presentation/vehicles/vehicles.dart';
 
 /// {@template home_body}
 /// Body of the HomePage.
@@ -24,6 +25,7 @@ class HomeBody extends StatelessWidget {
               children: const [
                 WelcomeView(),
                 PermissionRequestView(),
+                VehiclesPage(),
               ],
             ),
           ),
