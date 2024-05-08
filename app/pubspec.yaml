@@ -29,6 +29,7 @@ dependencies:
   models:
     path: ../models
   formz: ^0.7.0
+  carousel_slider: ^4.2.1
     
 
 dev_dependencies:

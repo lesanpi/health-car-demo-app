@@ -14,6 +14,7 @@ class VehiclesBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = PageController(viewportFraction: 0.5);
     return BlocBuilder<VehiclesCubit, VehiclesState>(
       builder: (context, state) {
         final status = state.status;
@@ -37,6 +38,7 @@ class VehiclesBody extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: Consts.margin),
           child: PageView.builder(
+            controller: controller,
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
               final vehicle = vehicles[index];
