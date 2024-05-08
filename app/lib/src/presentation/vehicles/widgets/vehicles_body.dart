@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
+import 'package:health_car_demo_app/app/constant.dart';
 import 'package:health_car_demo_app/src/presentation/vehicles/cubit/cubit.dart';
 
 /// {@template vehicles_body}
@@ -19,10 +20,44 @@ class VehiclesBody extends StatelessWidget {
         final vehicles = state.data;
         if (status.isInitial || status.isInProgress) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              color: Colors.black,
+            ),
           );
         }
-        return Center(child: Text(vehicles.toString()));
+        if (status.isFailure) {
+          return const Center(
+            child: Icon(
+              Icons.cancel,
+              color: Colors.black,
+            ),
+          );
+        }
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: Consts.margin),
+          child: PageView.builder(
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) {
+              final vehicle = vehicles[index];
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.network(vehicle.photo),
+                  Text(
+                    vehicle.name,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  Text(
+                    vehicle.id,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ],
+              );
+            },
+            itemCount: vehicles.length,
+          ),
+        );
       },
     );
   }
