@@ -135,7 +135,7 @@ class ReportMileageApi extends ReportMileageDataSource {
         uri,
       );
       log(
-        'Response ${response.body}',
+        'Response[${response.statusCode}] ${response.body}',
         name: 'getLastReportOfVehicle()',
       );
     } catch (_) {
@@ -143,6 +143,10 @@ class ReportMileageApi extends ReportMileageDataSource {
     }
 
     if (response.statusCode != 200) {
+      log(
+        'Throwing HttpFailureException [${response.statusCode}]',
+        name: 'getLastReportOfVehicle()',
+      );
       throw HttpFailureException('', response.statusCode);
     }
     try {

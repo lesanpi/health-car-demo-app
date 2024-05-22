@@ -12,7 +12,7 @@ class VehiclesUseCase {
     return _vehicleRepository.getVehicles();
   }
 
-  Future<ReportMileage> getLastReportOfVehicle(String vehicleId) {
+  Future<ReportMileage?> getLastReportOfVehicle(String vehicleId) {
     return _vehicleRepository.getLastReportOfVehicle(vehicleId);
   }
 }

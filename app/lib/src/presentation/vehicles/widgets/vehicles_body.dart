@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
+import 'package:gap/gap.dart';
 import 'package:health_car_demo_app/app/constant.dart';
 import 'package:health_car_demo_app/src/presentation/vehicles/cubit/cubit.dart';
 import 'package:health_car_demo_app/src/presentation/vehicles/widgets/vehicle_tile.dart';
@@ -18,6 +19,43 @@ class VehiclesBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = PageController(viewportFraction: 0.5);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: Consts.margin),
+          child: Text(
+            'Vehículos en Demo',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontSize: 18,
+                ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: Consts.margin),
+          child: Text(
+            '''
+Este es el listado de vehículos en los que se esta haciendo esta realizando esta demo''',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ),
+        const Gap(Consts.padding),
+        Expanded(child: VehiclesList(controller: controller)),
+      ],
+    );
+  }
+}
+
+class VehiclesList extends StatelessWidget {
+  const VehiclesList({
+    required this.controller,
+    super.key,
+  });
+
+  final PageController controller;
+
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<VehiclesCubit, VehiclesState>(
       builder: (context, state) {
         final status = state.status;

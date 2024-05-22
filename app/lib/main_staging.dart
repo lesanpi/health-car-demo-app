@@ -5,7 +5,7 @@ import 'package:health_car_demo_app/src/data/repositories/background_repository.
 void main() {
   bootstrap(() {
     return const App(
-      apiHost: 'healt-car-api-w59q1bv-lesanpi.globeapp.dev',
+      apiHost: 'healt-car-api.globeapp.dev',
     );
   });
 }

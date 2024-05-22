@@ -38,6 +38,6 @@ class BackgroundTaskHandler extends TaskHandler {
 void main() => runApp(
       const App(
         startCallback: startCallback,
-        apiHost: 'healt-car-api-w59q1bv-lesanpi.globeapp.dev',
+        apiHost: 'healt-car-api.globeapp.dev',
       ),
     );

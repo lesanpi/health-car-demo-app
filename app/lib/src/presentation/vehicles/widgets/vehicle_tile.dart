@@ -55,7 +55,7 @@ class VehicleTileContent extends StatelessWidget {
               ),
               Text(
                 vehicle.id,
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: Theme.of(context).textTheme.bodySmall,
               ),
               const VehicleMileageIndicator(),
             ],
@@ -114,29 +114,49 @@ class VehicleMileageIndicator extends StatelessWidget {
           }
 
           if (data == null) {
-            return const Center(
-              child: Text(
-                'No hay datos del kilometraje',
-              ),
+            return Text(
+              'No hay datos del kilometraje',
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  // fontSize: 30,
+                  ),
             );
           }
 
-          final percentage = data.mileage / 5000;
+          // final mileage = data.mileage;
+          const mileage = 2500;
+          const percentage = mileage / 5000;
+          final color = switch (percentage) {
+            <= 0.33 => Colors.green,
+            <= 0.66 => Colors.yellow,
+            > 0.66 => Colors.red,
+            _ => Colors.grey,
+          };
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text(
+                '$mileage Km recorridos',
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    // fontSize: 30,
+                    ),
+              ),
+              const Gap(5),
               Row(
                 children: [
-                  Text('${data.mileage} '),
                   Expanded(
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
                       child: LinearProgressIndicator(
                         value: percentage,
                         backgroundColor: Colors.grey.shade300,
+                        color: color,
                       ),
                     ),
                   ),
-                  const Text(' 5000 Km'),
+                  Text(
+                    ' 5000 Km',
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
                 ],
               ),
             ],
