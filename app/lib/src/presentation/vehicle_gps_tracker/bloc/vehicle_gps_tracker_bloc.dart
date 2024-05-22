@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -18,9 +19,21 @@ class VehicleGpsTrackerBloc
     on<CustomVehicleGpsTrackerEvent>(_onCustomVehicleGpsTrackerEvent);
     on<_VehicleGpsTrackerTicket>(_onTicked);
     add(const _VehicleGpsTrackerTicket());
+    tickSubs = Stream<void>.periodic(const Duration(seconds: 5)).listen(
+      (event) {
+        add(const _VehicleGpsTrackerTicket());
+      },
+    );
   }
   final Vehicle vehicle;
   final LocationUseCase _locationUseCase;
+  StreamSubscription<void>? tickSubs;
+
+  @override
+  Future<void> close() async {
+    await tickSubs?.cancel();
+    await super.close();
+  }
 
   FutureOr<void> _onCustomVehicleGpsTrackerEvent(
     CustomVehicleGpsTrackerEvent event,
@@ -34,10 +47,7 @@ class VehicleGpsTrackerBloc
     Emitter<VehicleGpsTrackerState> emit,
   ) async {
     final permissionGranted = await _locationUseCase.isPermissionGranted();
-    if (!permissionGranted) {
-      emit(state.copyWith(isPermissionGranted: permissionGranted));
-      return;
-    }
+    log('Is permission granted $permissionGranted');
     emit(state.copyWith(isPermissionGranted: permissionGranted));
     final report = await _locationUseCase.getLastReportOfVehicle(vehicle.id);
     emit(

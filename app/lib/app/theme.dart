@@ -7,7 +7,6 @@ import 'package:health_car_demo_app/app/constant.dart';
 class AppTheme {
   static final theme = ThemeData(
     useMaterial3: true,
-
     splashColor: Consts.primary.shade300.withOpacity(0.05),
     brightness: Brightness.dark,
     primaryColor: Consts.primary.shade600,

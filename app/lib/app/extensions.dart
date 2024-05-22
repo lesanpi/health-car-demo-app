@@ -53,9 +53,13 @@ Future<Uint8List> createImageFromWidget(
     child: RenderPositionedBox(
       child: repaintBoundary,
     ),
-    configuration: const ViewConfiguration(
-        // size: logicalSize,
-        ),
+    configuration: ViewConfiguration(
+      // size: logicalSize,
+      logicalConstraints: BoxConstraints(
+        maxWidth: logicalSize.width,
+        maxHeight: logicalSize.height,
+      ),
+    ),
   );
 
   final pipelineOwner = PipelineOwner();
@@ -90,11 +94,11 @@ Future<Uint8List> createImageFromWidget(
 
 Future<BitmapDescriptor> getUserIcon() async {
   return CircleAvatar(
-    backgroundColor: Consts.primary.withOpacity(0.4),
+    backgroundColor: Colors.blueAccent.withOpacity(0.4),
     radius: 30,
     child: CircleAvatar(
       radius: 20,
-      backgroundColor: Consts.primary,
+      backgroundColor: Colors.blueAccent,
       child: Text(
         'You',
         style: GoogleFonts.urbanist(

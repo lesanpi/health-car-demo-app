@@ -128,16 +128,17 @@ class _MapViewState extends State<MapView> {
   }
 
   Future<BitmapDescriptor> getCarIcon() async {
+    final scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
     return CircleAvatar(
-      backgroundColor: Consts.primary.withOpacity(0.4),
+      backgroundColor: Colors.white.withOpacity(0.4),
       radius: 30,
       child: CircleAvatar(
         radius: 20,
-        backgroundColor: Consts.primary,
+        backgroundColor: Colors.blueGrey.shade800,
         child: Text(
-          '🚙',
+          'Car',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.w600,
                 fontSize: 18,
               ),
