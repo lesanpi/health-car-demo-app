@@ -120,8 +120,9 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
     try {
       final collection = _databaseConnection.db.collection('reportMileage');
 
-      final result = await collection
-          .findOne(where.eq('vehicle', vehicleId).sortBy('createdAt'));
+      final result = await collection.findOne(
+        where.eq('vehicle', vehicleId).sortBy('createdAt', descending: true),
+      );
       final document = result ?? {};
 
       if (document.isEmpty) {
