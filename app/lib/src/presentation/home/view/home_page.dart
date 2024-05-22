@@ -1,6 +1,10 @@
+import 'dart:io';
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
-import 'package:health_car_demo_app/src/domain/use_cases/background_use_case.dart';
-import 'package:health_car_demo_app/src/presentation/home/bloc/bloc.dart';
+import 'package:flutter_foreground_task/flutter_foreground_task.dart';
+import 'package:flutter_foreground_task/ui/with_foreground_task.dart';
+import 'package:health_car_demo_app/main_development.dart';
 import 'package:health_car_demo_app/src/presentation/home/widgets/home_body.dart';
 
 /// {@template home_page}
@@ -17,13 +21,15 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Health Car'),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
+    return WithForegroundTask(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Health Car'),
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+        ),
+        body: const HomeView(),
       ),
-      body: const HomeView(),
     );
   }
 }

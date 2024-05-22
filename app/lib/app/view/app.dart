@@ -15,41 +15,20 @@ import 'package:health_car_demo_app/src/domain/repositories/vehicle_repository.d
 import 'package:health_car_demo_app/src/domain/use_cases/background_use_case.dart';
 import 'package:health_car_demo_app/src/presentation/home/home.dart';
 
-@pragma('vm:entry-point')
-void startCallback() {
-  // The setTaskHandler function must be called to handle the task in the background.
-  FlutterForegroundTask.setTaskHandler(BackgroundTaskHandler());
-}
-
-class BackgroundTaskHandler extends TaskHandler {
-  SendPort? _sendPort;
-
-  // Called when the task is started.
-  @override
-  Future<void> onStart(DateTime timestamp, SendPort? sendPort) async {
-    _sendPort = sendPort;
-  }
-
-  // Called every [interval] milliseconds in [ForegroundTaskOptions].
-  @override
-  Future<void> onRepeatEvent(DateTime timestamp, SendPort? sendPort) async {
-    await BackgroundUseCase.executeBackgroundProcess();
-  }
-
-  @override
-  void onDestroy(DateTime timestamp, SendPort? sendPort) {
-    log('onDestroy', name: 'BackgroundTaskHandler');
-  }
-}
-
 class App extends StatelessWidget {
-  const App({required this.apiHost, super.key});
+  const App({
+    required this.apiHost,
+    super.key,
+    this.startCallback,
+  });
   final String apiHost;
+  final Function? startCallback;
 
   @override
   Widget build(BuildContext context) {
-    final backgroundRepository =
-        BackgroundRepository(startCallback: startCallback);
+    final backgroundRepository = BackgroundRepository(
+      startCallback: startCallback,
+    );
     final vehicleRepository = VehicleRepository(
       apiReports: ReportMileageApi(apiHost: apiHost),
       apiVehicle: VehicleApi(apiHost: apiHost),

@@ -42,6 +42,10 @@ class BackgroundProcessBloc
     Emitter<BackgroundProcessState> emit,
   ) async {
     try {
+      if (!state.initializedService) {
+        await backgroundUseCase.initService();
+        emit(state.copyWith(initializedService: true));
+      }
       await backgroundUseCase.requestPermissions();
       await backgroundUseCase.start();
     } catch (e, s) {

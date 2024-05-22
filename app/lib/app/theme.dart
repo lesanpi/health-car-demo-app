@@ -16,6 +16,10 @@ class AppTheme {
       selectionColor: Consts.primary.shade300.withOpacity(0.2),
       selectionHandleColor: Consts.primary.shade300.withOpacity(0.2),
     ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      linearMinHeight: 20,
+      circularTrackColor: Colors.black,
+    ),
     snackBarTheme: const SnackBarThemeData(
       backgroundColor: Colors.white,
     ),

@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:health_car_demo_app/app/constant.dart';
 import 'package:health_car_demo_app/src/presentation/vehicles/cubit/cubit.dart';
+import 'package:health_car_demo_app/src/presentation/vehicles/widgets/vehicle_tile.dart';
 
 /// {@template vehicles_body}
 /// Body of the VehiclesPage.
@@ -37,25 +40,12 @@ class VehiclesBody extends StatelessWidget {
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: Consts.margin),
-          child: PageView.builder(
+          child: ListView.builder(
             controller: controller,
-            scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
               final vehicle = vehicles[index];
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.network(vehicle.photo),
-                  Text(
-                    vehicle.name,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  Text(
-                    vehicle.id,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ],
-              );
+              log('photo: ${vehicle.photo}');
+              return VehicleTile(vehicle: vehicle);
             },
             itemCount: vehicles.length,
           ),

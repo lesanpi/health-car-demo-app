@@ -33,7 +33,7 @@ class BleCarApi {
     await FlutterBluePlus.isScanning.where((val) => val == false).first;
     log(
       '✅ Scan finished. Results: ${FlutterBluePlus.lastScanResults}',
-      name: 'ForegroundTask.results',
+      name: '$_name.results',
     );
 
     return FlutterBluePlus.lastScanResults.map((e) => e.device).toList();
@@ -82,18 +82,36 @@ class BleCarApi {
     final characteristics = bluetoothService.characteristics
         .where(
           (element) =>
-              element.characteristicUuid.toString() ==
-              'beb5483e-36e1-4688-b7f5-ea07361b26a8',
+              // element.characteristicUuid.toString() ==
+              // 'beb5483e-36e1-4688-b7f5-ea07361b26a8',
+              true,
         )
         .toList();
+
+    log(
+      'Characteristics ${characteristics.map((e) => e.characteristicUuid.toString()).toList()}',
+      name: '$_name.extractDeviceInfoFromService',
+    );
     String? vehicleId;
     int? kilometers;
     for (final c in characteristics) {
+      log(
+        'Characteristic ${c.characteristicUuid} IS ID ? ${c.isVehicleIdCharacteristic}, IS KM ? ${c.isVehicleKilometersCharacteristic}',
+        name: '$_name.extractDeviceInfoFromService',
+      );
       if (c.isVehicleIdCharacteristic) {
         vehicleId = await extractVehicleIdValue(c);
+        log(
+          'Vehicle id $vehicleId',
+          name: '$_name.extractDeviceInfoFromService',
+        );
       }
       if (c.isVehicleKilometersCharacteristic) {
         kilometers = await extractVehicleKilometersValue(c);
+        log(
+          'Kilometers: $kilometers Km',
+          name: '$_name.extractDeviceInfoFromService',
+        );
       }
     }
 
@@ -162,7 +180,7 @@ class BleCarApi {
 
 extension CharacteristicsExtension on BluetoothCharacteristic {
   bool get isVehicleIdCharacteristic =>
-      characteristicUuid.toString() != BleCarApi.vehiculeIdCharacteristicUUID;
+      characteristicUuid.toString() == BleCarApi.vehiculeIdCharacteristicUUID;
   bool get isVehicleKilometersCharacteristic =>
-      characteristicUuid.toString() != BleCarApi.kilometersCharacteristicUUID;
+      characteristicUuid.toString() == BleCarApi.kilometersCharacteristicUUID;
 }

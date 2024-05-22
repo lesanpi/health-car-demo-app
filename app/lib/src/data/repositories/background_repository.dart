@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:isolate';
 
@@ -10,24 +11,72 @@ import 'package:permission_handler/permission_handler.dart';
 class BackgroundRepository extends IBackgroundRepository {
   BackgroundRepository({required super.startCallback});
 
+  String get name => runtimeType.toString();
+
+  ReceivePort? _receivePort;
+
+  void closeReceivePort() {
+    _receivePort?.close();
+    _receivePort = null;
+  }
+
+  bool registerReceivePort(ReceivePort? newReceivePort) {
+    if (newReceivePort == null) {
+      return false;
+    }
+
+    closeReceivePort();
+
+    _receivePort = newReceivePort;
+    _receivePort?.listen((data) {
+      print('Receive port data $data');
+    });
+
+    return _receivePort != null;
+  }
+
   @override
   Future<bool> start() async {
+    final receivePort = FlutterForegroundTask.receivePort;
+    final isRegistered = registerReceivePort(receivePort);
+    log(
+      'Init Starting service...',
+      name: name,
+    );
     if (await FlutterForegroundTask.isRunningService) {
+      log(
+        'Is not running service',
+        name: name,
+      );
       return FlutterForegroundTask.restartService();
     } else {
-      return FlutterForegroundTask.startService(
+      log(
+        'Starting service...',
+        name: name,
+      );
+      final result = await FlutterForegroundTask.startService(
         notificationTitle: 'Foreground Service is running',
         notificationText: 'Tap to return to the app',
-        callback: super.startCallback,
+        callback: startCallback,
       );
+      log(
+        'Starting service result ${result ? '✅' : '❌'}...',
+        name: name,
+      );
+      return result;
     }
   }
 
   @override
   Future<void> initService() async {
+    log(
+      'Initializing service task',
+      name: name,
+    );
     FlutterForegroundTask.init(
       androidNotificationOptions: AndroidNotificationOptions(
         id: 500,
+        foregroundServiceType: AndroidForegroundServiceType.CONNECTED_DEVICE,
         channelId: 'foreground_service',
         channelName: 'Foreground Service Notification',
         channelDescription:
@@ -47,11 +96,17 @@ class BackgroundRepository extends IBackgroundRepository {
         allowWifiLock: true,
       ),
     );
+    log(
+      'Initialized',
+      name: name,
+    );
   }
 
   @override
   Future<bool> isEnabled() async {
-    final bluetoothStatus = await Permission.bluetooth.request();
+    final bluetoothStatus = Platform.isIOS
+        ? await Permission.bluetooth.request()
+        : PermissionStatus.granted;
     final bluetoothScanStatus = await Permission.bluetoothScan.request();
     final bluetoothConnectStatus = await Permission.bluetoothConnect.request();
     final status = await FlutterForegroundTask.checkNotificationPermission();
@@ -66,10 +121,14 @@ class BackgroundRepository extends IBackgroundRepository {
     final bluetoothStatus = await Permission.bluetooth.request();
     final bluetoothScanStatus = await Permission.bluetoothScan.request();
     final bluetoothConnectStatus = await Permission.bluetoothConnect.request();
+    final alertStatus = await Permission.systemAlertWindow.request();
+    final batteryStatus = await Permission.ignoreBatteryOptimizations.request();
 
     if (bluetoothConnectStatus.isPermanentlyDenied ||
         bluetoothStatus.isPermanentlyDenied ||
-        bluetoothScanStatus.isPermanentlyDenied) {
+        bluetoothScanStatus.isPermanentlyDenied ||
+        alertStatus.isPermanentlyDenied ||
+        batteryStatus.isPermanentlyDenied) {
       await openAppSettings();
     }
     if (!Platform.isAndroid) {

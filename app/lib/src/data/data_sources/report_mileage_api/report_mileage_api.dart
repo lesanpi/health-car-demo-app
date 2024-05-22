@@ -28,7 +28,7 @@ class ReportMileageApi extends ReportMileageDataSource {
     http.Response response;
     try {
       log(
-        '👷🏻 Create report $data',
+        '👷🏻 Create report with mileage ${data.mileage} Km for vehicle ${data.vehicle}',
         name: 'createReport()',
       );
 
