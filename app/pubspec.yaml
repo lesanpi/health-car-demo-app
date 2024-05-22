@@ -30,6 +30,11 @@ dependencies:
     path: ../models
   formz: ^0.7.0
   carousel_slider: ^4.2.1
+  newton_particles: ^0.1.7
+  google_maps_flutter: ^2.2.8
+  bloc_concurrency: ^0.2.5
+  geolocator: ^12.0.0
+  flutter_animate: ^4.5.0
     
 
 dev_dependencies:

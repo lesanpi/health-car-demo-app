@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:gap/gap.dart';
 import 'package:health_car_demo_app/src/domain/use_cases/vehicles_use_case.dart';
+import 'package:health_car_demo_app/src/presentation/vehicle_gps_tracker/vehicle_gps_tracker.dart';
 import 'package:health_car_demo_app/src/presentation/vehicles/cubit/mileage_cubit.dart';
 import 'package:models/src/vehicle/vehicle.dart';
 
@@ -36,32 +37,40 @@ class VehicleTileContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.network(
-          vehicle.photo,
-          height: 100,
-          fit: BoxFit.fitWidth,
-        ),
-        const Gap(20),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                vehicle.name,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              Text(
-                vehicle.id,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              const VehicleMileageIndicator(),
-            ],
+    return InkWell(
+      onTap: () {
+        Navigator.push(context, VehicleGpsTrackerPage.route(vehicle));
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.network(
+            vehicle.photo,
+            height: 100,
+            fit: BoxFit.fitWidth,
+            errorBuilder: (context, error, stackTrace) {
+              return const Icon(Icons.car_crash);
+            },
           ),
-        ),
-      ],
+          const Gap(20),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  vehicle.name,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                Text(
+                  vehicle.id,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                const VehicleMileageIndicator(),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -122,9 +131,9 @@ class VehicleMileageIndicator extends StatelessWidget {
             );
           }
 
-          // final mileage = data.mileage;
-          const mileage = 2500;
-          const percentage = mileage / 5000;
+          final mileage = data.mileage;
+          // const mileage = 2500;
+          final percentage = mileage / 5000;
           final color = switch (percentage) {
             <= 0.33 => Colors.green,
             <= 0.66 => Colors.yellow,
@@ -135,7 +144,7 @@ class VehicleMileageIndicator extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '$mileage Km recorridos',
+                '$mileage Km recorrido/s',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     // fontSize: 30,
                     ),

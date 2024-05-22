@@ -18,9 +18,7 @@ class VehiclesPage extends StatelessWidget {
           vehicleRepository: context.read(),
         ),
       ),
-      child: const Scaffold(
-        body: VehiclesView(),
-      ),
+      child: const VehiclesView(),
     );
   }
 }

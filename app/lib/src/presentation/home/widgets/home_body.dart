@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:health_car_demo_app/app/constant.dart';
 import 'package:health_car_demo_app/src/presentation/home/bloc/bloc.dart';
 import 'package:health_car_demo_app/src/presentation/vehicles/vehicles.dart';
+import 'package:newton_particles/newton_particles.dart';
 
 /// {@template home_body}
 /// Body of the HomePage.
@@ -17,19 +18,35 @@ class HomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: PageView(
-              children: const [
-                WelcomeView(),
-                PermissionRequestView(),
-                VehiclesPage(),
-              ],
+      child: Newton(
+        activeEffects: [
+          RainEffect(
+            particleConfiguration: ParticleConfiguration(
+              shape: CircleShape(),
+              size: const Size(5, 5),
+              color: SingleParticleColor(
+                color: Colors.white.withOpacity(0.05),
+              ),
+            ),
+            effectConfiguration: const EffectConfiguration(
+              maxDuration: 10000,
             ),
           ),
         ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: PageView(
+                children: const [
+                  WelcomeView(),
+                  PermissionRequestView(),
+                  VehiclesPage(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

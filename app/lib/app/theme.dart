@@ -7,8 +7,9 @@ import 'package:health_car_demo_app/app/constant.dart';
 class AppTheme {
   static final theme = ThemeData(
     useMaterial3: true,
+
     splashColor: Consts.primary.shade300.withOpacity(0.05),
-    brightness: Brightness.light,
+    brightness: Brightness.dark,
     primaryColor: Consts.primary.shade600,
     hintColor: Consts.hintColor,
     textSelectionTheme: TextSelectionThemeData(
@@ -18,12 +19,12 @@ class AppTheme {
     ),
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       linearMinHeight: 20,
-      circularTrackColor: Colors.black,
+      circularTrackColor: Colors.white,
     ),
     snackBarTheme: const SnackBarThemeData(
       backgroundColor: Colors.white,
     ),
-    scaffoldBackgroundColor: const Color(0xFFF2F4F5),
+    // scaffoldBackgroundColor: const Color(0xFFF2F4F5),
     textTheme: TextTheme(
       titleLarge: GoogleFonts.urbanist(
         fontSize: 25,
