@@ -10,6 +10,7 @@ import 'package:health_car_demo_app/src/data/data_sources/geolocation/gelocation
 import 'package:health_car_demo_app/src/data/data_sources/report_mileage_api/report_mileage_api.dart';
 import 'package:health_car_demo_app/src/data/data_sources/vehicle_api/vehicle_api.dart';
 import 'package:health_car_demo_app/src/data/repositories/background_repository.dart';
+import 'package:health_car_demo_app/src/data/repositories/geolocation_repository.dart';
 import 'package:health_car_demo_app/src/data/repositories/vehicle_repository.dart';
 import 'package:health_car_demo_app/src/domain/repositories/background_repository.dart';
 import 'package:health_car_demo_app/src/domain/repositories/geolocation_repository.dart';

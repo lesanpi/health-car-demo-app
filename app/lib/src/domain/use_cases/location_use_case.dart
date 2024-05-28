@@ -15,7 +15,7 @@ class LocationUseCase {
   Future<bool> isPermissionGranted() =>
       geolocationRepository.isGeolocationPermissionGranted();
 
-  Future<UserGeolocation> getCurrentPosition() async {
+  Future<Geolocation?> getCurrentPosition() async {
     return geolocationRepository.getCurrentPosition();
   }
 
