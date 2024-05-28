@@ -15,9 +15,21 @@ class MileageCubit extends Cubit<MileageState> {
     required this.vehicleId,
   }) : super(const MileageState()) {
     onStarted();
+    _subscription =
+        Stream<void>.periodic(const Duration(minutes: 1)).listen((_) {
+      onStarted();
+    });
   }
   final VehiclesUseCase vehiclesUseCase;
   final String vehicleId;
+
+  StreamSubscription<void>? _subscription;
+
+  @override
+  Future<void> close() async {
+    await _subscription?.cancel();
+    await super.close();
+  }
 
   /// A description for yourCustomFunction
   FutureOr<void> onStarted() async {
