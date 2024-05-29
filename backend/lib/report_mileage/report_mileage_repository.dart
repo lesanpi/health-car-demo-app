@@ -27,12 +27,15 @@ class ReportMileageRepositoryImpl extends ReportMileageRepository {
       final report = await _dataSource.createReport(data);
       return Right(report);
     } on HttpException catch (e, s) {
-      print('Exception on createReport: $e, $s');
+      print('HttpException on createReport: $e, $s');
       return Left(
         ServerFailure(message: e.message, statusCode: e.statusCode),
       );
     } catch (e, s) {
       print('Exception on createReport: $e, $s');
+      return Left(
+        ServerFailure(message: 'Exxeption: $e'),
+      );
     }
   }
 
