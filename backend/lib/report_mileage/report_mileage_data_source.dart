@@ -22,7 +22,13 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
       print('Data received createReport: ${data.toJson()}');
       final result = await collection.insertOne(
         {
-          ...data.toJson(),
+          // ...data.toJson(),
+
+          'vehicle': data.vehicle,
+          'mileage': data.mileage,
+          'channel': data.channel,
+          'device': data.device,
+          'geolocation': data.toJson(),
           'createdAt': DateTime.now().toUtc().toIso8601String(),
         },
         bypassDocumentValidation: true,
