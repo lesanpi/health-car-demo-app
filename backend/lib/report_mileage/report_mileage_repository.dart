@@ -31,6 +31,8 @@ class ReportMileageRepositoryImpl extends ReportMileageRepository {
       return Left(
         ServerFailure(message: e.message, statusCode: e.statusCode),
       );
+    } catch (e, s) {
+      print('Exception on createReport: $e, $s');
     }
   }
 
