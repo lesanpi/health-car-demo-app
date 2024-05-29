@@ -19,10 +19,13 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   Future<ReportMileage> createReport(CreateReportDto data) async {
     try {
       final collection = _databaseConnection.db.collection('reportMileage');
-      final result = await collection.insertOne({
-        ...data.toJson(),
-        'createdAt': DateTime.now().toUtc().toIso8601String(),
-      });
+      final result = await collection.insertOne(
+        {
+          ...data.toJson(),
+          'createdAt': DateTime.now().toUtc().toIso8601String(),
+        },
+        bypassDocumentValidation: true,
+      );
       final document = result.document ?? {};
 
       final reportId = mapObjectId<String>(document['_id']);
