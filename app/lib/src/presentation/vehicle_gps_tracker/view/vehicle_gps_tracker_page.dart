@@ -37,7 +37,11 @@ class VehicleGpsTrackerPage extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => PermissionHandlerBloc(
-            permissionsToValidate: [Permission.location],
+            permissionsToValidate: [
+              Permission.location,
+              Permission.locationWhenInUse,
+              Permission.locationAlways,
+            ],
           ),
         ),
       ],

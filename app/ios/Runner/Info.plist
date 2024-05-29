@@ -54,6 +54,17 @@
 		</array>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>
+		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+		<string>Visualizar tu ubicación en el Mapa para encontrar tu vehículo</string>
+		<key>NSLocationUsageDescription</key>
+		<string>Visualizar tu ubicación en el Mapa para encontrar tu vehículo</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>Visualizar tu ubicación en el Mapa para encontrar tu vehículo</string>
+		<key>UIBackgroundModes</key>
+		<array>
+			<string>fetch</string>
+			<string>location</string>
+		</array>
 		<key>CADisableMinimumFrameDurationOnPhone</key>
 		<true/>
 		<key>UIApplicationSupportsIndirectInputEvents</key>

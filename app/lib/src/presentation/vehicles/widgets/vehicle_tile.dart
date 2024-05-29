@@ -43,10 +43,11 @@ class VehicleTileContent extends StatelessWidget {
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.network(
             vehicle.photo,
-            height: 100,
+            width: 100,
             fit: BoxFit.fitWidth,
             errorBuilder: (context, error, stackTrace) {
               return const Icon(Icons.car_crash);

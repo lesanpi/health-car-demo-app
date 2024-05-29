@@ -1,0 +1,14 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:equatable/equatable.dart';
+
+class LocationModel extends Equatable {
+  const LocationModel({
+    required this.lat,
+    required this.long,
+  });
+  final double lat;
+  final double long;
+
+  @override
+  List<Object> get props => [lat, long];
+}

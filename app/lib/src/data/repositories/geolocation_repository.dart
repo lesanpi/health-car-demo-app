@@ -19,8 +19,8 @@ class GeolocationRepository extends IGeolocationRepository {
       final position = await _geolocationApi.getCurrentPosition();
 
       final geolocation = Geolocation(
-        long: position.longitude,
-        lat: position.latitude,
+        long: position.long,
+        lat: position.lat,
       );
       log(
         '📍 Current geolocation $geolocation',
@@ -28,6 +28,11 @@ class GeolocationRepository extends IGeolocationRepository {
       );
       return geolocation;
     } catch (e) {
+      log(
+        'Exception getting location $e',
+        name: '$name.getCurrentPosition',
+        error: e,
+      );
       return null;
       // rethrow;
     }

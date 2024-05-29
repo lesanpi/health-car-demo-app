@@ -76,7 +76,8 @@ class BackgroundRepository extends IBackgroundRepository {
     FlutterForegroundTask.init(
       androidNotificationOptions: AndroidNotificationOptions(
         id: 500,
-        foregroundServiceType: AndroidForegroundServiceType.CONNECTED_DEVICE,
+        // foregroundServiceType: AndroidForegroundServiceType.CONNECTED_DEVICE,
+        foregroundServiceType: AndroidForegroundServiceType.LOCATION,
         channelId: 'foreground_service',
         channelName: 'Foreground Service Notification',
         channelDescription:
@@ -91,7 +92,7 @@ class BackgroundRepository extends IBackgroundRepository {
       ),
       iosNotificationOptions: const IOSNotificationOptions(),
       foregroundTaskOptions: const ForegroundTaskOptions(
-        interval: 30000,
+        // interval: 30000,
         autoRunOnBoot: true,
         allowWifiLock: true,
       ),
@@ -104,15 +105,18 @@ class BackgroundRepository extends IBackgroundRepository {
 
   @override
   Future<bool> isEnabled() async {
+    final locationAlways = await Permission.locationAlways.request();
     final bluetoothStatus = Platform.isIOS
         ? await Permission.bluetooth.request()
         : PermissionStatus.granted;
     final bluetoothScanStatus = await Permission.bluetoothScan.request();
     final bluetoothConnectStatus = await Permission.bluetoothConnect.request();
     final status = await FlutterForegroundTask.checkNotificationPermission();
+
     return bluetoothStatus.isGranted &&
         bluetoothScanStatus.isGranted &&
         bluetoothConnectStatus.isGranted &&
+        locationAlways.isGranted &&
         status == NotificationPermission.granted;
   }
 
@@ -121,10 +125,16 @@ class BackgroundRepository extends IBackgroundRepository {
     final bluetoothStatus = await Permission.bluetooth.request();
     final bluetoothScanStatus = await Permission.bluetoothScan.request();
     final bluetoothConnectStatus = await Permission.bluetoothConnect.request();
+    final locationAlways = await Permission.locationAlways.request();
+    final locationWhenUse = await Permission.locationWhenInUse.request();
+    final location = await Permission.location.request();
     final alertStatus = await Permission.systemAlertWindow.request();
     final batteryStatus = await Permission.ignoreBatteryOptimizations.request();
 
     if (bluetoothConnectStatus.isPermanentlyDenied ||
+        locationAlways.isPermanentlyDenied ||
+        location.isPermanentlyDenied ||
+        locationWhenUse.isPermanentlyDenied ||
         bluetoothStatus.isPermanentlyDenied ||
         bluetoothScanStatus.isPermanentlyDenied ||
         alertStatus.isPermanentlyDenied ||
