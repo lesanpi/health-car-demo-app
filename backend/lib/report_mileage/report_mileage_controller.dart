@@ -94,7 +94,7 @@ class ReportMileageController extends HttpController {
     if (createReportData.isLeft) {
       return Response.json(
         body: {
-          'message': createReportData.left.message,
+          'message': 'CreateReportDtoError: ${createReportData.left.message}',
           'errors': createReportData.left.errors,
         },
         statusCode: createReportData.left.statusCode,

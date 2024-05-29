@@ -50,7 +50,7 @@ abstract class HttpController {
     } on BadRequestException catch (e) {
       return Left(
         ValidationFailure(
-          message: e.message,
+          message: 'ParseJson error: ${e.message}',
           errors: {},
         ),
       );

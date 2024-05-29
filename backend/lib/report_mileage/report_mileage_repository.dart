@@ -26,7 +26,8 @@ class ReportMileageRepositoryImpl extends ReportMileageRepository {
       final _ = await _vehicleDataSource.getVehicleById(data.vehicle);
       final report = await _dataSource.createReport(data);
       return Right(report);
-    } on HttpException catch (e) {
+    } on HttpException catch (e, s) {
+      print('Exception on createReport: $e, $s');
       return Left(
         ServerFailure(message: e.message, statusCode: e.statusCode),
       );
