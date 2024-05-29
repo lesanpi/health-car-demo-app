@@ -19,6 +19,7 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   Future<ReportMileage> createReport(CreateReportDto data) async {
     try {
       final collection = _databaseConnection.db.collection('reportMileage');
+      print('Data received createReport: ${data.toJson()}');
       final result = await collection.insertOne(
         {
           ...data.toJson(),
