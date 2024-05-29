@@ -28,7 +28,7 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
           'mileage': data.mileage,
           'channel': data.channel,
           'device': data.device,
-          'geolocation': data.toJson(),
+          'geolocation': data.geolocation?.toJson(),
           'createdAt': DateTime.now().toUtc().toIso8601String(),
         },
         bypassDocumentValidation: true,
