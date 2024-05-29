@@ -37,14 +37,14 @@ class ReportMileageApi extends ReportMileageDataSource {
         body: json.encode(data.toJson()),
       );
       log(
-        'Response ${response.body}',
+        'Response[${response.statusCode}] ${response.body}',
         name: 'createReport()',
       );
     } catch (_) {
       throw InternalServerException('');
     }
 
-    if (response.statusCode != 200) {
+    if (response.statusCode != 200 && response.statusCode != 201) {
       throw HttpFailureException('', response.statusCode);
     }
     try {
