@@ -38,8 +38,8 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
       return report;
     } on HttpException {
       rethrow;
-    } catch (e) {
-      throw InternalServerException('Unexpected error: $e');
+    } catch (e, s) {
+      throw InternalServerException('Unexpected error: $e, $s');
     }
   }
 
