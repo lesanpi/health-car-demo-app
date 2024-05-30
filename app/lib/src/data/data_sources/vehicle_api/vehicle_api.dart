@@ -80,7 +80,7 @@ class VehicleApi extends VehicleDataSource {
   Future<ReportMileage> getLastReportLocationOfVehicle(String vehicleId) async {
     final uri = Uri.https(
       _apiHost,
-      '${VehicleEndpoints.vehicleStatusEndpoints}/$vehicleId',
+      '${VehicleEndpoints.vehicleLocationEndpoints}/$vehicleId',
     );
     http.Response response;
     try {

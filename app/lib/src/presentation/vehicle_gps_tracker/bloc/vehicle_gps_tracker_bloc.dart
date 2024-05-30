@@ -49,7 +49,7 @@ class VehicleGpsTrackerBloc
     final permissionGranted = await _locationUseCase.isPermissionGranted();
     log('Is permission granted $permissionGranted');
     emit(state.copyWith(isPermissionGranted: permissionGranted));
-    final report = await _locationUseCase.getLastReportOfVehicle(vehicle.id);
+    final report = await _locationUseCase.getVehicleLastLocation(vehicle.id);
     log('Last report vehicle $report');
     emit(
       state.copyWith(reportMileage: report),

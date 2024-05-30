@@ -19,7 +19,7 @@ class LocationUseCase {
     return geolocationRepository.getCurrentPosition();
   }
 
-  Future<ReportMileage?> getLastReportOfVehicle(String vehicleId) {
+  Future<ReportMileage?> getVehicleLastLocation(String vehicleId) {
     return vehicleRepository.getLastReportOfVehicle(vehicleId);
   }
 }

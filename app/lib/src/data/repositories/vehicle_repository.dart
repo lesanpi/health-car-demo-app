@@ -74,4 +74,31 @@ class VehicleRepository extends IVehicleRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<ReportMileage?> getLastLocationVehicle(String vehicle) async {
+    try {
+      log(
+        '🧭 Loading location vehicle $vehicle...',
+      );
+      final vehicles =
+          await _apiVehicle.getLastReportLocationOfVehicle(vehicle);
+      log(
+        '🧭✅ getLastReportLocationOfVehicle... $vehicles',
+      );
+      return vehicles;
+    } on HttpFailureException catch (e) {
+      if (e.statusCode == 404) {
+        return null;
+      }
+      rethrow;
+    } catch (e, s) {
+      log(
+        'Error on getVehicles: $e',
+        error: e,
+        stackTrace: s,
+      );
+      rethrow;
+    }
+  }
 }
