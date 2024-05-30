@@ -44,7 +44,10 @@ class ReportMileageController extends HttpController {
         },
         statusCode: left.statusCode,
       ),
-      (right) => Response.json(body: right.toJson()),
+      (right) {
+        print('Last report $right');
+        return Response.json(body: right.toJson());
+      },
     );
   }
 

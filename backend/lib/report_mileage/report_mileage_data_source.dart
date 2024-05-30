@@ -23,7 +23,6 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
       final result = await collection.insertOne(
         {
           // ...data.toJson(),
-
           'vehicle': data.vehicle,
           'mileage': data.mileage,
           'channel': data.channel,
@@ -31,8 +30,9 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
           'geolocation': data.geolocation?.toJson(),
           'createdAt': DateTime.now().toUtc().toIso8601String(),
         },
-        bypassDocumentValidation: true,
       );
+      print('Result ${result.ok}');
+
       final document = result.document ?? {};
 
       final reportId = mapObjectId<String>(document['_id']);
@@ -131,7 +131,10 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
       final collection = _databaseConnection.db.collection('reportMileage');
 
       final result = await collection.findOne(
-        where.eq('vehicle', vehicleId).sortBy('createdAt', descending: true),
+        where.eq('vehicle', vehicleId).sortBy(
+              'createdAt',
+              descending: true,
+            ),
       );
       final document = result ?? {};
 

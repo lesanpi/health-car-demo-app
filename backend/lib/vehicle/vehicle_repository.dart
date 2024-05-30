@@ -62,4 +62,18 @@ class VehicleRepositoryImpl extends VehicleRepository {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, ReportMileage?>> getLastLocationReport(
+    String vehicle,
+  ) async {
+    try {
+      final report = await dataSource.getLastReportLocationOfVehicle(vehicle);
+      return Right(report);
+    } on HttpException catch (e) {
+      return Left(
+        ServerFailure(message: e.message, statusCode: e.statusCode),
+      );
+    }
+  }
 }

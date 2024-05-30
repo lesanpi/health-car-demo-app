@@ -113,12 +113,19 @@ class VehicleDataSourceImpl extends VehicleDataSource {
   }
 
   @override
-  Future<ReportMileage> getLastReportOfVehicle(String vehicleId) async {
+  Future<ReportMileage> getLastReportLocationOfVehicle(String vehicleId) async {
     try {
       final collection = _databaseConnection.db.collection('reportMileage');
 
-      final result = await collection
-          .findOne(where.eq('vehicle', vehicleId).sortBy('createdAt'));
+      final result = await collection.findOne(
+        where
+            .eq('vehicle', vehicleId)
+            .and(where.ne('geolocation', null))
+            .sortBy(
+              'createdAt',
+              descending: true,
+            ),
+      );
       final document = result ?? {};
 
       if (document.isEmpty) {

@@ -19,4 +19,9 @@ abstract class VehicleRepository {
   Future<Either<Failure, Vehicle>> createVehicle(
     CreateVehicleDto data,
   );
+
+  /// Get last location report
+  Future<Either<Failure, ReportMileage?>> getLastLocationReport(
+    String vehicle,
+  );
 }

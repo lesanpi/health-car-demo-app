@@ -30,6 +30,26 @@ class VehicleController extends HttpController {
     );
   }
 
+  FutureOr<Response> getLastLocationReport(String vehicleId) {
+    final lastReport = _repository.getLastLocationReport(vehicleId);
+    return lastReport.fold(
+      (left) => Response.json(
+        body: {
+          'message': left.message,
+        },
+        statusCode: left.statusCode,
+      ),
+      (right) {
+        print('Last location report $right');
+        return Response.json(
+          body: {
+            'report': right?.toJson(),
+          },
+        );
+      },
+    );
+  }
+
   @override
   FutureOr<Response> show(Request request, String id) {
     final tags = _repository.getVehicleById(id);

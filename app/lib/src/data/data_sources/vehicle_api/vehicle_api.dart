@@ -77,8 +77,48 @@ class VehicleApi extends VehicleDataSource {
   }
 
   @override
-  Future<ReportMileage> getLastReportOfVehicle(String vehicleId) {
-    throw UnimplementedError();
+  Future<ReportMileage> getLastReportLocationOfVehicle(String vehicleId) async {
+    final uri = Uri.https(
+      _apiHost,
+      '${VehicleEndpoints.vehicleStatusEndpoints}/$vehicleId',
+    );
+    http.Response response;
+    try {
+      log(
+        '👷🏻 Loading last location of $vehicleId',
+        name: 'getLastReportLocationOfVehicle()',
+      );
+
+      response = await _httpClient.get(
+        uri,
+      );
+      log(
+        'Response[${response.statusCode}] ${response.body}',
+        name: 'getLastReportLocationOfVehicle()',
+      );
+    } catch (_) {
+      throw InternalServerException('');
+    }
+
+    if (response.statusCode != 200) {
+      log(
+        'Throwing HttpFailureException [${response.statusCode}]',
+        name: 'getLastReportLocationOfVehicle()',
+      );
+      throw HttpFailureException('', response.statusCode);
+    }
+    try {
+      final responseBody = json.decode(response.body) as Map<String, dynamic>;
+      return ReportMileage.fromJson(responseBody);
+    } catch (e, s) {
+      log(
+        'Error JsonDeserializationException',
+        error: e,
+        stackTrace: s,
+        name: 'getLastReportLocationOfVehicle()',
+      );
+      throw JsonDeserializationException();
+    }
   }
 
   @override
