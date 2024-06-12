@@ -1,3 +1,5 @@
+import 'package:either_dart/either.dart';
+import 'package:failures/failures.dart';
 import 'package:models/models.dart';
 
 /// {@template vehicle_status_repository}
@@ -5,8 +7,12 @@ import 'package:models/models.dart';
 /// {@endtemplate}
 abstract class VehicleStatusRepository {
   /// Get last [VehicleStatus] by [vehicle]
-  Future<VehicleStatus> getLastVehicleStatusByVehicle(String vehicle);
+  Future<Either<Failure, VehicleStatus>> getLastVehicleStatusByVehicle(
+    String vehicle,
+  );
 
   /// Create a [VehicleStatus] using [data]
-  Future<VehicleStatus> createVehicleStatus(CreateVehicleStatusDto data);
+  Future<Either<Failure, VehicleStatus>> createVehicleStatus(
+    CreateVehicleStatusDto data,
+  );
 }
