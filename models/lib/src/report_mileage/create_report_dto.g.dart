@@ -25,5 +25,5 @@ Map<String, dynamic> _$$CreateReportDtoImplToJson(
       'mileage': instance.mileage,
       'channel': instance.channel,
       'device': instance.device,
-      'geolocation': instance.geolocation?.toJson(),
+      'geolocation': instance.geolocation,
     };

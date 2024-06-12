@@ -3,4 +3,5 @@ name: healt_car_demo
 environment:
   sdk: '>=3.0.0 <4.0.0'
 dev_dependencies:
+  build_runner: ^2.4.11
   melos: ^3.1.1
