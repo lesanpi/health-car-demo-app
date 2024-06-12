@@ -7,7 +7,9 @@ Handler middleware(Handler handler) {
   return handler.use(
     provider<VehicleController>(
       (context) => VehicleController(
-        repository: VehicleRepositoryImpl(dataSource: context.read()),
+        repository: VehicleRepositoryImpl(
+          dataSource: context.read(),
+        ),
       ),
     ),
   );
