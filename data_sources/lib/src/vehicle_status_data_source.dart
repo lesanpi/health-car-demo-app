@@ -12,7 +12,7 @@ abstract class VehicleStatusDataSource {
   Future<VehicleStatus> getVehicleStatusById(String id);
 
   /// return last [VehicleStatus] of vehicle [vehicleId]
-  Future<ReportMileage> getLastVehicleStatus(String vehicleId);
+  Future<VehicleStatus> getLastVehicleStatus(String vehicleId);
 
   /// Deletes an vehicle status using [id]
   /// return [OperationResultDto] with the status of the operation
