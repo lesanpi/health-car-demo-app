@@ -7,7 +7,7 @@ part 'create_vehicle_status_dto.g.dart';
 /// Create Vehicle status description
 /// {@endtemplate}
 @freezed
-abstract class CreateVehicleStatusDto with _$CreateVehicleStatusDto {
+class CreateVehicleStatusDto with _$CreateVehicleStatusDto {
   /// {@macro create_vehicle_status}
   const factory CreateVehicleStatusDto({
     required String vehicle,
