@@ -88,9 +88,18 @@ class VehicleMileageIndicator extends StatelessWidget {
           final status = state.status;
           final data = state.data;
           if (status.isInProgress) {
-            return LinearProgressIndicator(
-              backgroundColor: Colors.grey.shade300,
-              color: Colors.grey.shade500,
+            return Column(
+              children: [
+                const Spacer(),
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  child: LinearProgressIndicator(
+                    backgroundColor: Colors.grey.shade300,
+                    color: Colors.grey.shade500,
+                  ),
+                ),
+                const Spacer(),
+              ],
             );
           }
 
@@ -124,11 +133,23 @@ class VehicleMileageIndicator extends StatelessWidget {
           }
 
           if (data == null) {
-            return Text(
-              'No hay datos del kilometraje',
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  // fontSize: 30,
+            return Column(
+              children: [
+                Text(
+                  'No hay datos del kilometraje',
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      // fontSize: 30,
+                      ),
+                ),
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  child: LinearProgressIndicator(
+                    value: 0,
+                    backgroundColor: Colors.grey.shade300,
+                    color: Colors.grey.shade500,
                   ),
+                ),
+              ],
             );
           }
 
@@ -142,7 +163,6 @@ class VehicleMileageIndicator extends StatelessWidget {
             _ => Colors.grey,
           };
           return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 '$mileage Km recorrido/s',

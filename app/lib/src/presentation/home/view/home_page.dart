@@ -4,8 +4,11 @@ import 'dart:isolate';
 import 'package:flutter/material.dart';
 import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:flutter_foreground_task/ui/with_foreground_task.dart';
+import 'package:health_car_demo_app/app/constant.dart';
 import 'package:health_car_demo_app/main_development.dart';
+import 'package:health_car_demo_app/src/domain/use_cases/vehicles_use_case.dart';
 import 'package:health_car_demo_app/src/presentation/home/widgets/home_body.dart';
+import 'package:health_car_demo_app/src/presentation/vehicles/vehicles.dart';
 
 /// {@template home_page}
 /// A description for HomePage
@@ -21,14 +24,27 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WithForegroundTask(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Health Car'),
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
+    return BlocProvider(
+      create: (context) => VehiclesCubit(
+        VehiclesUseCase(
+          vehicleRepository: context.read(),
         ),
-        body: const HomeView(),
+      ),
+      child: WithForegroundTask(
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text(
+              'Health Car',
+              style: TextStyle(
+                fontSize: 38,
+              ),
+            ),
+            titleSpacing: Consts.margin * 1.5,
+            centerTitle: false,
+            backgroundColor: Colors.transparent,
+          ),
+          body: const HomeView(),
+        ),
       ),
     );
   }

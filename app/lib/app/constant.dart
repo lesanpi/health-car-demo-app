@@ -25,16 +25,17 @@ class Consts {
   static const hintColor = Color(0xFFD2D2D2);
 
   static const int _primary500 = 0xFF494A4D;
-  static const primary = MaterialColor(_primary500, {
-    100: Color(0xFFFEFEFE),
-    200: Color(0xFFFBFCFC),
-    300: Color(0xFFF7F8FA),
-    400: Color(0xFFEBF0F3),
-    500: Color(_primary500),
-    600: Color(0xFF303030),
-    700: Color(0xFF1B1C1E),
-    800: Color(0xFF050710),
-  });
+  static const primary = Colors.blue;
+  // static const primary = MaterialColor(_primary500, {
+  //   100: Color(0xFFFEFEFE),
+  //   200: Color(0xFFFBFCFC),
+  //   300: Color(0xFFF7F8FA),
+  //   400: Color(0xFFEBF0F3),
+  //   500: Color(_primary500),
+  //   600: Color(0xFF303030),
+  //   700: Color(0xFF1B1C1E),
+  //   800: Color(0xFF050710),
+  // });
 
   static const errorColor = Color(0xFFF04438);
   static const int _error500 = 0xFFF04438;

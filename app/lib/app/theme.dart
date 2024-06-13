@@ -8,7 +8,8 @@ class AppTheme {
   static final theme = ThemeData(
     useMaterial3: true,
     splashColor: Consts.primary.shade300.withOpacity(0.05),
-    brightness: Brightness.dark,
+    // brightness: Brightness.dark,
+    brightness: Brightness.light,
     primaryColor: Consts.primary.shade600,
     hintColor: Consts.hintColor,
     textSelectionTheme: TextSelectionThemeData(

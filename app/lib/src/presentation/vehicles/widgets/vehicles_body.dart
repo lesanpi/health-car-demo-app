@@ -7,6 +7,8 @@ import 'package:health_car_demo_app/app/constant.dart';
 import 'package:health_car_demo_app/src/presentation/vehicles/cubit/cubit.dart';
 import 'package:health_car_demo_app/src/presentation/vehicles/widgets/vehicle_tile.dart';
 
+import 'package:health_car_demo_app/src/presentation/vehicles/widgets/vehicle_card.dart';
+
 /// {@template vehicles_body}
 /// Body of the VehiclesPage.
 ///
@@ -40,7 +42,7 @@ Este es el listado de vehículos en los que se esta haciendo esta realizando est
           ),
         ),
         const Gap(Consts.padding),
-        Expanded(child: VehiclesList(controller: controller)),
+        const Expanded(child: VehiclesList()),
       ],
     );
   }
@@ -48,11 +50,8 @@ Este es el listado de vehículos en los que se esta haciendo esta realizando est
 
 class VehiclesList extends StatelessWidget {
   const VehiclesList({
-    required this.controller,
     super.key,
   });
-
-  final PageController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -76,14 +75,17 @@ class VehiclesList extends StatelessWidget {
           );
         }
 
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Consts.margin),
-          child: ListView.builder(
-            controller: controller,
+        return AspectRatio(
+          aspectRatio: 16 / 12,
+          child: ListView.separated(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            separatorBuilder: (context, index) => const Gap(Consts.margin),
             itemBuilder: (context, index) {
               final vehicle = vehicles[index];
-              log('photo: ${vehicle.photo}');
-              return VehicleTile(vehicle: vehicle);
+              // log('photo: ${vehicle.photo}');
+              return VehicleCard(vehicle: vehicle);
+              // return VehicleTile(vehicle: vehicle);
             },
             itemCount: vehicles.length,
           ),
