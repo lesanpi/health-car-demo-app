@@ -8,14 +8,20 @@ import 'package:health_car_demo_app/src/domain/repositories/vehicle_repository.d
 import 'package:models/src/report_mileage/create_report_dto.dart';
 import 'package:models/src/report_mileage/report_mileage.dart';
 import 'package:models/src/vehicle/vehicle.dart';
+import 'package:models/src/vehicle_status/vehicle_status.dart';
+
+import 'package:health_car_demo_app/src/data/data_sources/vehicle_status_api/vehicle_status_api.dart';
 
 class VehicleRepository extends IVehicleRepository {
   VehicleRepository({
     required ReportMileageApi apiReports,
+    required VehicleStatusApi apiStatus,
     required VehicleApi apiVehicle,
   })  : _apiReports = apiReports,
+        _apiStatus = apiStatus,
         _apiVehicle = apiVehicle;
   final ReportMileageApi _apiReports;
+  final VehicleStatusApi _apiStatus;
   final VehicleApi _apiVehicle;
 
   @override
@@ -95,6 +101,35 @@ class VehicleRepository extends IVehicleRepository {
     } catch (e, s) {
       log(
         'Error on getVehicles: $e',
+        error: e,
+        stackTrace: s,
+      );
+      rethrow;
+    }
+  }
+
+  @override
+  Future<VehicleStatus?> getLastVehicleStatus(String vehicle) async {
+    try {
+      log(
+        '🧭 Loading location vehicle $vehicle...',
+        name: 'getVehicleStatus',
+      );
+      final vehicleStatus = await _apiStatus.getLastVehicleStatus(vehicle);
+      log(
+        '🧭✅ getLastReportLocationOfVehicle... $vehicleStatus',
+        name: 'getVehicleStatus',
+      );
+      return vehicleStatus;
+    } on HttpFailureException catch (e) {
+      if (e.statusCode == 404) {
+        return null;
+      }
+      rethrow;
+    } catch (e, s) {
+      log(
+        'Error on getVehicleStatus: $e',
+        name: 'getVehicleStatus',
         error: e,
         stackTrace: s,
       );

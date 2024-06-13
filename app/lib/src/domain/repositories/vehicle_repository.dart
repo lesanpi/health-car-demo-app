@@ -7,5 +7,7 @@ abstract class IVehicleRepository {
 
   Future<ReportMileage?> getLastLocationVehicle(String vehicle);
 
+  Future<VehicleStatus?> getLastVehicleStatus(String vehicle);
+
   Future<List<Vehicle>> getVehicles();
 }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:health_car_demo_app/app/constant.dart';
 import 'package:health_car_demo_app/src/domain/use_cases/vehicles_use_case.dart';
+import 'package:health_car_demo_app/src/presentation/vehicle_details/view/vehicle_details_page.dart';
 import 'package:health_car_demo_app/src/presentation/vehicle_gps_tracker/vehicle_gps_tracker.dart';
 import 'package:health_car_demo_app/src/presentation/vehicles/widgets/vehicle_tile.dart';
 import 'package:models/models.dart';
@@ -47,7 +48,8 @@ class VehicleCardContent extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          Navigator.push(context, VehicleGpsTrackerPage.route(vehicle));
+          // Navigator.push(context, VehicleGpsTrackerPage.route(vehicle));
+          Navigator.push(context, VehicleDetailsPage.route(vehicle: vehicle));
         },
         child: Padding(
           padding: const EdgeInsets.all(10),

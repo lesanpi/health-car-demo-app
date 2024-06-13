@@ -15,4 +15,8 @@ class VehiclesUseCase {
   Future<ReportMileage?> getLastReportOfVehicle(String vehicleId) {
     return _vehicleRepository.getLastReportOfVehicle(vehicleId);
   }
+
+  Future<VehicleStatus?> getLastVehicleStatus(String vehicleId) {
+    return _vehicleRepository.getLastVehicleStatus(vehicleId);
+  }
 }

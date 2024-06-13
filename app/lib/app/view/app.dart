@@ -10,6 +10,7 @@ import 'package:health_car_demo_app/src/data/data_sources/geolocation/fl_geoloca
 import 'package:health_car_demo_app/src/data/data_sources/geolocation/gelocation_api_plugin.dart';
 import 'package:health_car_demo_app/src/data/data_sources/report_mileage_api/report_mileage_api.dart';
 import 'package:health_car_demo_app/src/data/data_sources/vehicle_api/vehicle_api.dart';
+import 'package:health_car_demo_app/src/data/data_sources/vehicle_status_api/vehicle_status_api.dart';
 import 'package:health_car_demo_app/src/data/repositories/background_repository.dart';
 import 'package:health_car_demo_app/src/data/repositories/geolocation_repository.dart';
 import 'package:health_car_demo_app/src/data/repositories/vehicle_repository.dart';
@@ -36,6 +37,7 @@ class App extends StatelessWidget {
     final vehicleRepository = VehicleRepository(
       apiReports: ReportMileageApi(apiHost: apiHost),
       apiVehicle: VehicleApi(apiHost: apiHost),
+      apiStatus: VehicleStatusApi(apiHost: apiHost),
     );
     return MultiRepositoryProvider(
       providers: [
