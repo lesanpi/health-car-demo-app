@@ -10,6 +10,7 @@ import 'package:health_car_demo_app/src/presentation/vehicles/cubit/mileage_cubi
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'package:health_car_demo_app/src/presentation/vehicle_details/widgets/vehicle_mileage_indicator.dart';
+import 'package:fluentui_icons/fluentui_icons.dart';
 
 /// {@template vehicle_details_body}
 /// Body of the VehicleDetailsPage.
@@ -25,10 +26,11 @@ class VehicleDetailsBody extends StatelessWidget {
     final vehicle = context.select((VehicleDetailsBloc bloc) => bloc.vehicle);
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Gap(Consts.margin),
           AspectRatio(
-            aspectRatio: 16 / 10,
+            aspectRatio: 16 / 9,
             child: Stack(
               children: [
                 Positioned(
@@ -96,16 +98,11 @@ class VehicleDetailsBody extends StatelessWidget {
           ),
           // const Gap(Consts.margin),
           const VehicleMileageIndicator(),
-          const Gap(Consts.padding / 2),
+          // const Gap(Consts.padding / 2),
           const VehicleStatusCards(),
         ],
       ),
     );
-    // return BlocBuilder<VehicleDetailsBloc, VehicleDetailsState>(
-    //   builder: (context, state) {
-    //     return Center(child: Text(state.customProperty));
-    //   },
-    // );
   }
 }
 
@@ -182,37 +179,124 @@ class VehicleStatusCards extends StatelessWidget {
         builder: (context, state) {
           final data = state.data;
           final coolantTemperature = data?.coolantTemperature;
+          final oilTemperature = data?.oilTemperature;
+          final checkEngine = data?.milOn;
 
-          return Row(
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: SimpleStatCard(
-                  title: data == null
-                      ? '--'
-                      : timeago.format(
-                          data.createdAt,
-                          locale: 'en_short',
-                        ),
-                  description: 'Ult. vez',
-                  icon: const Icon(
-                    Icons.data_exploration,
-                    size: 40,
-                  ),
-                ),
+              Text(
+                '⚙️ Estado de mi vehículo',
+                maxLines: 2,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w900,
+                    ),
               ),
-              Expanded(
-                child: SimpleStatCard(
-                  title: coolantTemperature == null
-                      ? '-- °C'
-                      : '$coolantTemperature °C',
-                  description: 'Temperatura refrigerante',
-                  icon: const Icon(
-                    Icons.thermostat,
-                    size: 40,
+              const Gap(Consts.margin),
+              Row(
+                children: [
+                  Expanded(
+                    child: SimpleStatCard(
+                      color: Colors.teal.shade50,
+                      title: data == null
+                          ? '--'
+                          : timeago.format(
+                              data.createdAt,
+                              locale: 'en_short',
+                            ),
+                      description: 'Ult. vez',
+                      icon: const Icon(
+                        FluentSystemIcons.ic_fluent_clock_filled,
+                        size: 30,
+                      ),
+                    ),
                   ),
-                ),
+                  Expanded(
+                    child: SimpleStatCard(
+                      color: Colors.orange.shade50,
+                      title: coolantTemperature == null
+                          ? '-- °C'
+                          : '$coolantTemperature °C',
+                      description: 'Temperatura refrigerante',
+                      icon: const Icon(
+                        // Icons.thermostat,
+                        FluentSystemIcons.ic_fluent_temperature_filled,
+
+                        size: 30,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: SimpleStatCard(
+                      color: Colors.amber.shade50,
+                      description: checkEngine == null
+                          ? '--'
+                          : checkEngine
+                              ? 'Encendido'
+                              : 'Apagado',
+                      title: 'Check Engine',
+                      icon: const Icon(
+                        // Icons.car_crash,
+                        FluentSystemIcons.ic_fluent_report_warning_filled,
+
+                        size: 30,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              const Spacer(),
+              Row(
+                children: [
+                  Expanded(
+                    child: SimpleStatCard(
+                      color: Colors.red.shade50,
+                      title: data == null
+                          ? '--'
+                          : timeago.format(
+                              data.createdAt,
+                              locale: 'en_short',
+                            ),
+                      description: 'Ult. vez',
+                      icon: const Icon(
+                        FluentSystemIcons.ic_fluent_clock_filled,
+                        size: 30,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: SimpleStatCard(
+                      color: Colors.blue.shade50,
+                      title: oilTemperature == null
+                          ? '-- °C'
+                          : '$oilTemperature °C',
+                      description: 'Temperatura aceite',
+                      icon: const Icon(
+                        // Icons.thermostat,
+                        FluentSystemIcons.ic_fluent_settings_dev_filled,
+
+                        size: 30,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: SimpleStatCard(
+                      color: Colors.amber.shade50,
+                      description: checkEngine == null
+                          ? '--'
+                          : checkEngine
+                              ? 'Encendido'
+                              : 'Apagado',
+                      title: 'Check Engine',
+                      icon: const Icon(
+                        // Icons.car_crash,
+                        FluentSystemIcons.ic_fluent_report_warning_filled,
+
+                        size: 30,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           );
         },

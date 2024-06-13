@@ -78,7 +78,7 @@ class VehicleMileageIndicator extends StatelessWidget {
                           ),
                     ),
                     ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
                       child: LinearProgressIndicator(
                         value: 0,
                         minHeight: 50,
@@ -105,14 +105,23 @@ class VehicleMileageIndicator extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                          child: ClipRRect(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(10)),
-                            child: LinearProgressIndicator(
-                              minHeight: 50,
-                              value: percentage,
-                              backgroundColor: Colors.grey.shade300,
-                              color: color,
+                          child: Card(
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                width: 1.5,
+                              ),
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: ClipRRect(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(30)),
+                              child: LinearProgressIndicator(
+                                minHeight: 50,
+                                value: percentage,
+                                backgroundColor: Colors.grey.shade300,
+                                color: color,
+                              ),
                             ),
                           ),
                         ),
