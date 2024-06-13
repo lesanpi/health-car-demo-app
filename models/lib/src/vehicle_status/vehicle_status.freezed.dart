@@ -26,12 +26,12 @@ mixin _$VehicleStatus {
   String get vin => throw _privateConstructorUsedError;
   bool get milOn => throw _privateConstructorUsedError;
   List<String> get milCodes => throw _privateConstructorUsedError;
-  double get coolantTemperature => throw _privateConstructorUsedError;
-  double get oilTemperature => throw _privateConstructorUsedError;
-  double get intakeAirTemperature => throw _privateConstructorUsedError;
-  double get fuelPressure => throw _privateConstructorUsedError;
-  double get absBaroPressure => throw _privateConstructorUsedError;
-  double get manifoldPressureKpa => throw _privateConstructorUsedError;
+  double? get coolantTemperature => throw _privateConstructorUsedError;
+  double? get oilTemperature => throw _privateConstructorUsedError;
+  double? get intakeAirTemperature => throw _privateConstructorUsedError;
+  double? get fuelPressure => throw _privateConstructorUsedError;
+  double? get absBaroPressure => throw _privateConstructorUsedError;
+  double? get manifoldPressureKpa => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   int get kmMILOn => throw _privateConstructorUsedError;
   int get minutesMILOn => throw _privateConstructorUsedError;
@@ -54,12 +54,12 @@ abstract class $VehicleStatusCopyWith<$Res> {
       String vin,
       bool milOn,
       List<String> milCodes,
-      double coolantTemperature,
-      double oilTemperature,
-      double intakeAirTemperature,
-      double fuelPressure,
-      double absBaroPressure,
-      double manifoldPressureKpa,
+      double? coolantTemperature,
+      double? oilTemperature,
+      double? intakeAirTemperature,
+      double? fuelPressure,
+      double? absBaroPressure,
+      double? manifoldPressureKpa,
       DateTime createdAt,
       int kmMILOn,
       int minutesMILOn});
@@ -83,12 +83,12 @@ class _$VehicleStatusCopyWithImpl<$Res, $Val extends VehicleStatus>
     Object? vin = null,
     Object? milOn = null,
     Object? milCodes = null,
-    Object? coolantTemperature = null,
-    Object? oilTemperature = null,
-    Object? intakeAirTemperature = null,
-    Object? fuelPressure = null,
-    Object? absBaroPressure = null,
-    Object? manifoldPressureKpa = null,
+    Object? coolantTemperature = freezed,
+    Object? oilTemperature = freezed,
+    Object? intakeAirTemperature = freezed,
+    Object? fuelPressure = freezed,
+    Object? absBaroPressure = freezed,
+    Object? manifoldPressureKpa = freezed,
     Object? createdAt = null,
     Object? kmMILOn = null,
     Object? minutesMILOn = null,
@@ -114,30 +114,30 @@ class _$VehicleStatusCopyWithImpl<$Res, $Val extends VehicleStatus>
           ? _value.milCodes
           : milCodes // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      coolantTemperature: null == coolantTemperature
+      coolantTemperature: freezed == coolantTemperature
           ? _value.coolantTemperature
           : coolantTemperature // ignore: cast_nullable_to_non_nullable
-              as double,
-      oilTemperature: null == oilTemperature
+              as double?,
+      oilTemperature: freezed == oilTemperature
           ? _value.oilTemperature
           : oilTemperature // ignore: cast_nullable_to_non_nullable
-              as double,
-      intakeAirTemperature: null == intakeAirTemperature
+              as double?,
+      intakeAirTemperature: freezed == intakeAirTemperature
           ? _value.intakeAirTemperature
           : intakeAirTemperature // ignore: cast_nullable_to_non_nullable
-              as double,
-      fuelPressure: null == fuelPressure
+              as double?,
+      fuelPressure: freezed == fuelPressure
           ? _value.fuelPressure
           : fuelPressure // ignore: cast_nullable_to_non_nullable
-              as double,
-      absBaroPressure: null == absBaroPressure
+              as double?,
+      absBaroPressure: freezed == absBaroPressure
           ? _value.absBaroPressure
           : absBaroPressure // ignore: cast_nullable_to_non_nullable
-              as double,
-      manifoldPressureKpa: null == manifoldPressureKpa
+              as double?,
+      manifoldPressureKpa: freezed == manifoldPressureKpa
           ? _value.manifoldPressureKpa
           : manifoldPressureKpa // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -168,12 +168,12 @@ abstract class _$$VehicleStatusImplCopyWith<$Res>
       String vin,
       bool milOn,
       List<String> milCodes,
-      double coolantTemperature,
-      double oilTemperature,
-      double intakeAirTemperature,
-      double fuelPressure,
-      double absBaroPressure,
-      double manifoldPressureKpa,
+      double? coolantTemperature,
+      double? oilTemperature,
+      double? intakeAirTemperature,
+      double? fuelPressure,
+      double? absBaroPressure,
+      double? manifoldPressureKpa,
       DateTime createdAt,
       int kmMILOn,
       int minutesMILOn});
@@ -195,12 +195,12 @@ class __$$VehicleStatusImplCopyWithImpl<$Res>
     Object? vin = null,
     Object? milOn = null,
     Object? milCodes = null,
-    Object? coolantTemperature = null,
-    Object? oilTemperature = null,
-    Object? intakeAirTemperature = null,
-    Object? fuelPressure = null,
-    Object? absBaroPressure = null,
-    Object? manifoldPressureKpa = null,
+    Object? coolantTemperature = freezed,
+    Object? oilTemperature = freezed,
+    Object? intakeAirTemperature = freezed,
+    Object? fuelPressure = freezed,
+    Object? absBaroPressure = freezed,
+    Object? manifoldPressureKpa = freezed,
     Object? createdAt = null,
     Object? kmMILOn = null,
     Object? minutesMILOn = null,
@@ -226,30 +226,30 @@ class __$$VehicleStatusImplCopyWithImpl<$Res>
           ? _value._milCodes
           : milCodes // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      coolantTemperature: null == coolantTemperature
+      coolantTemperature: freezed == coolantTemperature
           ? _value.coolantTemperature
           : coolantTemperature // ignore: cast_nullable_to_non_nullable
-              as double,
-      oilTemperature: null == oilTemperature
+              as double?,
+      oilTemperature: freezed == oilTemperature
           ? _value.oilTemperature
           : oilTemperature // ignore: cast_nullable_to_non_nullable
-              as double,
-      intakeAirTemperature: null == intakeAirTemperature
+              as double?,
+      intakeAirTemperature: freezed == intakeAirTemperature
           ? _value.intakeAirTemperature
           : intakeAirTemperature // ignore: cast_nullable_to_non_nullable
-              as double,
-      fuelPressure: null == fuelPressure
+              as double?,
+      fuelPressure: freezed == fuelPressure
           ? _value.fuelPressure
           : fuelPressure // ignore: cast_nullable_to_non_nullable
-              as double,
-      absBaroPressure: null == absBaroPressure
+              as double?,
+      absBaroPressure: freezed == absBaroPressure
           ? _value.absBaroPressure
           : absBaroPressure // ignore: cast_nullable_to_non_nullable
-              as double,
-      manifoldPressureKpa: null == manifoldPressureKpa
+              as double?,
+      manifoldPressureKpa: freezed == manifoldPressureKpa
           ? _value.manifoldPressureKpa
           : manifoldPressureKpa // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -307,17 +307,17 @@ class _$VehicleStatusImpl implements _VehicleStatus {
   }
 
   @override
-  final double coolantTemperature;
+  final double? coolantTemperature;
   @override
-  final double oilTemperature;
+  final double? oilTemperature;
   @override
-  final double intakeAirTemperature;
+  final double? intakeAirTemperature;
   @override
-  final double fuelPressure;
+  final double? fuelPressure;
   @override
-  final double absBaroPressure;
+  final double? absBaroPressure;
   @override
-  final double manifoldPressureKpa;
+  final double? manifoldPressureKpa;
   @override
   final DateTime createdAt;
   @override
@@ -401,12 +401,12 @@ abstract class _VehicleStatus implements VehicleStatus {
       required final String vin,
       required final bool milOn,
       required final List<String> milCodes,
-      required final double coolantTemperature,
-      required final double oilTemperature,
-      required final double intakeAirTemperature,
-      required final double fuelPressure,
-      required final double absBaroPressure,
-      required final double manifoldPressureKpa,
+      required final double? coolantTemperature,
+      required final double? oilTemperature,
+      required final double? intakeAirTemperature,
+      required final double? fuelPressure,
+      required final double? absBaroPressure,
+      required final double? manifoldPressureKpa,
       required final DateTime createdAt,
       final int kmMILOn,
       final int minutesMILOn}) = _$VehicleStatusImpl;
@@ -426,17 +426,17 @@ abstract class _VehicleStatus implements VehicleStatus {
   @override
   List<String> get milCodes;
   @override
-  double get coolantTemperature;
+  double? get coolantTemperature;
   @override
-  double get oilTemperature;
+  double? get oilTemperature;
   @override
-  double get intakeAirTemperature;
+  double? get intakeAirTemperature;
   @override
-  double get fuelPressure;
+  double? get fuelPressure;
   @override
-  double get absBaroPressure;
+  double? get absBaroPressure;
   @override
-  double get manifoldPressureKpa;
+  double? get manifoldPressureKpa;
   @override
   DateTime get createdAt;
   @override
