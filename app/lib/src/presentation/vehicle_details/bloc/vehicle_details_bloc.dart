@@ -36,6 +36,7 @@ class VehicleDetailsBloc
       );
     } catch (e) {
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
+      add(const VehicleDetailsStarted());
     }
   }
 }
