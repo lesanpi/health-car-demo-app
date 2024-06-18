@@ -25,6 +25,7 @@ class VehicleStatusDataSourceImpl extends VehicleStatusDataSource {
 
       final result = await collection.insertOne({
         ...data.toJson(),
+        'createdAt': DateTime.now().toUtc().toIso8601String(),
       });
       final vehicleDocument = result.document ?? {};
       final id = mapObjectId<String>(vehicleDocument['_id']);

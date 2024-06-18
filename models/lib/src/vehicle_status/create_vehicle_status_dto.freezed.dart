@@ -33,7 +33,6 @@ mixin _$CreateVehicleStatusDto {
   double? get fuelPressure => throw _privateConstructorUsedError;
   double? get absBaroPressure => throw _privateConstructorUsedError;
   double? get manifoldPressureKpa => throw _privateConstructorUsedError;
-  DateTime? get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -59,8 +58,7 @@ abstract class $CreateVehicleStatusDtoCopyWith<$Res> {
       double? intakeAirTemperature,
       double? fuelPressure,
       double? absBaroPressure,
-      double? manifoldPressureKpa,
-      DateTime? createdAt});
+      double? manifoldPressureKpa});
 }
 
 /// @nodoc
@@ -89,7 +87,6 @@ class _$CreateVehicleStatusDtoCopyWithImpl<$Res,
     Object? fuelPressure = freezed,
     Object? absBaroPressure = freezed,
     Object? manifoldPressureKpa = freezed,
-    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       vehicle: null == vehicle
@@ -140,10 +137,6 @@ class _$CreateVehicleStatusDtoCopyWithImpl<$Res,
           ? _value.manifoldPressureKpa
           : manifoldPressureKpa // ignore: cast_nullable_to_non_nullable
               as double?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ) as $Val);
   }
 }
@@ -169,8 +162,7 @@ abstract class _$$CreateVehicleStatusDtoImplCopyWith<$Res>
       double? intakeAirTemperature,
       double? fuelPressure,
       double? absBaroPressure,
-      double? manifoldPressureKpa,
-      DateTime? createdAt});
+      double? manifoldPressureKpa});
 }
 
 /// @nodoc
@@ -198,7 +190,6 @@ class __$$CreateVehicleStatusDtoImplCopyWithImpl<$Res>
     Object? fuelPressure = freezed,
     Object? absBaroPressure = freezed,
     Object? manifoldPressureKpa = freezed,
-    Object? createdAt = freezed,
   }) {
     return _then(_$CreateVehicleStatusDtoImpl(
       vehicle: null == vehicle
@@ -249,10 +240,6 @@ class __$$CreateVehicleStatusDtoImplCopyWithImpl<$Res>
           ? _value.manifoldPressureKpa
           : manifoldPressureKpa // ignore: cast_nullable_to_non_nullable
               as double?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ));
   }
 }
@@ -272,8 +259,7 @@ class _$CreateVehicleStatusDtoImpl implements _CreateVehicleStatusDto {
       this.intakeAirTemperature,
       this.fuelPressure,
       this.absBaroPressure,
-      this.manifoldPressureKpa,
-      this.createdAt})
+      this.manifoldPressureKpa})
       : _milCodes = milCodes;
 
   factory _$CreateVehicleStatusDtoImpl.fromJson(Map<String, dynamic> json) =>
@@ -311,12 +297,10 @@ class _$CreateVehicleStatusDtoImpl implements _CreateVehicleStatusDto {
   final double? absBaroPressure;
   @override
   final double? manifoldPressureKpa;
-  @override
-  final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'CreateVehicleStatusDto(vehicle: $vehicle, vin: $vin, milOn: $milOn, kmMILOn: $kmMILOn, minutesMILOn: $minutesMILOn, milCodes: $milCodes, coolantTemperature: $coolantTemperature, oilTemperature: $oilTemperature, intakeAirTemperature: $intakeAirTemperature, fuelPressure: $fuelPressure, absBaroPressure: $absBaroPressure, manifoldPressureKpa: $manifoldPressureKpa, createdAt: $createdAt)';
+    return 'CreateVehicleStatusDto(vehicle: $vehicle, vin: $vin, milOn: $milOn, kmMILOn: $kmMILOn, minutesMILOn: $minutesMILOn, milCodes: $milCodes, coolantTemperature: $coolantTemperature, oilTemperature: $oilTemperature, intakeAirTemperature: $intakeAirTemperature, fuelPressure: $fuelPressure, absBaroPressure: $absBaroPressure, manifoldPressureKpa: $manifoldPressureKpa)';
   }
 
   @override
@@ -342,9 +326,7 @@ class _$CreateVehicleStatusDtoImpl implements _CreateVehicleStatusDto {
             (identical(other.absBaroPressure, absBaroPressure) ||
                 other.absBaroPressure == absBaroPressure) &&
             (identical(other.manifoldPressureKpa, manifoldPressureKpa) ||
-                other.manifoldPressureKpa == manifoldPressureKpa) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt));
+                other.manifoldPressureKpa == manifoldPressureKpa));
   }
 
   @JsonKey(ignore: true)
@@ -362,8 +344,7 @@ class _$CreateVehicleStatusDtoImpl implements _CreateVehicleStatusDto {
       intakeAirTemperature,
       fuelPressure,
       absBaroPressure,
-      manifoldPressureKpa,
-      createdAt);
+      manifoldPressureKpa);
 
   @JsonKey(ignore: true)
   @override
@@ -393,8 +374,7 @@ abstract class _CreateVehicleStatusDto implements CreateVehicleStatusDto {
       final double? intakeAirTemperature,
       final double? fuelPressure,
       final double? absBaroPressure,
-      final double? manifoldPressureKpa,
-      final DateTime? createdAt}) = _$CreateVehicleStatusDtoImpl;
+      final double? manifoldPressureKpa}) = _$CreateVehicleStatusDtoImpl;
 
   factory _CreateVehicleStatusDto.fromJson(Map<String, dynamic> json) =
       _$CreateVehicleStatusDtoImpl.fromJson;
@@ -423,8 +403,6 @@ abstract class _CreateVehicleStatusDto implements CreateVehicleStatusDto {
   double? get absBaroPressure;
   @override
   double? get manifoldPressureKpa;
-  @override
-  DateTime? get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$CreateVehicleStatusDtoImplCopyWith<_$CreateVehicleStatusDtoImpl>

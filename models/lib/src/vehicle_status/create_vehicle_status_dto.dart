@@ -25,7 +25,6 @@ class CreateVehicleStatusDto with _$CreateVehicleStatusDto {
     double? fuelPressure,
     double? absBaroPressure,
     double? manifoldPressureKpa,
-    DateTime? createdAt,
   }) = _CreateVehicleStatusDto;
 
   factory CreateVehicleStatusDto.fromJson(Map<String, dynamic> json) =>

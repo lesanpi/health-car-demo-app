@@ -23,9 +23,6 @@ _$CreateVehicleStatusDtoImpl _$$CreateVehicleStatusDtoImplFromJson(
       fuelPressure: (json['fuelPressure'] as num?)?.toDouble(),
       absBaroPressure: (json['absBaroPressure'] as num?)?.toDouble(),
       manifoldPressureKpa: (json['manifoldPressureKpa'] as num?)?.toDouble(),
-      createdAt: json['createdAt'] == null
-          ? null
-          : DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$$CreateVehicleStatusDtoImplToJson(
@@ -43,5 +40,4 @@ Map<String, dynamic> _$$CreateVehicleStatusDtoImplToJson(
       'fuelPressure': instance.fuelPressure,
       'absBaroPressure': instance.absBaroPressure,
       'manifoldPressureKpa': instance.manifoldPressureKpa,
-      'createdAt': instance.createdAt?.toIso8601String(),
     };

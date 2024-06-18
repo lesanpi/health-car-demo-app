@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:formz/formz.dart';
@@ -68,14 +69,16 @@ class VehicleDetailsBody extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        AutoSizeText(
                           vehicle.name,
                           maxLines: 2,
+                          minFontSize: 20,
+                          maxFontSize: 35,
                           style: Theme.of(context)
                               .textTheme
                               .headlineLarge
                               ?.copyWith(
-                                fontSize: 35,
+                                // fontSize: 35,
                                 fontWeight: FontWeight.w900,
                               ),
                         ),
@@ -87,7 +90,7 @@ class VehicleDetailsBody extends StatelessWidget {
                               .bodyMedium
                               ?.copyWith(),
                         ),
-                        const Gap(Consts.margin),
+                        const Gap(Consts.padding),
                         const TotalDistanceTraveledInfo(),
                       ],
                     ),
@@ -179,6 +182,7 @@ class VehicleStatusCards extends StatelessWidget {
         builder: (context, state) {
           final data = state.data;
           final coolantTemperature = data?.coolantTemperature;
+          final intakeAirTemperature = data?.intakeAirTemperature;
           final oilTemperature = data?.oilTemperature;
           final checkEngine = data?.milOn;
 
@@ -250,15 +254,10 @@ class VehicleStatusCards extends StatelessWidget {
                   Expanded(
                     child: SimpleStatCard(
                       color: Colors.red.shade50,
-                      title: data == null
-                          ? '--'
-                          : timeago.format(
-                              data.createdAt,
-                              locale: 'en_short',
-                            ),
-                      description: 'Ult. vez',
+                      title: data == null ? '--' : '$intakeAirTemperature °C',
+                      description: 'Temperatura Aire Motor',
                       icon: const Icon(
-                        FluentSystemIcons.ic_fluent_clock_filled,
+                        FluentSystemIcons.ic_fluent_cloud_backup_regular,
                         size: 30,
                       ),
                     ),
@@ -280,7 +279,7 @@ class VehicleStatusCards extends StatelessWidget {
                   ),
                   Expanded(
                     child: SimpleStatCard(
-                      color: Colors.amber.shade50,
+                      color: Colors.purple.shade50,
                       description: checkEngine == null
                           ? '--'
                           : checkEngine
