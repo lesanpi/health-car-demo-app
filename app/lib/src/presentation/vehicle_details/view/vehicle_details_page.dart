@@ -44,7 +44,11 @@ class VehicleDetailsPage extends StatelessWidget {
         ),
       ],
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.transparent,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);

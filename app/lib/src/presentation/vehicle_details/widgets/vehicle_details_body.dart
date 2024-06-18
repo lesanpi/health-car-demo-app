@@ -7,6 +7,7 @@ import 'package:health_car_demo_app/app/constant.dart';
 import 'package:health_car_demo_app/src/presentation/vehicle_details/bloc/bloc.dart';
 import 'package:health_car_demo_app/src/presentation/vehicle_details/widgets/animated_counter_text.dart';
 import 'package:health_car_demo_app/src/presentation/vehicle_details/widgets/vehicle_stats.dart';
+import 'package:health_car_demo_app/src/presentation/vehicle_gps_tracker/vehicle_gps_tracker.dart';
 import 'package:health_car_demo_app/src/presentation/vehicles/cubit/mileage_cubit.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -103,6 +104,11 @@ class VehicleDetailsBody extends StatelessWidget {
           const VehicleMileageIndicator(),
           // const Gap(Consts.padding / 2),
           const VehicleStatusCards(),
+          const Gap(Consts.margin),
+          const VehicleDTCCodesList(),
+          const Gap(Consts.margin),
+          const WhereIsMyCarSection(),
+          const Gap(Consts.margin * 10),
         ],
       ),
     );
@@ -185,6 +191,7 @@ class VehicleStatusCards extends StatelessWidget {
           final intakeAirTemperature = data?.intakeAirTemperature;
           final oilTemperature = data?.oilTemperature;
           final checkEngine = data?.milOn;
+          final milCodes = data?.milCodes ?? [];
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -280,15 +287,11 @@ class VehicleStatusCards extends StatelessWidget {
                   Expanded(
                     child: SimpleStatCard(
                       color: Colors.purple.shade50,
-                      description: checkEngine == null
-                          ? '--'
-                          : checkEngine
-                              ? 'Encendido'
-                              : 'Apagado',
-                      title: 'Check Engine',
+                      description: 'Códigos de error',
+                      title: milCodes.length.toString(),
                       icon: const Icon(
                         // Icons.car_crash,
-                        FluentSystemIcons.ic_fluent_report_warning_filled,
+                        FluentSystemIcons.ic_fluent_warning_regular,
 
                         size: 30,
                       ),
@@ -296,6 +299,182 @@ class VehicleStatusCards extends StatelessWidget {
                   ),
                 ],
               ),
+              Row(
+                children: [
+                  Expanded(
+                    child: SimpleStatCard(
+                      color: Colors.amber.shade50,
+                      title: data == null
+                          ? '--'
+                          : '${data.manifoldPressureKpa} kpa',
+                      description: 'Presión colector',
+                      icon: const Icon(
+                        FluentSystemIcons.ic_fluent_search_info_filled,
+                        size: 30,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: SimpleStatCard(
+                      color: Colors.blueGrey.shade50,
+                      title: data == null ? '--' : '${data.fuelPressure} kpa',
+                      description: 'Presión gasolina',
+                      icon: const Icon(
+                        FluentSystemIcons.ic_fluent_search_filled,
+                        size: 30,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: SimpleStatCard(
+                      color: Colors.brown.shade50,
+                      title:
+                          data == null ? '--' : '${data.absBaroPressure} kpa',
+                      description: 'Presión absoluta',
+                      icon: const Icon(
+                        FluentSystemIcons.ic_fluent_activity_filled,
+                        size: 30,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+class WhereIsMyCarSection extends StatelessWidget {
+  const WhereIsMyCarSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final vehicle = context.select((VehicleDetailsBloc bloc) => bloc.vehicle);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: Consts.margin,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '🗺️ ¿Donde esta mi carro?',
+            maxLines: 2,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w900,
+                ),
+          ),
+          const Gap(Consts.margin),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black.withOpacity(0.7),
+            ),
+            onPressed: () {
+              Navigator.push(context, VehicleGpsTrackerPage.route(vehicle));
+            },
+            child: Center(
+              child: Text(
+                '📍 Ir al Mapa',
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class VehicleDTCCodesList extends StatelessWidget {
+  const VehicleDTCCodesList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: Consts.margin,
+      ),
+      child: BlocBuilder<VehicleDetailsBloc, VehicleDetailsState>(
+        builder: (context, state) {
+          final data = state.data;
+
+          final checkEngine = data?.milOn;
+          final milCodes = data?.milCodes;
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '🚗❤️‍🩹 Codigos de Error',
+                maxLines: 2,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w900,
+                    ),
+              ),
+              if (milCodes == null)
+                const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.black,
+                  ),
+                )
+              else if (milCodes.isEmpty)
+                Column(
+                  children: [
+                    const Gap(Consts.margin),
+                    Center(
+                      child: Text(
+                        'No tienes códigos de error ❤️',
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
+                    ),
+                    const Gap(Consts.margin),
+                  ],
+                )
+              else
+                Column(
+                  children: [
+                    const Gap(Consts.margin),
+                    Wrap(
+                      spacing: Consts.margin,
+                      runSpacing: Consts.margin,
+                      children: List.generate(milCodes.length, (index) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Colors
+                                .primaries[index % Colors.primaries.length]
+                                .shade50,
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              width: 1.2,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: Consts.padding,
+                              vertical: Consts.padding,
+                            ),
+                            child: Text(
+                              milCodes[index],
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                    const Gap(Consts.margin),
+                  ],
+                ),
             ],
           );
         },

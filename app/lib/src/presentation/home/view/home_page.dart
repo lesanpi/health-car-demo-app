@@ -33,6 +33,9 @@ class HomePage extends StatelessWidget {
       child: WithForegroundTask(
         child: Scaffold(
           appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.white,
+            surfaceTintColor: Colors.transparent,
             title: const Text(
               'Health Car',
               style: TextStyle(
@@ -41,7 +44,6 @@ class HomePage extends StatelessWidget {
             ),
             titleSpacing: Consts.margin * 1.5,
             centerTitle: false,
-            backgroundColor: Colors.transparent,
           ),
           body: const HomeView(),
         ),

@@ -31,7 +31,7 @@ class VehicleGpsTrackerBody extends StatelessWidget {
               ),
               child: IconButton(
                 onPressed: () => Navigator.of(context).pop(),
-                color: Consts.primary.shade600,
+                color: Colors.black,
                 icon: const Icon(
                   Icons.arrow_back_rounded,
                 ),

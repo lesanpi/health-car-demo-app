@@ -65,7 +65,7 @@ class _MapViewState extends State<MapView> {
         return Stack(
           children: [
             GoogleMap(
-              style: Consts.darkMapStyle,
+              // style: Consts.darkMapStyle,
               myLocationButtonEnabled: false,
               initialCameraPosition: _kGooglePlex,
               onMapCreated: (controller) {
