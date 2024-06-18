@@ -28,6 +28,7 @@ mixin _$CreateVehicleStatusDto {
   int? get minutesMILOn => throw _privateConstructorUsedError;
   List<String>? get milCodes => throw _privateConstructorUsedError;
   double? get coolantTemperature => throw _privateConstructorUsedError;
+  double? get maf => throw _privateConstructorUsedError;
   double? get oilTemperature => throw _privateConstructorUsedError;
   double? get intakeAirTemperature => throw _privateConstructorUsedError;
   double? get fuelPressure => throw _privateConstructorUsedError;
@@ -54,6 +55,7 @@ abstract class $CreateVehicleStatusDtoCopyWith<$Res> {
       int? minutesMILOn,
       List<String>? milCodes,
       double? coolantTemperature,
+      double? maf,
       double? oilTemperature,
       double? intakeAirTemperature,
       double? fuelPressure,
@@ -82,6 +84,7 @@ class _$CreateVehicleStatusDtoCopyWithImpl<$Res,
     Object? minutesMILOn = freezed,
     Object? milCodes = freezed,
     Object? coolantTemperature = freezed,
+    Object? maf = freezed,
     Object? oilTemperature = freezed,
     Object? intakeAirTemperature = freezed,
     Object? fuelPressure = freezed,
@@ -116,6 +119,10 @@ class _$CreateVehicleStatusDtoCopyWithImpl<$Res,
       coolantTemperature: freezed == coolantTemperature
           ? _value.coolantTemperature
           : coolantTemperature // ignore: cast_nullable_to_non_nullable
+              as double?,
+      maf: freezed == maf
+          ? _value.maf
+          : maf // ignore: cast_nullable_to_non_nullable
               as double?,
       oilTemperature: freezed == oilTemperature
           ? _value.oilTemperature
@@ -158,6 +165,7 @@ abstract class _$$CreateVehicleStatusDtoImplCopyWith<$Res>
       int? minutesMILOn,
       List<String>? milCodes,
       double? coolantTemperature,
+      double? maf,
       double? oilTemperature,
       double? intakeAirTemperature,
       double? fuelPressure,
@@ -185,6 +193,7 @@ class __$$CreateVehicleStatusDtoImplCopyWithImpl<$Res>
     Object? minutesMILOn = freezed,
     Object? milCodes = freezed,
     Object? coolantTemperature = freezed,
+    Object? maf = freezed,
     Object? oilTemperature = freezed,
     Object? intakeAirTemperature = freezed,
     Object? fuelPressure = freezed,
@@ -219,6 +228,10 @@ class __$$CreateVehicleStatusDtoImplCopyWithImpl<$Res>
       coolantTemperature: freezed == coolantTemperature
           ? _value.coolantTemperature
           : coolantTemperature // ignore: cast_nullable_to_non_nullable
+              as double?,
+      maf: freezed == maf
+          ? _value.maf
+          : maf // ignore: cast_nullable_to_non_nullable
               as double?,
       oilTemperature: freezed == oilTemperature
           ? _value.oilTemperature
@@ -255,6 +268,7 @@ class _$CreateVehicleStatusDtoImpl implements _CreateVehicleStatusDto {
       this.minutesMILOn,
       final List<String>? milCodes,
       this.coolantTemperature,
+      this.maf,
       this.oilTemperature,
       this.intakeAirTemperature,
       this.fuelPressure,
@@ -288,6 +302,8 @@ class _$CreateVehicleStatusDtoImpl implements _CreateVehicleStatusDto {
   @override
   final double? coolantTemperature;
   @override
+  final double? maf;
+  @override
   final double? oilTemperature;
   @override
   final double? intakeAirTemperature;
@@ -300,7 +316,7 @@ class _$CreateVehicleStatusDtoImpl implements _CreateVehicleStatusDto {
 
   @override
   String toString() {
-    return 'CreateVehicleStatusDto(vehicle: $vehicle, vin: $vin, milOn: $milOn, kmMILOn: $kmMILOn, minutesMILOn: $minutesMILOn, milCodes: $milCodes, coolantTemperature: $coolantTemperature, oilTemperature: $oilTemperature, intakeAirTemperature: $intakeAirTemperature, fuelPressure: $fuelPressure, absBaroPressure: $absBaroPressure, manifoldPressureKpa: $manifoldPressureKpa)';
+    return 'CreateVehicleStatusDto(vehicle: $vehicle, vin: $vin, milOn: $milOn, kmMILOn: $kmMILOn, minutesMILOn: $minutesMILOn, milCodes: $milCodes, coolantTemperature: $coolantTemperature, maf: $maf, oilTemperature: $oilTemperature, intakeAirTemperature: $intakeAirTemperature, fuelPressure: $fuelPressure, absBaroPressure: $absBaroPressure, manifoldPressureKpa: $manifoldPressureKpa)';
   }
 
   @override
@@ -317,6 +333,7 @@ class _$CreateVehicleStatusDtoImpl implements _CreateVehicleStatusDto {
             const DeepCollectionEquality().equals(other._milCodes, _milCodes) &&
             (identical(other.coolantTemperature, coolantTemperature) ||
                 other.coolantTemperature == coolantTemperature) &&
+            (identical(other.maf, maf) || other.maf == maf) &&
             (identical(other.oilTemperature, oilTemperature) ||
                 other.oilTemperature == oilTemperature) &&
             (identical(other.intakeAirTemperature, intakeAirTemperature) ||
@@ -340,6 +357,7 @@ class _$CreateVehicleStatusDtoImpl implements _CreateVehicleStatusDto {
       minutesMILOn,
       const DeepCollectionEquality().hash(_milCodes),
       coolantTemperature,
+      maf,
       oilTemperature,
       intakeAirTemperature,
       fuelPressure,
@@ -370,6 +388,7 @@ abstract class _CreateVehicleStatusDto implements CreateVehicleStatusDto {
       final int? minutesMILOn,
       final List<String>? milCodes,
       final double? coolantTemperature,
+      final double? maf,
       final double? oilTemperature,
       final double? intakeAirTemperature,
       final double? fuelPressure,
@@ -393,6 +412,8 @@ abstract class _CreateVehicleStatusDto implements CreateVehicleStatusDto {
   List<String>? get milCodes;
   @override
   double? get coolantTemperature;
+  @override
+  double? get maf;
   @override
   double? get oilTemperature;
   @override

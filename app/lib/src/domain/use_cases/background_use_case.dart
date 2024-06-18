@@ -51,13 +51,51 @@ class BackgroundUseCase {
     );
     for (final element in vehicleMeasures) {
       try {
-        await repository.createReport(
-          CreateReportDto(
-            vehicle: element.vehicleId,
-            mileage: element.kilometers,
-            geolocation: userLocation,
-          ),
+        final vehicleId = element.vehicleId;
+        final kilometers = element.kilometers;
+        final scannerData = element.scannerData;
+        log(
+          'Scanner data $scannerData',
+          name: 'BackgroundUseCase',
         );
+        if (vehicleId != null && kilometers != null) {
+          try {
+            log(
+              'createReport loading $vehicleId $kilometers...',
+              name: 'BackgroundUseCase',
+            );
+            await repository.createReport(
+              CreateReportDto(
+                vehicle: vehicleId,
+                mileage: kilometers,
+                geolocation: userLocation,
+              ),
+            );
+          } catch (e, s) {
+            log(
+              'Error creating report',
+              error: e,
+              stackTrace: s,
+              name: 'BackgroundUseCase',
+            );
+          }
+        }
+        if (scannerData != null) {
+          try {
+            log(
+              'createVehicleStatus loading $scannerData...',
+              name: 'BackgroundUseCase',
+            );
+            await repository.createVehicleStatus(scannerData);
+          } catch (e, s) {
+            log(
+              'Error creating satatus',
+              error: e,
+              stackTrace: s,
+              name: 'BackgroundUseCase',
+            );
+          }
+        }
       } finally {}
     }
   }

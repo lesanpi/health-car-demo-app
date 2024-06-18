@@ -20,6 +20,7 @@ class CreateVehicleStatusDto with _$CreateVehicleStatusDto {
     int? minutesMILOn,
     List<String>? milCodes,
     double? coolantTemperature,
+    double? maf,
     double? oilTemperature,
     double? intakeAirTemperature,
     double? fuelPressure,

@@ -33,7 +33,7 @@ class VehicleStatusApi extends VehicleStatusDataSource {
     try {
       log(
         '👷🏻 Create vehicle status $data Km for vehicle ${data.vehicle}',
-        name: 'createReport()',
+        name: 'createVehicleStatus()',
       );
 
       response = await _httpClient.post(
@@ -42,7 +42,7 @@ class VehicleStatusApi extends VehicleStatusDataSource {
       );
       log(
         'Response[${response.statusCode}] ${response.body}',
-        name: 'createReport()',
+        name: 'createVehicleStatus()',
       );
     } catch (_) {
       throw InternalServerException('');
@@ -59,6 +59,7 @@ class VehicleStatusApi extends VehicleStatusDataSource {
         'Error JsonDeserializationException',
         error: e,
         stackTrace: s,
+        name: 'createVehicleStatus()',
       );
       throw JsonDeserializationException();
     }

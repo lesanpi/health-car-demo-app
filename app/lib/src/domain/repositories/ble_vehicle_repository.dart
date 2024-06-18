@@ -10,16 +10,26 @@ class IBleVehiculeRepository {
     final vehicleMeasuresList = <IotDeviceInfo>[];
     for (final device in devices) {
       final iotDevice = await BleCarApi.researchDevice(device);
+      log(
+        'Iot Device data ${iotDevice?.scannerStatus}',
+        name: 'IBleVehicleRepository.scanIoTDevices',
+      );
       if (iotDevice == null) continue;
       vehicleMeasuresList.add(iotDevice);
     }
     final results = vehicleMeasuresList
         .map(
-          (e) =>
-              VehicleMeasure(kilometers: e.kilometers, vehicleId: e.vehicleId),
+          (e) => VehicleMeasure(
+            kilometers: e.kilometers,
+            vehicleId: e.vehicleId,
+            scannerData: e.scannerStatus,
+          ),
         )
         .toList();
-    log('✅ Results $results', name: 'IBleVehicleRepository.scanIoTDevices');
+    log(
+      '✅ Results $results',
+      name: 'IBleVehicleRepository.scanIoTDevices',
+    );
     return results;
   }
 }

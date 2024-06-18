@@ -18,6 +18,7 @@ _$CreateVehicleStatusDtoImpl _$$CreateVehicleStatusDtoImplFromJson(
           ?.map((e) => e as String)
           .toList(),
       coolantTemperature: (json['coolantTemperature'] as num?)?.toDouble(),
+      maf: (json['maf'] as num?)?.toDouble(),
       oilTemperature: (json['oilTemperature'] as num?)?.toDouble(),
       intakeAirTemperature: (json['intakeAirTemperature'] as num?)?.toDouble(),
       fuelPressure: (json['fuelPressure'] as num?)?.toDouble(),
@@ -35,6 +36,7 @@ Map<String, dynamic> _$$CreateVehicleStatusDtoImplToJson(
       'minutesMILOn': instance.minutesMILOn,
       'milCodes': instance.milCodes,
       'coolantTemperature': instance.coolantTemperature,
+      'maf': instance.maf,
       'oilTemperature': instance.oilTemperature,
       'intakeAirTemperature': instance.intakeAirTemperature,
       'fuelPressure': instance.fuelPressure,

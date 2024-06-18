@@ -4,15 +4,21 @@ import 'dart:typed_data';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:health_car_demo_app/src/data/models/iot_device_info.dart';
+import 'package:models/models.dart';
 
 class BleCarApi {
   static const String _name = 'BleCarApi';
   static const String vehicleServiceUUID =
       '4fafc201-1fb5-459e-8fcc-c5c9c331914b';
+
+  /// Characteristics
   static const String kilometersCharacteristicUUID =
       'beb5483e-36e1-4688-b7f5-ea07361b26a8';
   static const String vehiculeIdCharacteristicUUID =
       'beb5483e-36e1-4688-b7f5-ea07361b26a9';
+
+  static const String scannerVehicleStatusCharacteristicUUID =
+      'beb5483e-36e1-4688-b7f5-ea07361b26b8';
 
   static Future<List<BluetoothDevice>> scanDevices() async {
     /// Stop scanning before start another
@@ -56,6 +62,36 @@ class BleCarApi {
     }
   }
 
+  static Future<CreateVehicleStatusDto?> extractVehicleStatusValue(
+    BluetoothCharacteristic characteristic,
+  ) async {
+    try {
+      if (characteristic.characteristicUuid.toString() !=
+          scannerVehicleStatusCharacteristicUUID) {
+        return null;
+      }
+      if (!characteristic.properties.read) return null;
+      final value = await characteristic.read();
+      final bytes = Uint8List.fromList(value);
+      final data = utf8.decode(bytes);
+      log(
+        'Extract vehicle status data $data',
+        name: '$_name.extractVehicleStatusValue',
+      );
+      return CreateVehicleStatusDto.fromJson(
+        jsonDecode(data) as Map<String, dynamic>,
+      );
+    } catch (e, s) {
+      log(
+        'Extract vehicle status failed',
+        error: e,
+        stackTrace: s,
+        name: '$_name.extractVehicleStatusValue',
+      );
+      return null;
+    }
+  }
+
   static Future<int> extractVehicleKilometersValue(
     BluetoothCharacteristic characteristic,
   ) async {
@@ -94,6 +130,8 @@ class BleCarApi {
     );
     String? vehicleId;
     int? kilometers;
+    CreateVehicleStatusDto? vehicleStatusData;
+
     for (final c in characteristics) {
       log(
         'Characteristic ${c.characteristicUuid} IS ID ? ${c.isVehicleIdCharacteristic}, IS KM ? ${c.isVehicleKilometersCharacteristic}',
@@ -106,7 +144,15 @@ class BleCarApi {
           name: '$_name.extractDeviceInfoFromService',
         );
       }
+      if (c.isScannerVehicleCharacteristic) {
+        vehicleStatusData = await extractVehicleStatusValue(c);
+        log(
+          'Vehicle Status: $vehicleStatusData',
+          name: '$_name.extractDeviceInfoFromService',
+        );
+      }
       if (c.isVehicleKilometersCharacteristic) {
+        // kilometers = 85;
         kilometers = await extractVehicleKilometersValue(c);
         log(
           'Kilometers: $kilometers Km',
@@ -115,8 +161,48 @@ class BleCarApi {
       }
     }
 
-    if (vehicleId == null || kilometers == null) throw Exception();
-    return IotDeviceInfo(kilometers: kilometers, vehicleId: vehicleId);
+    return IotDeviceInfo(
+      kilometers: kilometers,
+      vehicleId: vehicleId,
+      scannerStatus: vehicleStatusData,
+    );
+  }
+
+  static Future<CreateVehicleStatusDto?> extractScannerData(
+    BluetoothService bluetoothService,
+  ) async {
+    final characteristics = bluetoothService.characteristics
+        .where(
+          (element) =>
+              // element.characteristicUuid.toString() ==
+              // 'beb5483e-36e1-4688-b7f5-ea07361b26a8',
+              true,
+        )
+        .toList();
+
+    log(
+      'Characteristics ${characteristics.map((e) => e.characteristicUuid.toString()).toList()}',
+      name: '$_name.extractDeviceInfoFromService',
+    );
+
+    CreateVehicleStatusDto? vehicleStatusData;
+
+    for (final c in characteristics) {
+      log(
+        'Characteristic ${c.characteristicUuid} ',
+        name: '$_name.extractDeviceInfoFromService',
+      );
+
+      if (c.isScannerVehicleCharacteristic) {
+        vehicleStatusData = await extractVehicleStatusValue(c);
+        log(
+          'Vehicle Status: $vehicleStatusData',
+          name: '$_name.extractDeviceInfoFromService',
+        );
+      }
+    }
+
+    return vehicleStatusData;
   }
 
   static Future<void> disconnectFromDevice(BluetoothDevice device) async {
@@ -159,7 +245,12 @@ class BleCarApi {
         final service = services.firstWhere(
           (element) => element.serviceUuid.toString() == vehicleServiceUUID,
         );
-        final iotDeviceInfo = extractDeviceInfoFromService(service);
+        // final scannerData = await extractScannerData(service);
+        final iotDeviceInfo = await extractDeviceInfoFromService(service);
+        log(
+          'Data Scanner ${iotDeviceInfo.scannerStatus}',
+          name: '$_name.researchDevice',
+        );
         await disconnectFromDevice(device);
         return iotDeviceInfo;
       }
@@ -181,6 +272,11 @@ class BleCarApi {
 extension CharacteristicsExtension on BluetoothCharacteristic {
   bool get isVehicleIdCharacteristic =>
       characteristicUuid.toString() == BleCarApi.vehiculeIdCharacteristicUUID;
+
+  bool get isScannerVehicleCharacteristic =>
+      characteristicUuid.toString() ==
+      BleCarApi.scannerVehicleStatusCharacteristicUUID;
+
   bool get isVehicleKilometersCharacteristic =>
       characteristicUuid.toString() == BleCarApi.kilometersCharacteristicUUID;
 }
