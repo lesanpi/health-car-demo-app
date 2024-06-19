@@ -23,9 +23,7 @@ mixin _$VehicleStatus {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   String get vehicle => throw _privateConstructorUsedError;
-  String get vin => throw _privateConstructorUsedError;
   bool get milOn => throw _privateConstructorUsedError;
-  List<String> get milCodes => throw _privateConstructorUsedError;
   double? get coolantTemperature => throw _privateConstructorUsedError;
   double? get oilTemperature => throw _privateConstructorUsedError;
   double? get intakeAirTemperature => throw _privateConstructorUsedError;
@@ -33,6 +31,8 @@ mixin _$VehicleStatus {
   double? get absBaroPressure => throw _privateConstructorUsedError;
   double? get manifoldPressureKpa => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
+  String get vin => throw _privateConstructorUsedError;
+  List<String> get milCodes => throw _privateConstructorUsedError;
   int get kmMILOn => throw _privateConstructorUsedError;
   int get minutesMILOn => throw _privateConstructorUsedError;
 
@@ -51,9 +51,7 @@ abstract class $VehicleStatusCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: '_id') String id,
       String vehicle,
-      String vin,
       bool milOn,
-      List<String> milCodes,
       double? coolantTemperature,
       double? oilTemperature,
       double? intakeAirTemperature,
@@ -61,6 +59,8 @@ abstract class $VehicleStatusCopyWith<$Res> {
       double? absBaroPressure,
       double? manifoldPressureKpa,
       DateTime createdAt,
+      String vin,
+      List<String> milCodes,
       int kmMILOn,
       int minutesMILOn});
 }
@@ -80,9 +80,7 @@ class _$VehicleStatusCopyWithImpl<$Res, $Val extends VehicleStatus>
   $Res call({
     Object? id = null,
     Object? vehicle = null,
-    Object? vin = null,
     Object? milOn = null,
-    Object? milCodes = null,
     Object? coolantTemperature = freezed,
     Object? oilTemperature = freezed,
     Object? intakeAirTemperature = freezed,
@@ -90,6 +88,8 @@ class _$VehicleStatusCopyWithImpl<$Res, $Val extends VehicleStatus>
     Object? absBaroPressure = freezed,
     Object? manifoldPressureKpa = freezed,
     Object? createdAt = null,
+    Object? vin = null,
+    Object? milCodes = null,
     Object? kmMILOn = null,
     Object? minutesMILOn = null,
   }) {
@@ -102,18 +102,10 @@ class _$VehicleStatusCopyWithImpl<$Res, $Val extends VehicleStatus>
           ? _value.vehicle
           : vehicle // ignore: cast_nullable_to_non_nullable
               as String,
-      vin: null == vin
-          ? _value.vin
-          : vin // ignore: cast_nullable_to_non_nullable
-              as String,
       milOn: null == milOn
           ? _value.milOn
           : milOn // ignore: cast_nullable_to_non_nullable
               as bool,
-      milCodes: null == milCodes
-          ? _value.milCodes
-          : milCodes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       coolantTemperature: freezed == coolantTemperature
           ? _value.coolantTemperature
           : coolantTemperature // ignore: cast_nullable_to_non_nullable
@@ -142,6 +134,14 @@ class _$VehicleStatusCopyWithImpl<$Res, $Val extends VehicleStatus>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      vin: null == vin
+          ? _value.vin
+          : vin // ignore: cast_nullable_to_non_nullable
+              as String,
+      milCodes: null == milCodes
+          ? _value.milCodes
+          : milCodes // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       kmMILOn: null == kmMILOn
           ? _value.kmMILOn
           : kmMILOn // ignore: cast_nullable_to_non_nullable
@@ -165,9 +165,7 @@ abstract class _$$VehicleStatusImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: '_id') String id,
       String vehicle,
-      String vin,
       bool milOn,
-      List<String> milCodes,
       double? coolantTemperature,
       double? oilTemperature,
       double? intakeAirTemperature,
@@ -175,6 +173,8 @@ abstract class _$$VehicleStatusImplCopyWith<$Res>
       double? absBaroPressure,
       double? manifoldPressureKpa,
       DateTime createdAt,
+      String vin,
+      List<String> milCodes,
       int kmMILOn,
       int minutesMILOn});
 }
@@ -192,9 +192,7 @@ class __$$VehicleStatusImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? vehicle = null,
-    Object? vin = null,
     Object? milOn = null,
-    Object? milCodes = null,
     Object? coolantTemperature = freezed,
     Object? oilTemperature = freezed,
     Object? intakeAirTemperature = freezed,
@@ -202,6 +200,8 @@ class __$$VehicleStatusImplCopyWithImpl<$Res>
     Object? absBaroPressure = freezed,
     Object? manifoldPressureKpa = freezed,
     Object? createdAt = null,
+    Object? vin = null,
+    Object? milCodes = null,
     Object? kmMILOn = null,
     Object? minutesMILOn = null,
   }) {
@@ -214,18 +214,10 @@ class __$$VehicleStatusImplCopyWithImpl<$Res>
           ? _value.vehicle
           : vehicle // ignore: cast_nullable_to_non_nullable
               as String,
-      vin: null == vin
-          ? _value.vin
-          : vin // ignore: cast_nullable_to_non_nullable
-              as String,
       milOn: null == milOn
           ? _value.milOn
           : milOn // ignore: cast_nullable_to_non_nullable
               as bool,
-      milCodes: null == milCodes
-          ? _value._milCodes
-          : milCodes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       coolantTemperature: freezed == coolantTemperature
           ? _value.coolantTemperature
           : coolantTemperature // ignore: cast_nullable_to_non_nullable
@@ -254,6 +246,14 @@ class __$$VehicleStatusImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      vin: null == vin
+          ? _value.vin
+          : vin // ignore: cast_nullable_to_non_nullable
+              as String,
+      milCodes: null == milCodes
+          ? _value._milCodes
+          : milCodes // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       kmMILOn: null == kmMILOn
           ? _value.kmMILOn
           : kmMILOn // ignore: cast_nullable_to_non_nullable
@@ -272,9 +272,7 @@ class _$VehicleStatusImpl implements _VehicleStatus {
   const _$VehicleStatusImpl(
       {@JsonKey(name: '_id') required this.id,
       required this.vehicle,
-      required this.vin = '',
       required this.milOn,
-      required final List<String> milCodes = const [],
       required this.coolantTemperature,
       required this.oilTemperature,
       required this.intakeAirTemperature,
@@ -282,6 +280,8 @@ class _$VehicleStatusImpl implements _VehicleStatus {
       required this.absBaroPressure,
       required this.manifoldPressureKpa,
       required this.createdAt,
+      this.vin = '',
+      final List<String> milCodes = const [],
       this.kmMILOn = 0,
       this.minutesMILOn = 0})
       : _milCodes = milCodes;
@@ -295,19 +295,7 @@ class _$VehicleStatusImpl implements _VehicleStatus {
   @override
   final String vehicle;
   @override
-  @JsonKey()
-  final String vin;
-  @override
   final bool milOn;
-  final List<String> _milCodes;
-  @override
-  @JsonKey()
-  List<String> get milCodes {
-    if (_milCodes is EqualUnmodifiableListView) return _milCodes;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_milCodes);
-  }
-
   @override
   final double? coolantTemperature;
   @override
@@ -324,6 +312,18 @@ class _$VehicleStatusImpl implements _VehicleStatus {
   final DateTime createdAt;
   @override
   @JsonKey()
+  final String vin;
+  final List<String> _milCodes;
+  @override
+  @JsonKey()
+  List<String> get milCodes {
+    if (_milCodes is EqualUnmodifiableListView) return _milCodes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_milCodes);
+  }
+
+  @override
+  @JsonKey()
   final int kmMILOn;
   @override
   @JsonKey()
@@ -331,7 +331,7 @@ class _$VehicleStatusImpl implements _VehicleStatus {
 
   @override
   String toString() {
-    return 'VehicleStatus(id: $id, vehicle: $vehicle, vin: $vin, milOn: $milOn, milCodes: $milCodes, coolantTemperature: $coolantTemperature, oilTemperature: $oilTemperature, intakeAirTemperature: $intakeAirTemperature, fuelPressure: $fuelPressure, absBaroPressure: $absBaroPressure, manifoldPressureKpa: $manifoldPressureKpa, createdAt: $createdAt, kmMILOn: $kmMILOn, minutesMILOn: $minutesMILOn)';
+    return 'VehicleStatus(id: $id, vehicle: $vehicle, milOn: $milOn, coolantTemperature: $coolantTemperature, oilTemperature: $oilTemperature, intakeAirTemperature: $intakeAirTemperature, fuelPressure: $fuelPressure, absBaroPressure: $absBaroPressure, manifoldPressureKpa: $manifoldPressureKpa, createdAt: $createdAt, vin: $vin, milCodes: $milCodes, kmMILOn: $kmMILOn, minutesMILOn: $minutesMILOn)';
   }
 
   @override
@@ -341,9 +341,7 @@ class _$VehicleStatusImpl implements _VehicleStatus {
             other is _$VehicleStatusImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.vehicle, vehicle) || other.vehicle == vehicle) &&
-            (identical(other.vin, vin) || other.vin == vin) &&
             (identical(other.milOn, milOn) || other.milOn == milOn) &&
-            const DeepCollectionEquality().equals(other._milCodes, _milCodes) &&
             (identical(other.coolantTemperature, coolantTemperature) ||
                 other.coolantTemperature == coolantTemperature) &&
             (identical(other.oilTemperature, oilTemperature) ||
@@ -358,6 +356,8 @@ class _$VehicleStatusImpl implements _VehicleStatus {
                 other.manifoldPressureKpa == manifoldPressureKpa) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
+            (identical(other.vin, vin) || other.vin == vin) &&
+            const DeepCollectionEquality().equals(other._milCodes, _milCodes) &&
             (identical(other.kmMILOn, kmMILOn) || other.kmMILOn == kmMILOn) &&
             (identical(other.minutesMILOn, minutesMILOn) ||
                 other.minutesMILOn == minutesMILOn));
@@ -369,9 +369,7 @@ class _$VehicleStatusImpl implements _VehicleStatus {
       runtimeType,
       id,
       vehicle,
-      vin,
       milOn,
-      const DeepCollectionEquality().hash(_milCodes),
       coolantTemperature,
       oilTemperature,
       intakeAirTemperature,
@@ -379,6 +377,8 @@ class _$VehicleStatusImpl implements _VehicleStatus {
       absBaroPressure,
       manifoldPressureKpa,
       createdAt,
+      vin,
+      const DeepCollectionEquality().hash(_milCodes),
       kmMILOn,
       minutesMILOn);
 
@@ -400,9 +400,7 @@ abstract class _VehicleStatus implements VehicleStatus {
   const factory _VehicleStatus(
       {@JsonKey(name: '_id') required final String id,
       required final String vehicle,
-      required final String vin,
       required final bool milOn,
-      required final List<String> milCodes,
       required final double? coolantTemperature,
       required final double? oilTemperature,
       required final double? intakeAirTemperature,
@@ -410,6 +408,8 @@ abstract class _VehicleStatus implements VehicleStatus {
       required final double? absBaroPressure,
       required final double? manifoldPressureKpa,
       required final DateTime createdAt,
+      final String vin,
+      final List<String> milCodes,
       final int kmMILOn,
       final int minutesMILOn}) = _$VehicleStatusImpl;
 
@@ -422,11 +422,7 @@ abstract class _VehicleStatus implements VehicleStatus {
   @override
   String get vehicle;
   @override
-  String get vin;
-  @override
   bool get milOn;
-  @override
-  List<String> get milCodes;
   @override
   double? get coolantTemperature;
   @override
@@ -441,6 +437,10 @@ abstract class _VehicleStatus implements VehicleStatus {
   double? get manifoldPressureKpa;
   @override
   DateTime get createdAt;
+  @override
+  String get vin;
+  @override
+  List<String> get milCodes;
   @override
   int get kmMILOn;
   @override

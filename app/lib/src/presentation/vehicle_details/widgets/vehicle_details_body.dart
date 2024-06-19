@@ -306,7 +306,7 @@ class VehicleStatusCards extends StatelessWidget {
                       color: Colors.amber.shade50,
                       title: data == null
                           ? '--'
-                          : '${data.manifoldPressureKpa} kpa',
+                          : '${data.manifoldPressureKpa ?? '--'} kpa',
                       description: 'Presión colector',
                       icon: const Icon(
                         FluentSystemIcons.ic_fluent_search_info_filled,
@@ -317,7 +317,9 @@ class VehicleStatusCards extends StatelessWidget {
                   Expanded(
                     child: SimpleStatCard(
                       color: Colors.blueGrey.shade50,
-                      title: data == null ? '--' : '${data.fuelPressure} kpa',
+                      title: data == null
+                          ? '--'
+                          : '${data.fuelPressure ?? '--'} kpa',
                       description: 'Presión gasolina',
                       icon: const Icon(
                         FluentSystemIcons.ic_fluent_search_filled,
@@ -328,8 +330,9 @@ class VehicleStatusCards extends StatelessWidget {
                   Expanded(
                     child: SimpleStatCard(
                       color: Colors.brown.shade50,
-                      title:
-                          data == null ? '--' : '${data.absBaroPressure} kpa',
+                      title: data == null
+                          ? '--'
+                          : '${data.absBaroPressure ?? '--'} kpa',
                       description: 'Presión absoluta',
                       icon: const Icon(
                         FluentSystemIcons.ic_fluent_activity_filled,

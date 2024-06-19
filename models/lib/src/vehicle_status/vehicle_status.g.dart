@@ -10,12 +10,7 @@ _$VehicleStatusImpl _$$VehicleStatusImplFromJson(Map<String, dynamic> json) =>
     _$VehicleStatusImpl(
       id: json['_id'] as String,
       vehicle: json['vehicle'] as String,
-      vin: json['vin'] as String? ?? '',
       milOn: json['milOn'] as bool,
-      milCodes: (json['milCodes'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          const [],
       coolantTemperature: (json['coolantTemperature'] as num?)?.toDouble(),
       oilTemperature: (json['oilTemperature'] as num?)?.toDouble(),
       intakeAirTemperature: (json['intakeAirTemperature'] as num?)?.toDouble(),
@@ -23,6 +18,11 @@ _$VehicleStatusImpl _$$VehicleStatusImplFromJson(Map<String, dynamic> json) =>
       absBaroPressure: (json['absBaroPressure'] as num?)?.toDouble(),
       manifoldPressureKpa: (json['manifoldPressureKpa'] as num?)?.toDouble(),
       createdAt: DateTime.parse(json['createdAt'] as String),
+      vin: json['vin'] as String? ?? '',
+      milCodes: (json['milCodes'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       kmMILOn: (json['kmMILOn'] as num?)?.toInt() ?? 0,
       minutesMILOn: (json['minutesMILOn'] as num?)?.toInt() ?? 0,
     );
@@ -31,9 +31,7 @@ Map<String, dynamic> _$$VehicleStatusImplToJson(_$VehicleStatusImpl instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'vehicle': instance.vehicle,
-      'vin': instance.vin,
       'milOn': instance.milOn,
-      'milCodes': instance.milCodes,
       'coolantTemperature': instance.coolantTemperature,
       'oilTemperature': instance.oilTemperature,
       'intakeAirTemperature': instance.intakeAirTemperature,
@@ -41,6 +39,8 @@ Map<String, dynamic> _$$VehicleStatusImplToJson(_$VehicleStatusImpl instance) =>
       'absBaroPressure': instance.absBaroPressure,
       'manifoldPressureKpa': instance.manifoldPressureKpa,
       'createdAt': instance.createdAt.toIso8601String(),
+      'vin': instance.vin,
+      'milCodes': instance.milCodes,
       'kmMILOn': instance.kmMILOn,
       'minutesMILOn': instance.minutesMILOn,
     };
