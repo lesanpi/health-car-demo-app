@@ -272,9 +272,9 @@ class _$VehicleStatusImpl implements _VehicleStatus {
   const _$VehicleStatusImpl(
       {@JsonKey(name: '_id') required this.id,
       required this.vehicle,
-      required this.vin,
+      required this.vin = '',
       required this.milOn,
-      required final List<String> milCodes,
+      required final List<String> milCodes = const [],
       required this.coolantTemperature,
       required this.oilTemperature,
       required this.intakeAirTemperature,
@@ -295,11 +295,13 @@ class _$VehicleStatusImpl implements _VehicleStatus {
   @override
   final String vehicle;
   @override
+  @JsonKey()
   final String vin;
   @override
   final bool milOn;
   final List<String> _milCodes;
   @override
+  @JsonKey()
   List<String> get milCodes {
     if (_milCodes is EqualUnmodifiableListView) return _milCodes;
     // ignore: implicit_dynamic_type

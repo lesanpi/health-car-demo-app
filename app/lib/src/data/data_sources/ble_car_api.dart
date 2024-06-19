@@ -78,6 +78,7 @@ class BleCarApi {
         'Extract vehicle status data $data',
         name: '$_name.extractVehicleStatusValue',
       );
+      if (data.isEmpty) return null;
       return CreateVehicleStatusDto.fromJson(
         jsonDecode(data) as Map<String, dynamic>,
       );

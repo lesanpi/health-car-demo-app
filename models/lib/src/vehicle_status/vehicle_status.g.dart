@@ -10,10 +10,12 @@ _$VehicleStatusImpl _$$VehicleStatusImplFromJson(Map<String, dynamic> json) =>
     _$VehicleStatusImpl(
       id: json['_id'] as String,
       vehicle: json['vehicle'] as String,
-      vin: json['vin'] as String,
+      vin: json['vin'] as String? ?? '',
       milOn: json['milOn'] as bool,
-      milCodes:
-          (json['milCodes'] as List<dynamic>).map((e) => e as String).toList(),
+      milCodes: (json['milCodes'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       coolantTemperature: (json['coolantTemperature'] as num?)?.toDouble(),
       oilTemperature: (json['oilTemperature'] as num?)?.toDouble(),
       intakeAirTemperature: (json['intakeAirTemperature'] as num?)?.toDouble(),

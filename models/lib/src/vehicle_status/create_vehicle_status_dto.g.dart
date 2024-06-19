@@ -15,8 +15,9 @@ _$CreateVehicleStatusDtoImpl _$$CreateVehicleStatusDtoImplFromJson(
       kmMILOn: (json['kmMILOn'] as num?)?.toInt(),
       minutesMILOn: (json['minutesMILOn'] as num?)?.toInt(),
       milCodes: (json['milCodes'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
       coolantTemperature: (json['coolantTemperature'] as num?)?.toDouble(),
       maf: (json['maf'] as num?)?.toDouble(),
       oilTemperature: (json['oilTemperature'] as num?)?.toDouble(),
@@ -27,19 +28,28 @@ _$CreateVehicleStatusDtoImpl _$$CreateVehicleStatusDtoImplFromJson(
     );
 
 Map<String, dynamic> _$$CreateVehicleStatusDtoImplToJson(
-        _$CreateVehicleStatusDtoImpl instance) =>
-    <String, dynamic>{
-      'vehicle': instance.vehicle,
-      'vin': instance.vin,
-      'milOn': instance.milOn,
-      'kmMILOn': instance.kmMILOn,
-      'minutesMILOn': instance.minutesMILOn,
-      'milCodes': instance.milCodes,
-      'coolantTemperature': instance.coolantTemperature,
-      'maf': instance.maf,
-      'oilTemperature': instance.oilTemperature,
-      'intakeAirTemperature': instance.intakeAirTemperature,
-      'fuelPressure': instance.fuelPressure,
-      'absBaroPressure': instance.absBaroPressure,
-      'manifoldPressureKpa': instance.manifoldPressureKpa,
-    };
+    _$CreateVehicleStatusDtoImpl instance) {
+  final val = <String, dynamic>{
+    'vehicle': instance.vehicle,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('vin', instance.vin);
+  writeNotNull('milOn', instance.milOn);
+  writeNotNull('kmMILOn', instance.kmMILOn);
+  writeNotNull('minutesMILOn', instance.minutesMILOn);
+  val['milCodes'] = instance.milCodes;
+  writeNotNull('coolantTemperature', instance.coolantTemperature);
+  writeNotNull('maf', instance.maf);
+  writeNotNull('oilTemperature', instance.oilTemperature);
+  writeNotNull('intakeAirTemperature', instance.intakeAirTemperature);
+  writeNotNull('fuelPressure', instance.fuelPressure);
+  writeNotNull('absBaroPressure', instance.absBaroPressure);
+  writeNotNull('manifoldPressureKpa', instance.manifoldPressureKpa);
+  return val;
+}

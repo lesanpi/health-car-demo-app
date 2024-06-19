@@ -22,17 +22,29 @@ CreateVehicleStatusDto _$CreateVehicleStatusDtoFromJson(
 /// @nodoc
 mixin _$CreateVehicleStatusDto {
   String get vehicle => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
   String? get vin => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
   bool? get milOn => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
   int? get kmMILOn => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
   int? get minutesMILOn => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: [])
   List<String>? get milCodes => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
   double? get coolantTemperature => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
   double? get maf => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
   double? get oilTemperature => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
   double? get intakeAirTemperature => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
   double? get fuelPressure => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
   double? get absBaroPressure => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
   double? get manifoldPressureKpa => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,18 +61,18 @@ abstract class $CreateVehicleStatusDtoCopyWith<$Res> {
   @useResult
   $Res call(
       {String vehicle,
-      String? vin,
-      bool? milOn,
-      int? kmMILOn,
-      int? minutesMILOn,
-      List<String>? milCodes,
-      double? coolantTemperature,
-      double? maf,
-      double? oilTemperature,
-      double? intakeAirTemperature,
-      double? fuelPressure,
-      double? absBaroPressure,
-      double? manifoldPressureKpa});
+      @JsonKey(includeIfNull: false) String? vin,
+      @JsonKey(includeIfNull: false) bool? milOn,
+      @JsonKey(includeIfNull: false) int? kmMILOn,
+      @JsonKey(includeIfNull: false) int? minutesMILOn,
+      @JsonKey(defaultValue: []) List<String>? milCodes,
+      @JsonKey(includeIfNull: false) double? coolantTemperature,
+      @JsonKey(includeIfNull: false) double? maf,
+      @JsonKey(includeIfNull: false) double? oilTemperature,
+      @JsonKey(includeIfNull: false) double? intakeAirTemperature,
+      @JsonKey(includeIfNull: false) double? fuelPressure,
+      @JsonKey(includeIfNull: false) double? absBaroPressure,
+      @JsonKey(includeIfNull: false) double? manifoldPressureKpa});
 }
 
 /// @nodoc
@@ -159,18 +171,18 @@ abstract class _$$CreateVehicleStatusDtoImplCopyWith<$Res>
   @useResult
   $Res call(
       {String vehicle,
-      String? vin,
-      bool? milOn,
-      int? kmMILOn,
-      int? minutesMILOn,
-      List<String>? milCodes,
-      double? coolantTemperature,
-      double? maf,
-      double? oilTemperature,
-      double? intakeAirTemperature,
-      double? fuelPressure,
-      double? absBaroPressure,
-      double? manifoldPressureKpa});
+      @JsonKey(includeIfNull: false) String? vin,
+      @JsonKey(includeIfNull: false) bool? milOn,
+      @JsonKey(includeIfNull: false) int? kmMILOn,
+      @JsonKey(includeIfNull: false) int? minutesMILOn,
+      @JsonKey(defaultValue: []) List<String>? milCodes,
+      @JsonKey(includeIfNull: false) double? coolantTemperature,
+      @JsonKey(includeIfNull: false) double? maf,
+      @JsonKey(includeIfNull: false) double? oilTemperature,
+      @JsonKey(includeIfNull: false) double? intakeAirTemperature,
+      @JsonKey(includeIfNull: false) double? fuelPressure,
+      @JsonKey(includeIfNull: false) double? absBaroPressure,
+      @JsonKey(includeIfNull: false) double? manifoldPressureKpa});
 }
 
 /// @nodoc
@@ -262,18 +274,18 @@ class __$$CreateVehicleStatusDtoImplCopyWithImpl<$Res>
 class _$CreateVehicleStatusDtoImpl implements _CreateVehicleStatusDto {
   const _$CreateVehicleStatusDtoImpl(
       {required this.vehicle,
-      this.vin,
-      this.milOn,
-      this.kmMILOn,
-      this.minutesMILOn,
-      final List<String>? milCodes,
-      this.coolantTemperature,
-      this.maf,
-      this.oilTemperature,
-      this.intakeAirTemperature,
-      this.fuelPressure,
-      this.absBaroPressure,
-      this.manifoldPressureKpa})
+      @JsonKey(includeIfNull: false) this.vin,
+      @JsonKey(includeIfNull: false) this.milOn,
+      @JsonKey(includeIfNull: false) this.kmMILOn,
+      @JsonKey(includeIfNull: false) this.minutesMILOn,
+      @JsonKey(defaultValue: []) final List<String>? milCodes,
+      @JsonKey(includeIfNull: false) this.coolantTemperature,
+      @JsonKey(includeIfNull: false) this.maf,
+      @JsonKey(includeIfNull: false) this.oilTemperature,
+      @JsonKey(includeIfNull: false) this.intakeAirTemperature,
+      @JsonKey(includeIfNull: false) this.fuelPressure,
+      @JsonKey(includeIfNull: false) this.absBaroPressure,
+      @JsonKey(includeIfNull: false) this.manifoldPressureKpa})
       : _milCodes = milCodes;
 
   factory _$CreateVehicleStatusDtoImpl.fromJson(Map<String, dynamic> json) =>
@@ -282,15 +294,20 @@ class _$CreateVehicleStatusDtoImpl implements _CreateVehicleStatusDto {
   @override
   final String vehicle;
   @override
+  @JsonKey(includeIfNull: false)
   final String? vin;
   @override
+  @JsonKey(includeIfNull: false)
   final bool? milOn;
   @override
+  @JsonKey(includeIfNull: false)
   final int? kmMILOn;
   @override
+  @JsonKey(includeIfNull: false)
   final int? minutesMILOn;
   final List<String>? _milCodes;
   @override
+  @JsonKey(defaultValue: [])
   List<String>? get milCodes {
     final value = _milCodes;
     if (value == null) return null;
@@ -300,18 +317,25 @@ class _$CreateVehicleStatusDtoImpl implements _CreateVehicleStatusDto {
   }
 
   @override
+  @JsonKey(includeIfNull: false)
   final double? coolantTemperature;
   @override
+  @JsonKey(includeIfNull: false)
   final double? maf;
   @override
+  @JsonKey(includeIfNull: false)
   final double? oilTemperature;
   @override
+  @JsonKey(includeIfNull: false)
   final double? intakeAirTemperature;
   @override
+  @JsonKey(includeIfNull: false)
   final double? fuelPressure;
   @override
+  @JsonKey(includeIfNull: false)
   final double? absBaroPressure;
   @override
+  @JsonKey(includeIfNull: false)
   final double? manifoldPressureKpa;
 
   @override
@@ -381,19 +405,20 @@ class _$CreateVehicleStatusDtoImpl implements _CreateVehicleStatusDto {
 
 abstract class _CreateVehicleStatusDto implements CreateVehicleStatusDto {
   const factory _CreateVehicleStatusDto(
-      {required final String vehicle,
-      final String? vin,
-      final bool? milOn,
-      final int? kmMILOn,
-      final int? minutesMILOn,
-      final List<String>? milCodes,
-      final double? coolantTemperature,
-      final double? maf,
-      final double? oilTemperature,
-      final double? intakeAirTemperature,
-      final double? fuelPressure,
-      final double? absBaroPressure,
-      final double? manifoldPressureKpa}) = _$CreateVehicleStatusDtoImpl;
+          {required final String vehicle,
+          @JsonKey(includeIfNull: false) final String? vin,
+          @JsonKey(includeIfNull: false) final bool? milOn,
+          @JsonKey(includeIfNull: false) final int? kmMILOn,
+          @JsonKey(includeIfNull: false) final int? minutesMILOn,
+          @JsonKey(defaultValue: []) final List<String>? milCodes,
+          @JsonKey(includeIfNull: false) final double? coolantTemperature,
+          @JsonKey(includeIfNull: false) final double? maf,
+          @JsonKey(includeIfNull: false) final double? oilTemperature,
+          @JsonKey(includeIfNull: false) final double? intakeAirTemperature,
+          @JsonKey(includeIfNull: false) final double? fuelPressure,
+          @JsonKey(includeIfNull: false) final double? absBaroPressure,
+          @JsonKey(includeIfNull: false) final double? manifoldPressureKpa}) =
+      _$CreateVehicleStatusDtoImpl;
 
   factory _CreateVehicleStatusDto.fromJson(Map<String, dynamic> json) =
       _$CreateVehicleStatusDtoImpl.fromJson;
@@ -401,28 +426,40 @@ abstract class _CreateVehicleStatusDto implements CreateVehicleStatusDto {
   @override
   String get vehicle;
   @override
+  @JsonKey(includeIfNull: false)
   String? get vin;
   @override
+  @JsonKey(includeIfNull: false)
   bool? get milOn;
   @override
+  @JsonKey(includeIfNull: false)
   int? get kmMILOn;
   @override
+  @JsonKey(includeIfNull: false)
   int? get minutesMILOn;
   @override
+  @JsonKey(defaultValue: [])
   List<String>? get milCodes;
   @override
+  @JsonKey(includeIfNull: false)
   double? get coolantTemperature;
   @override
+  @JsonKey(includeIfNull: false)
   double? get maf;
   @override
+  @JsonKey(includeIfNull: false)
   double? get oilTemperature;
   @override
+  @JsonKey(includeIfNull: false)
   double? get intakeAirTemperature;
   @override
+  @JsonKey(includeIfNull: false)
   double? get fuelPressure;
   @override
+  @JsonKey(includeIfNull: false)
   double? get absBaroPressure;
   @override
+  @JsonKey(includeIfNull: false)
   double? get manifoldPressureKpa;
   @override
   @JsonKey(ignore: true)

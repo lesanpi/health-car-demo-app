@@ -32,7 +32,7 @@ class VehicleStatusApi extends VehicleStatusDataSource {
     http.Response response;
     try {
       log(
-        '👷🏻 Create vehicle status $data Km for vehicle ${data.vehicle}',
+        '👷🏻 Create vehicle status $data Km for vehicle ${data.vehicle} ${jsonEncode(data.toJson())}',
         name: 'createVehicleStatus()',
       );
 

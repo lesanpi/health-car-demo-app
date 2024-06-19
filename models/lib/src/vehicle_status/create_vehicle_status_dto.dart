@@ -14,18 +14,18 @@ class CreateVehicleStatusDto with _$CreateVehicleStatusDto {
   /// {@macro create_vehicle_status}
   const factory CreateVehicleStatusDto({
     required String vehicle,
-    String? vin,
-    bool? milOn,
-    int? kmMILOn,
-    int? minutesMILOn,
-    List<String>? milCodes,
-    double? coolantTemperature,
-    double? maf,
-    double? oilTemperature,
-    double? intakeAirTemperature,
-    double? fuelPressure,
-    double? absBaroPressure,
-    double? manifoldPressureKpa,
+    @JsonKey(includeIfNull: false) String? vin,
+    @JsonKey(includeIfNull: false) bool? milOn,
+    @JsonKey(includeIfNull: false) int? kmMILOn,
+    @JsonKey(includeIfNull: false) int? minutesMILOn,
+    @JsonKey(defaultValue: []) List<String>? milCodes,
+    @JsonKey(includeIfNull: false) double? coolantTemperature,
+    @JsonKey(includeIfNull: false) double? maf,
+    @JsonKey(includeIfNull: false) double? oilTemperature,
+    @JsonKey(includeIfNull: false) double? intakeAirTemperature,
+    @JsonKey(includeIfNull: false) double? fuelPressure,
+    @JsonKey(includeIfNull: false) double? absBaroPressure,
+    @JsonKey(includeIfNull: false) double? manifoldPressureKpa,
   }) = _CreateVehicleStatusDto;
 
   factory CreateVehicleStatusDto.fromJson(Map<String, dynamic> json) =>

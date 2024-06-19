@@ -12,9 +12,9 @@ class VehicleStatus with _$VehicleStatus {
   const factory VehicleStatus({
     @JsonKey(name: '_id') required String id,
     required String vehicle,
-    required String vin,
+    @Default('') required String vin,
     required bool milOn,
-    required List<String> milCodes,
+    @Default([]) required List<String> milCodes,
     required double? coolantTemperature,
     required double? oilTemperature,
     required double? intakeAirTemperature,
