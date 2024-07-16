@@ -17,6 +17,9 @@ class AppTheme {
       selectionColor: Consts.primary.shade300.withOpacity(0.2),
       selectionHandleColor: Consts.primary.shade300.withOpacity(0.2),
     ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: Colors.white,
+    ),
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       linearMinHeight: 20,
       circularTrackColor: Colors.white,
@@ -150,7 +153,7 @@ class AppTheme {
         shadowColor: Consts.primary,
         foregroundColor: Consts.primary.shade300,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(15),
         ),
       ),
     ),

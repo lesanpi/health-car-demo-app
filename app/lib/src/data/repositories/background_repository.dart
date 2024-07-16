@@ -104,13 +104,20 @@ class BackgroundRepository extends IBackgroundRepository {
   }
 
   @override
+  Future<bool> isBackgroundProcessRunning() {
+    return FlutterForegroundTask.isRunningService;
+  }
+
+  @override
   Future<bool> isEnabled() async {
-    final locationAlways = await Permission.locationAlways.request();
+    final locationWhenInUse = await Permission.locationWhenInUse.status;
+    final locationAlways = await Permission.locationAlways.status;
     final bluetoothStatus = Platform.isIOS
-        ? await Permission.bluetooth.request()
+        ? await Permission.bluetooth.status
         : PermissionStatus.granted;
-    final bluetoothScanStatus = await Permission.bluetoothScan.request();
-    final bluetoothConnectStatus = await Permission.bluetoothConnect.request();
+    final bluetoothScanStatus = await Permission.bluetoothScan.status;
+    final bluetoothConnectStatus = await Permission.bluetoothConnect.status;
+    // final postNotificationStatus = await Permission.systemAlertWindow
     final status = await FlutterForegroundTask.checkNotificationPermission();
 
     return bluetoothStatus.isGranted &&
@@ -125,8 +132,8 @@ class BackgroundRepository extends IBackgroundRepository {
     final bluetoothStatus = await Permission.bluetooth.request();
     final bluetoothScanStatus = await Permission.bluetoothScan.request();
     final bluetoothConnectStatus = await Permission.bluetoothConnect.request();
-    final locationAlways = await Permission.locationAlways.request();
     final locationWhenUse = await Permission.locationWhenInUse.request();
+    final locationAlways = await Permission.locationAlways.request();
     final location = await Permission.location.request();
     final alertStatus = await Permission.systemAlertWindow.request();
     final batteryStatus = await Permission.ignoreBatteryOptimizations.request();

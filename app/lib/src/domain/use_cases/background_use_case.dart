@@ -26,6 +26,9 @@ class BackgroundUseCase {
     }
   }
 
+  Future<bool> isBackgroundProcessRunning() =>
+      backgroundRepository.isBackgroundProcessRunning();
+
   Future<void> initService() {
     return backgroundRepository.initService();
   }

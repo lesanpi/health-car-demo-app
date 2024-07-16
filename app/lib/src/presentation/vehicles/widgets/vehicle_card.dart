@@ -38,7 +38,7 @@ class VehicleCardContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
-      // color: Colors.cyan.shade50,
+      color: Colors.black.withOpacity(0),
       // color: Colors.cyan,
       shape: RoundedRectangleBorder(
         side: const BorderSide(

@@ -10,4 +10,6 @@ abstract class IBackgroundRepository {
   Future<void> initService();
 
   Future<void> requestPermissions();
+
+  Future<bool> isBackgroundProcessRunning();
 }

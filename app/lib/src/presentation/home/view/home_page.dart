@@ -6,8 +6,11 @@ import 'package:flutter_foreground_task/flutter_foreground_task.dart';
 import 'package:flutter_foreground_task/ui/with_foreground_task.dart';
 import 'package:health_car_demo_app/app/constant.dart';
 import 'package:health_car_demo_app/main_development.dart';
+import 'package:health_car_demo_app/src/domain/use_cases/background_use_case.dart';
 import 'package:health_car_demo_app/src/domain/use_cases/vehicles_use_case.dart';
+import 'package:health_car_demo_app/src/presentation/home/cubit/verify_brackground_task_cubit.dart';
 import 'package:health_car_demo_app/src/presentation/home/widgets/home_body.dart';
+import 'package:health_car_demo_app/src/presentation/home/widgets/permission_request_view.dart';
 import 'package:health_car_demo_app/src/presentation/vehicles/vehicles.dart';
 
 /// {@template home_page}
@@ -24,12 +27,21 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => VehiclesCubit(
-        VehiclesUseCase(
-          vehicleRepository: context.read(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => VehiclesCubit(
+            VehiclesUseCase(
+              vehicleRepository: context.read(),
+            ),
+          ),
         ),
-      ),
+        BlocProvider(
+          create: (context) => VerifyBrackgroundTaskCubit(
+            BackgroundUseCase(backgroundRepository: context.read()),
+          ),
+        ),
+      ],
       child: WithForegroundTask(
         child: Scaffold(
           appBar: AppBar(
@@ -45,6 +57,7 @@ class HomePage extends StatelessWidget {
             titleSpacing: Consts.margin * 1.5,
             centerTitle: false,
           ),
+          backgroundColor: Colors.white,
           body: const HomeView(),
         ),
       ),
@@ -61,6 +74,21 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const HomeBody();
+    return BlocListener<VerifyBrackgroundTaskCubit, VerifyBrackgroundTaskState>(
+      listener: (context, state) {
+        final enabled = state.enabled;
+        if (!enabled) {
+          showModalBottomSheet<void>(
+            context: context,
+            isScrollControlled: true,
+            useSafeArea: true,
+            builder: (context) {
+              return const PermissionRequestView();
+            },
+          );
+        }
+      },
+      child: const HomeBody(),
+    );
   }
 }

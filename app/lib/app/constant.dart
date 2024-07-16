@@ -37,6 +37,8 @@ class Consts {
   //   800: Color(0xFF050710),
   // });
 
+  static const blackBackground = Color(0xFF1E1E1E);
+
   static const errorColor = Color(0xFFF04438);
   static const int _error500 = 0xFFF04438;
   static MaterialColor error = const MaterialColor(

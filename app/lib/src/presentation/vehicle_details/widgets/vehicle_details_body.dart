@@ -374,7 +374,7 @@ class WhereIsMyCarSection extends StatelessWidget {
           const Gap(Consts.margin),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black.withOpacity(0.7),
+              backgroundColor: Colors.black.withOpacity(0.87),
             ),
             onPressed: () {
               Navigator.push(context, VehicleGpsTrackerPage.route(vehicle));
