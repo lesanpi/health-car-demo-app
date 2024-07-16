@@ -22,7 +22,7 @@ class _MapViewState extends State<MapView> {
 
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+    zoom: 18,
   );
   List<Marker> markerList = <Marker>[];
 
@@ -45,7 +45,7 @@ class _MapViewState extends State<MapView> {
                 location.lat,
                 location.long,
               ),
-              zoom: 19.151926040649414,
+              zoom: 18,
             ),
           ),
         );
