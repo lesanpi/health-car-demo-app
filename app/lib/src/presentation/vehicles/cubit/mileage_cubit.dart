@@ -33,7 +33,9 @@ class MileageCubit extends Cubit<MileageState> {
 
   /// A description for yourCustomFunction
   FutureOr<void> onStarted() async {
-    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+    emit(state.copyWith(
+        status:
+            !state.status.isSuccess ? FormzSubmissionStatus.inProgress : null));
     try {
       final data = await vehiclesUseCase.getLastReportOfVehicle(vehicleId);
 

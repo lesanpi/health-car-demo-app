@@ -74,6 +74,9 @@ class PermissionRequestView extends StatelessWidget {
                 context
                     .read<BackgroundProcessBloc>()
                     .add(const RequestPermissionPressed());
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context, true);
+                }
               },
               child: const Center(child: Text('Activar permisos')),
             ),

@@ -115,10 +115,29 @@ class BackgroundRepository extends IBackgroundRepository {
     final bluetoothStatus = Platform.isIOS
         ? await Permission.bluetooth.status
         : PermissionStatus.granted;
-    final bluetoothScanStatus = await Permission.bluetoothScan.status;
-    final bluetoothConnectStatus = await Permission.bluetoothConnect.status;
+    final bluetoothScanStatus = Platform.isIOS
+        ? PermissionStatus.granted
+        : await Permission.bluetoothScan.status;
+    final bluetoothConnectStatus = Platform.isIOS
+        ? PermissionStatus.granted
+        : await Permission.bluetoothConnect.status;
     // final postNotificationStatus = await Permission.systemAlertWindow
     final status = await FlutterForegroundTask.checkNotificationPermission();
+    log('locationWhenInUse: $locationWhenInUse ', name: 'BackgroundRepository');
+    log('locationAlways: $locationAlways ', name: 'BackgroundRepository');
+    log('bluetoothStatus: $bluetoothStatus ', name: 'BackgroundRepository');
+    log(
+      'bluetoothScanStatus: $bluetoothScanStatus ',
+      name: 'BackgroundRepository',
+    );
+    log(
+      'bluetoothConnectStatus: $bluetoothConnectStatus ',
+      name: 'BackgroundRepository',
+    );
+    log(
+      'ForegorundTask Status: $status ',
+      name: 'BackgroundRepository',
+    );
 
     return bluetoothStatus.isGranted &&
         bluetoothScanStatus.isGranted &&
@@ -129,9 +148,15 @@ class BackgroundRepository extends IBackgroundRepository {
 
   @override
   Future<void> requestPermissions() async {
-    final bluetoothStatus = await Permission.bluetooth.request();
-    final bluetoothScanStatus = await Permission.bluetoothScan.request();
-    final bluetoothConnectStatus = await Permission.bluetoothConnect.request();
+    final bluetoothStatus = Platform.isIOS
+        ? await Permission.bluetooth.request()
+        : PermissionStatus.granted;
+    final bluetoothScanStatus = Platform.isIOS
+        ? PermissionStatus.granted
+        : await Permission.bluetoothScan.request();
+    final bluetoothConnectStatus = Platform.isIOS
+        ? PermissionStatus.granted
+        : await Permission.bluetoothConnect.request();
     final locationWhenUse = await Permission.locationWhenInUse.request();
     final locationAlways = await Permission.locationAlways.request();
     final location = await Permission.location.request();
