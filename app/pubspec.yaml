@@ -4,7 +4,7 @@ version: 1.0.0+1
 publish_to: none
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   bloc: ^8.1.2
@@ -29,7 +29,6 @@ dependencies:
   models:
     path: ../models
   formz: ^0.7.0
-  carousel_slider: ^4.2.1
   newton_particles: ^0.1.7
   google_maps_flutter: ^2.2.8
   bloc_concurrency: ^0.2.5
@@ -40,7 +39,6 @@ dependencies:
   timeago: ^3.6.1
   auto_size_text: ^3.0.0
   fluentui_icons: ^1.0.0
-    
 
 dev_dependencies:
   bloc_test: ^9.1.2

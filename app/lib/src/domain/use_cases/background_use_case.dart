@@ -57,6 +57,7 @@ class BackgroundUseCase {
         final vehicleId = element.vehicleId;
         final kilometers = element.kilometers;
         final scannerData = element.scannerData;
+        final hasGpsSignal = element.hasGpsSignal;
         log(
           'Scanner data $scannerData',
           name: 'BackgroundUseCase',

@@ -1,3 +1,5 @@
+import 'dart:math' show atan2, cos, pi, sin, sqrt;
+
 import 'package:backend/controller/mapObjectId.dart';
 import 'package:backend/db/database_connection.dart';
 import 'package:data_sources/data_sources.dart';
@@ -19,15 +21,28 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   Future<ReportMileage> createReport(CreateReportDto data) async {
     try {
       final collection = _databaseConnection.db.collection('reportMileage');
+      final hasGpsSignal = data.hasGpsSignal;
+      var dataInput = data;
       print('Data received createReport: ${data.toJson()}');
+
+      if (!hasGpsSignal) {
+        // Calculate distance if no GPS signal
+        final lastReport = await getLastReportOfVehicle(data.vehicle);
+        final distance =
+            calculateDistance(lastReport.geolocation, data.geolocation);
+        dataInput = dataInput.copyWith(
+          mileage: data.mileage + distance,
+        ); // Add calculated distance to mileage
+      }
+
       final result = await collection.insertOne(
         {
-          // ...data.toJson(),
-          'vehicle': data.vehicle,
-          'mileage': data.mileage,
-          'channel': data.channel,
-          'device': data.device,
-          'geolocation': data.geolocation?.toJson(),
+          'vehicle': dataInput.vehicle,
+          'mileage': dataInput.mileage,
+          'channel': dataInput.channel,
+          'hasGpsSignal': hasGpsSignal,
+          'device': dataInput.device,
+          'geolocation': dataInput.geolocation?.toJson(),
           'createdAt': DateTime.now().toUtc().toIso8601String(),
         },
       );
@@ -194,5 +209,35 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
     } finally {
       // await _databaseConnection.close();
     }
+  }
+
+  int calculateDistance(Geolocation? from, Geolocation? to) {
+    if (from == null || to == null) {
+      return 0; // Handle null values
+    }
+
+    const earthRadius = 6371000.0; // Earth's radius in meters
+
+    final lat1 = from.lat * pi / 180;
+    final lon1 = from.long * pi / 180;
+    final lat2 = to.lat * pi / 180;
+    final lon2 = to.long * pi / 180;
+
+    final dLat = lat2 - lat1;
+    final dLon = lon2 - lon1;
+
+    final a = sin(dLat / 2) * sin(dLat / 2) +
+        cos(lat1) * cos(lat2) * sin(dLon / 2) * sin(dLon / 2);
+    final c = 2 *
+        atan2(
+          sqrt(a),
+          sqrt(
+            1 - a,
+          ),
+        );
+
+    final distance = earthRadius * c;
+
+    return (distance / 1000).toInt();
   }
 }

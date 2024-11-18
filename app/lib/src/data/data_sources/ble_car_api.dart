@@ -14,6 +14,10 @@ class BleCarApi {
   /// Characteristics
   static const String kilometersCharacteristicUUID =
       'beb5483e-36e1-4688-b7f5-ea07361b26a8';
+
+  static const String hasGpsSignalCharacteristicUUID =
+      'beb5483e-36e1-4688-b7f5-ea07361b26c8';
+
   static const String vehiculeIdCharacteristicUUID =
       'beb5483e-36e1-4688-b7f5-ea07361b26a9';
 
@@ -113,6 +117,26 @@ class BleCarApi {
     }
   }
 
+  static Future<bool> extractHasSignalValue(
+    BluetoothCharacteristic characteristic,
+  ) async {
+    try {
+      if (characteristic.characteristicUuid.toString() !=
+          hasGpsSignalCharacteristicUUID) {
+        throw Exception();
+      }
+      if (!characteristic.properties.read) throw Exception();
+
+      final value = await characteristic.read();
+      final bytes = Uint8List.fromList(value);
+      final byteData = ByteData.view(bytes.buffer);
+      final integerValueLitle = byteData.getUint32(0, Endian.little);
+      return integerValueLitle == 1;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   static Future<IotDeviceInfo> extractDeviceInfoFromService(
     BluetoothService bluetoothService,
   ) async {
@@ -131,6 +155,7 @@ class BleCarApi {
     );
     String? vehicleId;
     int? kilometers;
+    var hasGpsSignal = false;
     CreateVehicleStatusDto? vehicleStatusData;
 
     for (final c in characteristics) {
@@ -142,6 +167,13 @@ class BleCarApi {
         vehicleId = await extractVehicleIdValue(c);
         log(
           'Vehicle id $vehicleId',
+          name: '$_name.extractDeviceInfoFromService',
+        );
+      }
+      if (c.isHasGpsSignalCharacteristic) {
+        hasGpsSignal = await extractHasSignalValue(c);
+        log(
+          'Has gps signal $hasGpsSignal',
           name: '$_name.extractDeviceInfoFromService',
         );
       }
@@ -165,6 +197,7 @@ class BleCarApi {
     return IotDeviceInfo(
       kilometers: kilometers,
       vehicleId: vehicleId,
+      hasGpsSignal: hasGpsSignal,
       scannerStatus: vehicleStatusData,
     );
   }
@@ -273,6 +306,9 @@ class BleCarApi {
 extension CharacteristicsExtension on BluetoothCharacteristic {
   bool get isVehicleIdCharacteristic =>
       characteristicUuid.toString() == BleCarApi.vehiculeIdCharacteristicUUID;
+
+  bool get isHasGpsSignalCharacteristic =>
+      characteristicUuid.toString() == BleCarApi.hasGpsSignalCharacteristicUUID;
 
   bool get isScannerVehicleCharacteristic =>
       characteristicUuid.toString() ==

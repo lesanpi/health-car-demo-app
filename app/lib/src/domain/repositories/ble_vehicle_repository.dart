@@ -23,6 +23,7 @@ class IBleVehiculeRepository {
             kilometers: e.kilometers,
             vehicleId: e.vehicleId,
             scannerData: e.scannerStatus,
+            hasGpsSignal: e.hasGpsSignal,
           ),
         )
         .toList();

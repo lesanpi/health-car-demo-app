@@ -248,10 +248,10 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2024-07-15T16:10:05.970425Z",
+  "generated": "2024-11-13T16:05:57.938171Z",
   "generator": "pub",
-  "generatorVersion": "3.4.0",
+  "generatorVersion": "3.5.3",
   "flutterRoot": "file:///Users/lesanpi/dev/flutter",
-  "flutterVersion": "3.22.0",
+  "flutterVersion": "3.24.3",
   "pubCache": "file:///Users/lesanpi/.pub-cache"
 }

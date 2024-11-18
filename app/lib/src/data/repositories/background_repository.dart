@@ -54,6 +54,7 @@ class BackgroundRepository extends IBackgroundRepository {
         'Starting service...',
         name: name,
       );
+      await initService();
       final result = await FlutterForegroundTask.startService(
         notificationTitle: 'Foreground Service is running',
         notificationText: 'Tap to return to the app',
@@ -77,7 +78,8 @@ class BackgroundRepository extends IBackgroundRepository {
       androidNotificationOptions: AndroidNotificationOptions(
         id: 500,
         // foregroundServiceType: AndroidForegroundServiceType.CONNECTED_DEVICE,
-        foregroundServiceType: AndroidForegroundServiceType.LOCATION,
+        // foregroundServiceType: AndroidForegroundServiceType.LOCATION,
+
         channelId: 'foreground_service',
         channelName: 'Foreground Service Notification',
         channelDescription:

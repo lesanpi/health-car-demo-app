@@ -93,6 +93,8 @@ class VehicleDetailsBody extends StatelessWidget {
                         ),
                         const Gap(Consts.padding),
                         const TotalDistanceTraveledInfo(),
+                        const Gap(Consts.padding),
+                        const LastMileageUpdate(),
                       ],
                     ),
                   ),
@@ -175,6 +177,54 @@ class TotalDistanceTraveledInfo extends StatelessWidget {
   }
 }
 
+class LastMileageUpdate extends StatelessWidget {
+  const LastMileageUpdate({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MileageCubit, MileageState>(
+      builder: (context, state) {
+        final data = state.data;
+        final mileage = data?.mileage;
+        final createdAt = data?.createdAt;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (createdAt == null)
+              Text(
+                '--',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                      // letterSpacing: 0,
+                    ),
+              )
+            else
+              Text(
+                '${timeago.format(createdAt, locale: 'es')} ',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                      // letterSpacing: 0,
+                    ),
+              ),
+            Text(
+              'Ultima actualización de Km',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  // fontSize: 25,
+                  // fontWeight: FontWeight.w400,
+                  // letterSpacing: 0,
+                  ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
 class VehicleStatusCards extends StatelessWidget {
   const VehicleStatusCards({super.key});
 
@@ -213,7 +263,7 @@ class VehicleStatusCards extends StatelessWidget {
                           ? '--'
                           : timeago.format(
                               data.createdAt,
-                              locale: 'en_short',
+                              locale: 'es',
                             ),
                       description: 'Ult. vez',
                       icon: const Icon(

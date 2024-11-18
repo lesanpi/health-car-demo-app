@@ -25,6 +25,7 @@ mixin _$CreateReportDto {
   String get channel => throw _privateConstructorUsedError;
   String get device => throw _privateConstructorUsedError;
   Geolocation? get geolocation => throw _privateConstructorUsedError;
+  bool get hasGpsSignal => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +44,8 @@ abstract class $CreateReportDtoCopyWith<$Res> {
       int mileage,
       String channel,
       String device,
-      Geolocation? geolocation});
+      Geolocation? geolocation,
+      bool hasGpsSignal});
 
   $GeolocationCopyWith<$Res>? get geolocation;
 }
@@ -66,6 +68,7 @@ class _$CreateReportDtoCopyWithImpl<$Res, $Val extends CreateReportDto>
     Object? channel = null,
     Object? device = null,
     Object? geolocation = freezed,
+    Object? hasGpsSignal = null,
   }) {
     return _then(_value.copyWith(
       vehicle: null == vehicle
@@ -88,6 +91,10 @@ class _$CreateReportDtoCopyWithImpl<$Res, $Val extends CreateReportDto>
           ? _value.geolocation
           : geolocation // ignore: cast_nullable_to_non_nullable
               as Geolocation?,
+      hasGpsSignal: null == hasGpsSignal
+          ? _value.hasGpsSignal
+          : hasGpsSignal // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -117,7 +124,8 @@ abstract class _$$CreateReportDtoImplCopyWith<$Res>
       int mileage,
       String channel,
       String device,
-      Geolocation? geolocation});
+      Geolocation? geolocation,
+      bool hasGpsSignal});
 
   @override
   $GeolocationCopyWith<$Res>? get geolocation;
@@ -139,6 +147,7 @@ class __$$CreateReportDtoImplCopyWithImpl<$Res>
     Object? channel = null,
     Object? device = null,
     Object? geolocation = freezed,
+    Object? hasGpsSignal = null,
   }) {
     return _then(_$CreateReportDtoImpl(
       vehicle: null == vehicle
@@ -161,6 +170,10 @@ class __$$CreateReportDtoImplCopyWithImpl<$Res>
           ? _value.geolocation
           : geolocation // ignore: cast_nullable_to_non_nullable
               as Geolocation?,
+      hasGpsSignal: null == hasGpsSignal
+          ? _value.hasGpsSignal
+          : hasGpsSignal // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -173,7 +186,8 @@ class _$CreateReportDtoImpl implements _CreateReportDto {
       required this.mileage,
       this.channel = '',
       this.device = '',
-      this.geolocation});
+      this.geolocation,
+      this.hasGpsSignal = false});
 
   factory _$CreateReportDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$CreateReportDtoImplFromJson(json);
@@ -190,10 +204,13 @@ class _$CreateReportDtoImpl implements _CreateReportDto {
   final String device;
   @override
   final Geolocation? geolocation;
+  @override
+  @JsonKey()
+  final bool hasGpsSignal;
 
   @override
   String toString() {
-    return 'CreateReportDto(vehicle: $vehicle, mileage: $mileage, channel: $channel, device: $device, geolocation: $geolocation)';
+    return 'CreateReportDto(vehicle: $vehicle, mileage: $mileage, channel: $channel, device: $device, geolocation: $geolocation, hasGpsSignal: $hasGpsSignal)';
   }
 
   @override
@@ -206,13 +223,15 @@ class _$CreateReportDtoImpl implements _CreateReportDto {
             (identical(other.channel, channel) || other.channel == channel) &&
             (identical(other.device, device) || other.device == device) &&
             (identical(other.geolocation, geolocation) ||
-                other.geolocation == geolocation));
+                other.geolocation == geolocation) &&
+            (identical(other.hasGpsSignal, hasGpsSignal) ||
+                other.hasGpsSignal == hasGpsSignal));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, vehicle, mileage, channel, device, geolocation);
+  int get hashCode => Object.hash(runtimeType, vehicle, mileage, channel,
+      device, geolocation, hasGpsSignal);
 
   @JsonKey(ignore: true)
   @override
@@ -235,7 +254,8 @@ abstract class _CreateReportDto implements CreateReportDto {
       required final int mileage,
       final String channel,
       final String device,
-      final Geolocation? geolocation}) = _$CreateReportDtoImpl;
+      final Geolocation? geolocation,
+      final bool hasGpsSignal}) = _$CreateReportDtoImpl;
 
   factory _CreateReportDto.fromJson(Map<String, dynamic> json) =
       _$CreateReportDtoImpl.fromJson;
@@ -250,6 +270,8 @@ abstract class _CreateReportDto implements CreateReportDto {
   String get device;
   @override
   Geolocation? get geolocation;
+  @override
+  bool get hasGpsSignal;
   @override
   @JsonKey(ignore: true)
   _$$CreateReportDtoImplCopyWith<_$CreateReportDtoImpl> get copyWith =>

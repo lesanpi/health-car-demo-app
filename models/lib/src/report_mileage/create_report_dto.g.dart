@@ -16,6 +16,7 @@ _$CreateReportDtoImpl _$$CreateReportDtoImplFromJson(
       geolocation: json['geolocation'] == null
           ? null
           : Geolocation.fromJson(json['geolocation'] as Map<String, dynamic>),
+      hasGpsSignal: json['hasGpsSignal'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$CreateReportDtoImplToJson(
@@ -26,4 +27,5 @@ Map<String, dynamic> _$$CreateReportDtoImplToJson(
       'channel': instance.channel,
       'device': instance.device,
       'geolocation': instance.geolocation,
+      'hasGpsSignal': instance.hasGpsSignal,
     };

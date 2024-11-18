@@ -20,6 +20,7 @@ class CreateReportDto with _$CreateReportDto {
     @Default('') String channel,
     @Default('') String device,
     Geolocation? geolocation,
+    @Default(false) bool hasGpsSignal,
   }) = _CreateReportDto;
 
   /// Creates a CreateReportDto from Json map
