@@ -30,6 +30,7 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
         final lastReport = await getLastReportOfVehicle(data.vehicle);
         final distance =
             calculateDistance(lastReport.geolocation, data.geolocation);
+        print('Distance updated $distance');
         dataInput = dataInput.copyWith(
           mileage: data.mileage + distance,
         ); // Add calculated distance to mileage

@@ -25,7 +25,7 @@ class VehicleStatusApi extends VehicleStatusDataSource {
 
   @override
   Future<VehicleStatus> create(CreateVehicleStatusDto data) async {
-    final uri = Uri.https(
+    final uri = Uri.http(
       _apiHost,
       VehicleStatusEndpoints.index,
     );
@@ -79,7 +79,7 @@ class VehicleStatusApi extends VehicleStatusDataSource {
 
   @override
   Future<VehicleStatus> getLastVehicleStatus(String vehicleId) async {
-    final uri = Uri.https(
+    final uri = Uri.http(
       _apiHost,
       '${VehicleStatusEndpoints.index}/$vehicleId',
     );
