@@ -19,6 +19,7 @@ class VehicleDataSourceImpl extends VehicleDataSource {
   @override
   Future<Vehicle> create(CreateVehicleDto data) async {
     try {
+      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('vehicles');
 
       final result = await collection.insertOne({
@@ -33,12 +34,15 @@ class VehicleDataSourceImpl extends VehicleDataSource {
       return Vehicle.fromJson(vehicleDocument);
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
-    } finally {}
+    } finally {
+      await _databaseConnection.close();
+    }
   }
 
   @override
   Future<OperationResultDto> deleteVehicle(String id) async {
     try {
+      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('vehicles');
       final result =
           await collection.deleteOne(where.id(ObjectId.fromHexString(id)));
@@ -48,12 +52,15 @@ class VehicleDataSourceImpl extends VehicleDataSource {
       );
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
-    } finally {}
+    } finally {
+      await _databaseConnection.close();
+    }
   }
 
   @override
   Future<List<Vehicle>> getAllVehicles() async {
     try {
+      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('vehicles');
       final result = await collection.find().toList();
 
@@ -69,12 +76,15 @@ class VehicleDataSourceImpl extends VehicleDataSource {
       return vehicles;
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
-    } finally {}
+    } finally {
+      await _databaseConnection.close();
+    }
   }
 
   @override
   Future<Vehicle> getVehicleById(String id) async {
     try {
+      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('vehicles');
       final result =
           await collection.findOne(where.id(ObjectId.fromHexString(id)));
@@ -100,7 +110,9 @@ class VehicleDataSourceImpl extends VehicleDataSource {
       rethrow;
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
-    } finally {}
+    } finally {
+      await _databaseConnection.close();
+    }
   }
 
   @override
@@ -115,6 +127,7 @@ class VehicleDataSourceImpl extends VehicleDataSource {
   @override
   Future<ReportMileage> getLastReportLocationOfVehicle(String vehicleId) async {
     try {
+      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('reportMileage');
 
       final result = await collection.findOne(
@@ -147,6 +160,7 @@ class VehicleDataSourceImpl extends VehicleDataSource {
     } on HttpException {
       rethrow;
     } catch (e) {
+      await _databaseConnection.close();
       throw InternalServerException('Unexpected error: $e');
     }
   }

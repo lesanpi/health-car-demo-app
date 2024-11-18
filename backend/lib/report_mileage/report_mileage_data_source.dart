@@ -20,6 +20,7 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   @override
   Future<ReportMileage> createReport(CreateReportDto data) async {
     try {
+      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('reportMileage');
       final hasGpsSignal = data.hasGpsSignal;
       var dataInput = data;
@@ -66,12 +67,15 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
       rethrow;
     } catch (e, s) {
       throw InternalServerException('Unexpected error: $e, $s');
+    } finally {
+      await _databaseConnection.close();
     }
   }
 
   @override
   Future<OperationResultDto> deleteReport(String id) async {
     try {
+      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('reportMileage');
       final result =
           await collection.deleteOne(where.id(ObjectId.fromHexString(id)));
@@ -84,12 +88,15 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
       rethrow;
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
+    } finally {
+      await _databaseConnection.close();
     }
   }
 
   @override
   Future<List<ReportMileage>> getAllReports() async {
     try {
+      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('reportMileage');
       final result = await collection.find().toList();
 
@@ -114,12 +121,16 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
       rethrow;
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
+    } finally {
+      await _databaseConnection.close();
     }
   }
 
   @override
   Future<List<ReportMileage>> getAllReportsByVehicle(String vehicleId) async {
     try {
+      await _databaseConnection.connect();
+
       final collection = _databaseConnection.db.collection('reportMileage');
       final result = await collection
           .find(where.eq('vehicle', vehicleId).sortBy('createdAt'))
@@ -138,12 +149,15 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
       rethrow;
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
+    } finally {
+      await _databaseConnection.close();
     }
   }
 
   @override
   Future<ReportMileage> getLastReportOfVehicle(String vehicleId) async {
     try {
+      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('reportMileage');
 
       final result = await collection.findOne(
@@ -176,12 +190,16 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
       throw InternalServerException('Unexpected error: $e');
 
       // await _databaseConnection.close();
+    } finally {
+      await _databaseConnection.close();
     }
   }
 
   @override
   Future<ReportMileage> getReportById(String id) async {
     try {
+      await _databaseConnection.connect();
+
       final collection = _databaseConnection.db.collection('reportMileage');
       final result =
           await collection.findOne(where.id(ObjectId.fromHexString(id)));
@@ -208,7 +226,7 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
     } finally {
-      // await _databaseConnection.close();
+      await _databaseConnection.close();
     }
   }
 
