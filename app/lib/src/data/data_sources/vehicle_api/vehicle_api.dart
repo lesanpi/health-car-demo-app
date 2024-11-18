@@ -32,7 +32,7 @@ class VehicleApi extends VehicleDataSource {
 
   @override
   Future<List<Vehicle>> getAllVehicles() async {
-    final uri = Uri.http(
+    final uri = Uri.https(
       _apiHost,
       VehicleEndpoints.index,
     );
@@ -83,7 +83,7 @@ class VehicleApi extends VehicleDataSource {
 
   @override
   Future<ReportMileage> getLastReportLocationOfVehicle(String vehicleId) async {
-    final uri = Uri.http(
+    final uri = Uri.https(
       _apiHost,
       '${VehicleEndpoints.vehicleLocationEndpoints}/$vehicleId',
     );

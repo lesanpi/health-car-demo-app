@@ -21,7 +21,7 @@ class ReportMileageApi extends ReportMileageDataSource {
 
   @override
   Future<ReportMileage> createReport(CreateReportDto data) async {
-    final uri = Uri.http(
+    final uri = Uri.https(
       _apiHost,
       ReportMileageEndpoints.reportsEndpoints,
     );
@@ -70,7 +70,7 @@ class ReportMileageApi extends ReportMileageDataSource {
 
   @override
   Future<List<ReportMileage>> getAllReportsByVehicle(String vehicleId) async {
-    final uri = Uri.http(
+    final uri = Uri.https(
       _apiHost,
       ReportMileageEndpoints.reportsEndpoints,
     ).replace(
@@ -120,7 +120,7 @@ class ReportMileageApi extends ReportMileageDataSource {
 
   @override
   Future<ReportMileage> getLastReportOfVehicle(String vehicleId) async {
-    final uri = Uri.http(
+    final uri = Uri.https(
       _apiHost,
       '${ReportMileageEndpoints.vehicleStatusEndpoints}/$vehicleId',
     );
@@ -164,7 +164,7 @@ class ReportMileageApi extends ReportMileageDataSource {
 
   @override
   Future<ReportMileage> getReportById(String id) async {
-    final uri = Uri.http(
+    final uri = Uri.https(
       _apiHost,
       ReportMileageEndpoints.vehicleStatusEndpoints,
     );
