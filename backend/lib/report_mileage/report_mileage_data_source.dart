@@ -1,4 +1,7 @@
+import 'dart:convert';
 import 'dart:math' show atan2, cos, pi, sin, sqrt;
+import 'package:dotenv/dotenv.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:backend/controller/mapObjectId.dart';
 import 'package:backend/db/database_connection.dart';
@@ -6,6 +9,8 @@ import 'package:data_sources/data_sources.dart';
 import 'package:exceptions/exceptions.dart';
 import 'package:models/models.dart';
 import 'package:mongo_dart/mongo_dart.dart';
+
+final env = DotEnv(includePlatformEnvironment: true)..load(['variables.env']);
 
 /// {@template report_mileage_data_source}
 /// Report Mileage data source implementation for backend
@@ -17,24 +22,58 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
   }) : _databaseConnection = databaseConnection;
   final DatabaseConnection _databaseConnection;
 
+  /// Get distance using google maps
+  Future<double> getDistanceByGoogleMaps(
+    String origin,
+    String destination,
+  ) async {
+    final apiKey = env['GOOGLE_MAPS_API_KEY'] ?? '';
+    // Replace with your API key
+
+    final url = Uri.parse(
+      'https://maps.googleapis.com/maps/api/directions/json?origin=$origin&destination=$destination&mode=driving&key=$apiKey',
+    );
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final distance = data['routes'][0]['legs'][0]['distance']['value'] as int;
+      return distance / 1000;
+    } else {
+      throw Exception('Failed to fetch distance');
+    }
+  }
+
   @override
   Future<ReportMileage> createReport(CreateReportDto data) async {
     try {
-      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('reportMileage');
       final hasGpsSignal = data.hasGpsSignal;
       var dataInput = data;
       print('Data received createReport: ${data.toJson()}');
 
       if (!hasGpsSignal) {
-        // Calculate distance if no GPS signal
-        final lastReport = await getLastReportOfVehicle(data.vehicle);
-        final distance =
-            calculateDistance(lastReport.geolocation, data.geolocation);
-        print('Distance updated $distance');
-        dataInput = dataInput.copyWith(
-          mileage: data.mileage + distance,
-        ); // Add calculated distance to mileage
+        try {
+          // Calculate distance if no GPS signal
+          final lastReport = await getLastReportOfVehicle(data.vehicle);
+          print('Last report geolocation ${lastReport.geolocation}');
+          print('Current report geolocation ${data.geolocation}');
+          final lastReportGeo = lastReport.geolocation;
+          final currentGeo = data.geolocation;
+          final distance = await getDistanceByGoogleMaps(
+            '${lastReportGeo?.lat},${lastReportGeo?.long}',
+            '${currentGeo?.lat},${currentGeo?.long}',
+          );
+
+          // calculateDistance(lastReport.geolocation, data.geolocation);
+          print('Distance between lastReport and current $distance');
+          dataInput = dataInput.copyWith(
+            mileage: data.mileage + (distance.toInt()),
+          );
+        } catch (e) {
+          print('Error calculating distance in offline mode $e');
+        } // Add calculated distance to mileage
       }
 
       final result = await collection.insertOne(
@@ -67,15 +106,12 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
       rethrow;
     } catch (e, s) {
       throw InternalServerException('Unexpected error: $e, $s');
-    } finally {
-      await _databaseConnection.close();
-    }
+    } finally {}
   }
 
   @override
   Future<OperationResultDto> deleteReport(String id) async {
     try {
-      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('reportMileage');
       final result =
           await collection.deleteOne(where.id(ObjectId.fromHexString(id)));
@@ -88,15 +124,12 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
       rethrow;
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
-    } finally {
-      await _databaseConnection.close();
-    }
+    } finally {}
   }
 
   @override
   Future<List<ReportMileage>> getAllReports() async {
     try {
-      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('reportMileage');
       final result = await collection.find().toList();
 
@@ -121,16 +154,12 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
       rethrow;
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
-    } finally {
-      await _databaseConnection.close();
-    }
+    } finally {}
   }
 
   @override
   Future<List<ReportMileage>> getAllReportsByVehicle(String vehicleId) async {
     try {
-      await _databaseConnection.connect();
-
       final collection = _databaseConnection.db.collection('reportMileage');
       final result = await collection
           .find(where.eq('vehicle', vehicleId).sortBy('createdAt'))
@@ -149,15 +178,12 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
       rethrow;
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
-    } finally {
-      await _databaseConnection.close();
-    }
+    } finally {}
   }
 
   @override
   Future<ReportMileage> getLastReportOfVehicle(String vehicleId) async {
     try {
-      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('reportMileage');
 
       final result = await collection.findOne(
@@ -189,17 +215,13 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
 
-      // await _databaseConnection.close();
-    } finally {
-      await _databaseConnection.close();
-    }
+      //
+    } finally {}
   }
 
   @override
   Future<ReportMileage> getReportById(String id) async {
     try {
-      await _databaseConnection.connect();
-
       final collection = _databaseConnection.db.collection('reportMileage');
       final result =
           await collection.findOne(where.id(ObjectId.fromHexString(id)));
@@ -225,9 +247,7 @@ class ReportMileageDataSourceImpl extends ReportMileageDataSource {
       rethrow;
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
-    } finally {
-      await _databaseConnection.close();
-    }
+    } finally {}
   }
 
   int calculateDistance(Geolocation? from, Geolocation? to) {

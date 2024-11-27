@@ -21,7 +21,6 @@ class VehicleStatusDataSourceImpl extends VehicleStatusDataSource {
   @override
   Future<VehicleStatus> create(CreateVehicleStatusDto data) async {
     try {
-      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('vehicleStatus');
 
       final result = await collection.insertOne({
@@ -37,16 +36,12 @@ class VehicleStatusDataSourceImpl extends VehicleStatusDataSource {
       return VehicleStatus.fromJson(vehicleDocument);
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
-    } finally {
-      await _databaseConnection.close();
-    }
+    } finally {}
   }
 
   @override
   Future<OperationResultDto> deleteVehicleStatus(String id) async {
     try {
-      await _databaseConnection.connect();
-
       final collection = _databaseConnection.db.collection('vehicleStatus');
       final result =
           await collection.deleteOne(where.id(ObjectId.fromHexString(id)));
@@ -56,9 +51,7 @@ class VehicleStatusDataSourceImpl extends VehicleStatusDataSource {
       );
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
-    } finally {
-      await _databaseConnection.close();
-    }
+    } finally {}
   }
 
   @override
@@ -66,7 +59,6 @@ class VehicleStatusDataSourceImpl extends VehicleStatusDataSource {
     String vehicle,
   ) async {
     try {
-      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('vehicleStatus');
       final result = await collection
           .find(
@@ -90,15 +82,12 @@ class VehicleStatusDataSourceImpl extends VehicleStatusDataSource {
       rethrow;
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
-    } finally {
-      await _databaseConnection.close();
-    }
+    } finally {}
   }
 
   @override
   Future<VehicleStatus> getLastVehicleStatus(String vehicleId) async {
     try {
-      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('vehicleStatus');
       final result = await collection.findOne(
         where.eq('vehicle', vehicleId).sortBy(
@@ -129,15 +118,12 @@ class VehicleStatusDataSourceImpl extends VehicleStatusDataSource {
       rethrow;
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
-    } finally {
-      await _databaseConnection.close();
-    }
+    } finally {}
   }
 
   @override
   Future<VehicleStatus> getVehicleStatusById(String id) async {
     try {
-      await _databaseConnection.connect();
       final collection = _databaseConnection.db.collection('vehicleStatus');
       final result =
           await collection.findOne(where.id(ObjectId.fromHexString(id)));
@@ -163,8 +149,6 @@ class VehicleStatusDataSourceImpl extends VehicleStatusDataSource {
       rethrow;
     } catch (e) {
       throw InternalServerException('Unexpected error: $e');
-    } finally {
-      await _databaseConnection.close();
-    }
+    } finally {}
   }
 }

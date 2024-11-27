@@ -66,6 +66,31 @@ class BleCarApi {
     }
   }
 
+  static Future<void> updateCharacteristicInt({
+    required BluetoothCharacteristic characteristic,
+    required int value,
+  }) async {
+    // Convertimos el número entero a un array de bytes (Uint8List)
+    final bytes = intToBytes(value);
+
+    try {
+      log(
+        '🚀 Updating characteristic value $value $bytes',
+        name: '$_name.updateCharacteristicInt',
+      );
+      await characteristic.write(bytes);
+      log(
+        '✅ Characterictic value updated to $value.',
+        name: '$_name.updateCharacteristicInt',
+      );
+    } catch (e) {
+      log(
+        '❌Error updating characteristic: $e',
+        name: '$_name.updateCharacteristicInt',
+      );
+    }
+  }
+
   static Future<CreateVehicleStatusDto?> extractVehicleStatusValue(
     BluetoothCharacteristic characteristic,
   ) async {
@@ -108,9 +133,11 @@ class BleCarApi {
       if (!characteristic.properties.read) throw Exception();
 
       final value = await characteristic.read();
+
       final bytes = Uint8List.fromList(value);
       final byteData = ByteData.view(bytes.buffer);
       final integerValueLitle = byteData.getUint32(0, Endian.little);
+
       return integerValueLitle;
     } catch (e) {
       rethrow;
@@ -139,6 +166,7 @@ class BleCarApi {
 
   static Future<IotDeviceInfo> extractDeviceInfoFromService(
     BluetoothService bluetoothService,
+    BluetoothDevice device,
   ) async {
     final characteristics = bluetoothService.characteristics
         .where(
@@ -150,7 +178,7 @@ class BleCarApi {
         .toList();
 
     log(
-      'Characteristics ${characteristics.map((e) => e.characteristicUuid.toString()).toList()}',
+      '🚀 Extract Device Info from device ${device.remoteId.str}',
       name: '$_name.extractDeviceInfoFromService',
     );
     String? vehicleId;
@@ -159,10 +187,6 @@ class BleCarApi {
     CreateVehicleStatusDto? vehicleStatusData;
 
     for (final c in characteristics) {
-      log(
-        'Characteristic ${c.characteristicUuid} IS ID ? ${c.isVehicleIdCharacteristic}, IS KM ? ${c.isVehicleKilometersCharacteristic}',
-        name: '$_name.extractDeviceInfoFromService',
-      );
       if (c.isVehicleIdCharacteristic) {
         vehicleId = await extractVehicleIdValue(c);
         log(
@@ -199,6 +223,7 @@ class BleCarApi {
       vehicleId: vehicleId,
       hasGpsSignal: hasGpsSignal,
       scannerStatus: vehicleStatusData,
+      device: device,
     );
   }
 
@@ -280,7 +305,8 @@ class BleCarApi {
           (element) => element.serviceUuid.toString() == vehicleServiceUUID,
         );
         // final scannerData = await extractScannerData(service);
-        final iotDeviceInfo = await extractDeviceInfoFromService(service);
+        final iotDeviceInfo =
+            await extractDeviceInfoFromService(service, device);
         log(
           'Data Scanner ${iotDeviceInfo.scannerStatus}',
           name: '$_name.researchDevice',
@@ -301,6 +327,64 @@ class BleCarApi {
     }
     return null;
   }
+
+  static Future<void> updateMileage({
+    required BluetoothDevice device,
+    required int mileage,
+  }) async {
+    await device.connect();
+    await device.connectionState
+        .where((val) => val == BluetoothConnectionState.connected)
+        .first;
+    log(
+      '✅🔥 ${device.remoteId}: "${device.advName}" connected!',
+      name: '$_name.updateMileage',
+    );
+
+    log(
+      '🚀 Lets update mileage to $mileage',
+      name: '$_name.updateMileage',
+    );
+    final services = await device.discoverServices();
+    final containService = services.any(
+      (element) => element.serviceUuid.toString() == vehicleServiceUUID,
+    );
+    log(
+      'Device Contain service ${containService ? '✅' : '❌'}',
+      name: '$_name.updateMileage',
+    );
+
+    if (containService) {
+      final service = services.firstWhere(
+        (element) => element.serviceUuid.toString() == vehicleServiceUUID,
+      );
+      // final scannerData = await extractScannerData(service);
+      final iotDeviceInfo = await extractDeviceInfoFromService(service, device);
+      log(
+        '🚗 Current Device kilometers ${iotDeviceInfo.kilometers} km',
+        name: '$_name.updateMileage',
+      );
+      final characteristics = service.characteristics
+          .where((e) => e.isVehicleKilometersCharacteristic)
+          .toList();
+      if (characteristics.isNotEmpty) {
+        await updateCharacteristicInt(
+          characteristic: characteristics.first,
+          value: mileage,
+        );
+      }
+      // updateCharacteristicInt()
+      await disconnectFromDevice(device);
+    }
+    await device.disconnect();
+    await device.connectionState
+        .where((val) => val == BluetoothConnectionState.disconnected)
+        .first;
+    log(
+      '🔌 Disconnect ${device.remoteId}: "${device.advName}"',
+      name: '$_name.updateMileage',
+    );
+  }
 }
 
 extension CharacteristicsExtension on BluetoothCharacteristic {
@@ -316,4 +400,16 @@ extension CharacteristicsExtension on BluetoothCharacteristic {
 
   bool get isVehicleKilometersCharacteristic =>
       characteristicUuid.toString() == BleCarApi.kilometersCharacteristicUUID;
+}
+
+extension IntToBytesExtension on int {
+  List<int> toBytes([Endian endian = Endian.little]) {
+    return Uint8List(4)..buffer.asByteData().setInt32(0, this, endian);
+  }
+}
+
+Uint8List intToBytes(int value) {
+  final byteData = ByteData(4); // 4 bytes for 32-bit integer
+  byteData.setInt32(0, value, Endian.little);
+  return byteData.buffer.asUint8List();
 }

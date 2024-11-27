@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:health_car_demo_app/main_development.dart';
+import 'package:health_car_demo_app/src/data/data_sources/ble_car_api.dart';
 import 'package:health_car_demo_app/src/data/data_sources/geolocation/fl_geolocation_api.dart';
 import 'package:health_car_demo_app/src/data/data_sources/geolocation/gelocation_api_plugin.dart';
 import 'package:health_car_demo_app/src/data/data_sources/report_mileage_api/report_mileage_api.dart';
@@ -60,6 +61,7 @@ class BackgroundUseCase {
         final kilometers = element.kilometers;
         final scannerData = element.scannerData;
         final hasGpsSignal = element.hasGpsSignal;
+
         log(
           'Scanner data $scannerData',
           name: 'BackgroundUseCase',
@@ -70,13 +72,23 @@ class BackgroundUseCase {
               'createReport loading $vehicleId $kilometers...',
               name: 'BackgroundUseCase',
             );
-            await repository.createReport(
+            final reportCreated = await repository.createReport(
               CreateReportDto(
                 vehicle: vehicleId,
                 mileage: kilometers,
                 geolocation: userLocation,
+                hasGpsSignal: hasGpsSignal,
               ),
             );
+            log(
+              'report received $vehicleId ${reportCreated.mileage}...',
+              name: 'BackgroundUseCase',
+            );
+            await BleCarApi.updateMileage(
+              device: element.device,
+              mileage: reportCreated.mileage,
+            );
+            if (!hasGpsSignal) {}
           } catch (e, s) {
             log(
               'Error creating report',

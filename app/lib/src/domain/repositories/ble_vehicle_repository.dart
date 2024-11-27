@@ -24,6 +24,7 @@ class IBleVehiculeRepository {
             vehicleId: e.vehicleId,
             scannerData: e.scannerStatus,
             hasGpsSignal: e.hasGpsSignal,
+            device: e.device,
           ),
         )
         .toList();

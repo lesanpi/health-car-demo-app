@@ -36,7 +36,8 @@ class BackgroundTaskHandler extends TaskHandler {
 }
 
 // const apiHost = '10.10.45.121:8080';
-const apiHost = 'healt-car-api.globeapp.dev';
+const apiHost = 'http://192.168.18.18:8080';
+// const apiHost = 'healt-car-api.globeapp.dev';
 
 void main() {
   log('Starting app');

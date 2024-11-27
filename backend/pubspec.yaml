@@ -21,6 +21,7 @@ dependencies:
     path: ../models
   repository:
     path: ../repository
+  http: ^1.2.2
 
 dev_dependencies:
   mocktail: ^0.3.0

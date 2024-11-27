@@ -21,9 +21,8 @@ class ReportMileageApi extends ReportMileageDataSource {
 
   @override
   Future<ReportMileage> createReport(CreateReportDto data) async {
-    final uri = Uri.https(
-      _apiHost,
-      ReportMileageEndpoints.reportsEndpoints,
+    final uri = Uri.parse(
+      _apiHost + ReportMileageEndpoints.reportsEndpoints,
     );
     http.Response response;
     try {
@@ -70,9 +69,8 @@ class ReportMileageApi extends ReportMileageDataSource {
 
   @override
   Future<List<ReportMileage>> getAllReportsByVehicle(String vehicleId) async {
-    final uri = Uri.https(
-      _apiHost,
-      ReportMileageEndpoints.reportsEndpoints,
+    final uri = Uri.parse(
+      _apiHost + ReportMileageEndpoints.reportsEndpoints,
     ).replace(
       queryParameters: {
         if (vehicleId.isNotEmpty) 'vehicle': vehicleId,
@@ -120,9 +118,8 @@ class ReportMileageApi extends ReportMileageDataSource {
 
   @override
   Future<ReportMileage> getLastReportOfVehicle(String vehicleId) async {
-    final uri = Uri.https(
-      _apiHost,
-      '${ReportMileageEndpoints.vehicleStatusEndpoints}/$vehicleId',
+    final uri = Uri.parse(
+      '$_apiHost${ReportMileageEndpoints.vehicleStatusEndpoints}/$vehicleId',
     );
     http.Response response;
     try {
@@ -164,9 +161,8 @@ class ReportMileageApi extends ReportMileageDataSource {
 
   @override
   Future<ReportMileage> getReportById(String id) async {
-    final uri = Uri.https(
-      _apiHost,
-      ReportMileageEndpoints.vehicleStatusEndpoints,
+    final uri = Uri.parse(
+      _apiHost + ReportMileageEndpoints.vehicleStatusEndpoints,
     );
     http.Response response;
     try {

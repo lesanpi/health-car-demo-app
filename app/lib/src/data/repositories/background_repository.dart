@@ -94,7 +94,7 @@ class BackgroundRepository extends IBackgroundRepository {
       ),
       iosNotificationOptions: const IOSNotificationOptions(),
       foregroundTaskOptions: const ForegroundTaskOptions(
-        // interval: 30000,
+        interval: 60 * 1000,
         autoRunOnBoot: true,
         allowWifiLock: true,
       ),
